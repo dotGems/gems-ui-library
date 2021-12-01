@@ -26,13 +26,15 @@ const useStyles = makeStyles({
     },
 });
 
-export const Card = ({ children, title = "Pomelo Tree",
-    imgUrl = "",
+export const Card = ({ 
+    /* children, */
+    title = "Pomelo Tree",
+    /* imgUrl = "", */
     width = "350px",
     height = "370px",
     titleAlign = 'center',
     ipfsImg = "QmeFach1u8wQQiggRi8CaBLZk1AZUtEfDiKMAVgmSysSsi",
-    ...props }: Props) => {
+    /*...props*/ }: Props) => {
     const classes = useStyles();
     return (
         <MuiCard style={{ borderRadius: "25px", height: height, width: width }} key={title}>

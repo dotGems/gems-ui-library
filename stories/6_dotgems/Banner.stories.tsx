@@ -1,10 +1,10 @@
 import React from "react";
 
 import { Meta, Story } from '@storybook/react';
-import { Banner, BannerProps } from '../src/Banner';
+import { Banner, BannerProps } from '../../src/components/6_dotgems/Banner';
 
 const meta: Meta = {
-    title: 'Banner',
+    title: 'dotGems/Banner',
     component: Banner
 }
 
@@ -14,4 +14,3 @@ export default meta;
 const Template: Story<BannerProps> = (args) => <Banner {...args} />;
 
 export const Default = Template.bind({});
-

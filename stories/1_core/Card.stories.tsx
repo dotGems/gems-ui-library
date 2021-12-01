@@ -1,10 +1,10 @@
 import React from "react";
 
 import { Meta, Story } from '@storybook/react';
-import { Card, CardProps } from '../src/Card';
+import { Card, CardProps } from '../../src/components/1_core/Card';
 
 const meta: Meta = {
-    title: 'Card',
+    title: 'Core/Card',
     component: Card,
     argTypes: {
 

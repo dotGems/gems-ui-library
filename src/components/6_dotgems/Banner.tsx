@@ -5,10 +5,10 @@ import MuiGrid from '@mui/material/Grid';
 import MuiTypography from '@mui/material/Typography';
 import { makeStyles } from '@mui/styles';
 
-import { Theme, useMediaQuery } from '@mui/material';
+import { /* Theme, */ useMediaQuery } from '@mui/material';
 // import GoldenPomelo from '../../assets/GoldenPomelo.png';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((/*theme: Theme*/) => ({
     card: {
 
         padding: "16px",
