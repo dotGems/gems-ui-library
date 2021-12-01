@@ -4,17 +4,7 @@ import { Welcome } from '../src/components/Welcome';
 
 const meta: Meta = {
   title: 'Welcome',
-  component: Welcome,
-  argTypes: {
-    children: {
-      control: {
-        type: 'text',
-      },
-    },
-  },
-  parameters: {
-    controls: { expanded: true },
-  },
+  component: Welcome
 };
 
 export default meta;
