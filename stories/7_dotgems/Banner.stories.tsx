@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Meta, Story } from '@storybook/react';
-import { Banner, BannerProps } from '../../src/components/6_dotgems/Banner';
+import { Banner, BannerProps } from '../../src/components/7_dotgems/Banner';
 
 const meta: Meta = {
     title: 'dotGems/Banner',
