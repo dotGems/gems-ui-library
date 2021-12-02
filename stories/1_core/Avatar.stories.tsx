@@ -14,4 +14,17 @@ export default meta;
 const Template: Story<AvatarProps> = (args) => <Avatar {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {}
+Default.args = {
+    size: "md",
+    variant: "elegant",
+    data: {
+        img: "/img/avatar/person_1.jpg",
+        label: "Alissa Anderson"
+    },
+    config: {
+        onClick: () => {console.log("You clicked Alissa.")},
+        custom: {
+            isRounded: undefined
+        }
+    }
+}

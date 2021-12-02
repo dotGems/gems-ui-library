@@ -1,7 +1,7 @@
-export const AVAILABLE_THEMES = [
-    'DYNAMIC',
-    'ELEGANT'
-];
+export const AVAILABLE_THEMES = {
+    DYNAMIC: "DYNAMIC",
+    ELEGANT: "ELEGANT"
+};
 
 export const DYNAMIC = {};
 
