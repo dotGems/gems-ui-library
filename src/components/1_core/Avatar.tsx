@@ -18,8 +18,8 @@ export interface AvatarProps extends StandardProps {
         }
     }
 }
-const theme = createTheme({});
-const useStyles = makeStyles(theme => ({
+
+const useStyles = makeStyles({
     avatarContainer: {
         display: "flex",
         flexWrap: "nowrap",
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     avatarImg: {
         marginRight: "16px"
     }
-}));
+});
 
 const defaultConfig = {
     custom: {
@@ -41,6 +41,7 @@ const defaultConfig = {
  * Displays a thumbnail followed by a label.
  * 
  * @todo Replace use of MuiButton with our button.
+ * @todo Handle className and style
  */
 export const Avatar = ({ className, variant, style, size = 'md', data, config = defaultConfig }: AvatarProps) => {
 
