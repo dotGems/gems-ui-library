@@ -8,8 +8,7 @@ import DataObjectIcon from '@mui/icons-material/DataObject';
 import MuiTypography from '@mui/material/Typography';
 
 import { StandardProps } from "../../interfaces/IStandardProps";
-import { IPFS_SOURCE } from '../../constants/urls';
-import { COLLECTION_SOURCE } from './constants/urls';
+import { IPFS_SOURCE, COLLECTION_SOURCE } from '../../constants/urls';
 import { Button } from '../1_core/Button';
 
 export interface CollectionBannerProps extends StandardProps {
