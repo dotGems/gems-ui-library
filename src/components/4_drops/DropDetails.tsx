@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 
-import { StandardProps } from "../../interfaces/IStandardProps";
+import { LocalizedStandardModel } from "../../models/Standard.model";
 
-export interface DropDetailsProps extends StandardProps {}
+export interface DropDetailsProps extends LocalizedStandardModel {}
 
 const useStyles = makeStyles({});
 

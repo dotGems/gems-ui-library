@@ -16,7 +16,7 @@ const Template: Story<TagProps> = (args) => <Tag {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-    variant:"elegant",
+    variant:"info",
     size: "md",
     data: {
         icon: WhatshotIcon,
@@ -24,35 +24,38 @@ Default.args = {
     },
     config: {
         custom: {
-            isRounded: false
+            isRounded: false,
+            hasPadding: true
         }
     }
 }
 
 export const IconOnly = Template.bind({});
 IconOnly.args = {
-    variant:"elegant",
+    variant:"info",
     size: "md",
     data: {
         icon: WhatshotIcon
     },
     config: {
         custom: {
-            isRounded: false
+            isRounded: false,
+            hasPadding: true
         }
     }
 }
 
 export const TextOnly = Template.bind({});
 TextOnly.args = {
-    variant:"elegant",
+    variant:"info",
     size: "md",
     data: {
         label: "Hot"
     },
     config: {
         custom: {
-            isRounded: false
+            isRounded: false,
+            hasPadding: true
         }
     }
 }

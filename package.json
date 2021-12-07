@@ -22,7 +22,8 @@
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.2.0",
     "@mui/material": "^5.2.0",
-    "@mui/styles": "^5.2.0"
+    "@mui/styles": "^5.2.0",
+    "swiper": "^7.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",

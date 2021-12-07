@@ -2,11 +2,11 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import MuiAvatar from '@mui/material/Avatar';
 
-import { StandardProps } from "../../interfaces/IStandardProps";
+import { StandardModel } from "../../models/Standard.model";
 import { createTheme, Typography } from '@mui/material';
 import MuiButton from '@mui/material/Button';
 
-export interface AvatarProps extends StandardProps {
+export interface AvatarProps extends StandardModel {
     data: {
         img: string;
         label?: string;

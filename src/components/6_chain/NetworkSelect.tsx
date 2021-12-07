@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 
-import { StandardProps } from "../../interfaces/IStandardProps";
+import { StandardModel } from "../../models/Standard.model";
 
-export interface NetworkSelectProps extends StandardProps {}
+export interface NetworkSelectProps extends StandardModel {}
 
 const useStyles = makeStyles({});
 

@@ -1,15 +1,15 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { Welcome } from '../src/components/Welcome';
+import { Drop } from '../../../src/components/0_welcome/demos/Drop';
 
 const meta: Meta = {
-  title: 'Welcome',
-  component: Welcome
+  title: 'Welcome/Demos/Drop',
+  component: Drop
 };
 
 export default meta;
 
-const Template: Story = args => <Welcome {...args} />;
+const Template: Story = args => <Drop {...args} />;
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing

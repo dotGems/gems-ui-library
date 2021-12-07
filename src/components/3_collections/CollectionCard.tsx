@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 
-import { StandardProps } from "../../interfaces/IStandardProps";
+import { StandardModel } from "../../models/Standard.model";
 
-export interface CollectionCardProps extends StandardProps {}
+export interface CollectionCardProps extends StandardModel {}
 
 const useStyles = makeStyles({});
 

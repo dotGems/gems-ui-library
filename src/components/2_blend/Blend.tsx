@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 
-import { StandardProps } from "../../interfaces/IStandardProps";
+import { StandardModel } from "../../models/Standard.model";
 
-export interface BlendModalProps extends StandardProps {}
+export interface BlendProps extends StandardModel {}
 
 const useStyles = makeStyles({});
 
@@ -11,7 +11,7 @@ const useStyles = makeStyles({});
  * Modal containing the blend menu to allow users to fuse
  * different NFTs to create a new, usually more valuable NFT.
  */
-export const BlendModal = ({}: BlendModalProps) => {
+export const Blend = ({}: BlendProps) => {
 
     const classes = useStyles();
 

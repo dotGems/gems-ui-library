@@ -1,10 +1,10 @@
-export interface StandardProps {
+export interface StandardModel {
     size?: 'sm' | 'md' | 'lg';
     variant?: 'elegant' | 'dynamic';
     className?: string;
     style?: any;
 }
 
-export interface LocalizedStandardProps extends StandardProps {
+export interface LocalizedStandardModel extends StandardModel {
     dict?: any;
 }

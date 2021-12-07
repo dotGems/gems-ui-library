@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 
-import { StandardProps } from "../../interfaces/IStandardProps";
+import { StandardModel } from "../../models/Standard.model";
 
-export interface CheckoutProps extends StandardProps {}
+export interface CheckoutProps extends StandardModel {}
 
 const useStyles = makeStyles({});
 

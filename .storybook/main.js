@@ -1,6 +1,7 @@
 module.exports = {
   stories: [
     '../stories/welcome.stories.@(ts|tsx|js|jsx)',
+    '../stories/0_welcome/**/*.stories.@(ts|tsx|js|jsx)',
     '../stories/1_core/**/*.stories.@(ts|tsx|js|jsx)',
     '../stories/2_blend/**/*.stories.@(ts|tsx|js|jsx)',
     '../stories/3_collections/**/*.stories.@(ts|tsx|js|jsx)',
