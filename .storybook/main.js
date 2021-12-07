@@ -10,10 +10,16 @@ module.exports = {
     '../stories/6_chain/**/*.stories.@(ts|tsx|js|jsx)',
     '../stories/7_dotgems/**/*.stories.@(ts|tsx|js|jsx)',
     '../stories/9_utils/**/*.stories.@(ts|tsx|js|jsx)',
+    '../stories/**/*.@(ts|tsx|js|jsx)',
   ],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-docs',
+    '@storybook/addon-actions',
+  ],
   // https://storybook.js.org/docs/react/configure/typescript#mainjs-configuration
   typescript: {
     check: true, // type-check stories during Storybook build
-  }
+  },
 };
