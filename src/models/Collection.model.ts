@@ -14,11 +14,3 @@ export interface CollectionModel {
         url: string
     },
 }
-
-export interface CollectionProps extends LocalizedStandardModel {
-    data: CollectionModel,
-    config?: {
-        showViewData?: Boolean // Whether to display the 'metadata' button.
-        showDropsMosaic?: Boolean // Whether to use the collection's image (false) or a mosaic of drops within that collection.
-    }
-}

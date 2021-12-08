@@ -12,15 +12,10 @@ import { Button } from "../1_core/Button";
 import { Tag } from '../1_core/Tag';
 import { COLLECTION_SOURCE } from '../../data/constants/urls';
 import { feeRateToPercentage } from '../../utils/data';
+import { CollectionModel } from '../../models/Collection.model';
 
 export interface CollectionDetailsProps extends LocalizedStandardModel {
-    data: {
-        collection_name: string;
-        author: string;
-        market_fee: string;
-        desc: string;
-        name: string;
-    },
+    data: CollectionModel,
     config: {
         showViewData?: Boolean
     }
@@ -36,6 +31,8 @@ const useStyles = makeStyles({
  * Displays a collection's core information.
  * 
  * @todo Translate
+ * @todo Handle \n better. Using white-space isn't enough,
+ *       maybe we'll need to parse \ns and return multiple <p>s JSX.
  */
 export const CollectionDetails = ({
     className,
@@ -63,13 +60,13 @@ export const CollectionDetails = ({
 
     return (
         <div>
-            <Typography variant="h2" style={{ fontSize: "36px", fontWeight: "bold" }} component="div" gutterBottom><CollectionsOutlinedIcon />&nbsp;{data.name}</Typography>
+            <Typography variant="h2" style={{ fontSize: "36px", fontWeight: "bold" }} component="div" gutterBottom><CollectionsOutlinedIcon />&nbsp;{data.deserialized.name}</Typography>
             <Tag data={{icon:PersonOutlinedIcon, iconTitle:"Author", label:data.author}} variant="light" size="lg" config={{custom: {hasPadding: false}}}/>
             <Button startIcon={<LanguageIcon />} label="Website" variant="text" target="_blank" href={`${COLLECTION_SOURCE}${data.collection_name}`}/>
             {config.showViewData ? <Button startIcon={<DataObjectIcon />} label="Metadata" variant="text" onClick={copyMetadataToClipboard}/> : null}
             <div className={classes.collectionDescription}>
                 <Typography variant="h3" style={{ fontSize: "24px", fontWeight: "bold" }} component="div" gutterBottom>About this Collection</Typography>
-                <Typography variant="body1" gutterBottom>{data.desc}</Typography>
+                <Typography variant="body1" gutterBottom>{data.deserialized.description}</Typography>
             </div>
             <Typography variant="caption" gutterBottom>All transactions within this collection are subject to a&nbsp;<strong>{feeRateToPercentage(data.market_fee)}&nbsp;fee</strong>&nbsp;to cover network costs.</Typography>
             <Snackbar

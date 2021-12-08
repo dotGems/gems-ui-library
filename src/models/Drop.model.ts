@@ -1,4 +1,3 @@
-import { LocalizedStandardModel } from "./Standard.model";
 import { TemplateModel } from "./Template.model";
 
 export interface DropModel {
@@ -21,14 +20,4 @@ export interface DropModel {
     end_time: number,
     display_data: string,
     template: TemplateModel
-}
-
-export interface DropProps extends LocalizedStandardModel {
-    data: DropModel,
-    config?: {},
-    dict?: {
-        buy?: string,
-        add_to_cart?: string,
-        about?: string,
-    }
 }

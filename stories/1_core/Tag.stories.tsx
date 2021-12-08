@@ -3,6 +3,8 @@ import WhatshotIcon from '@mui/icons-material/Whatshot';
 
 import { Meta, Story } from '@storybook/react';
 import { Tag, TagProps } from '../../src/components/1_core/Tag';
+import { CoreVariant } from "../../src/models/StandardCore.model";
+import { StandardSize } from "../../src/models/Standard.model";
 
 const meta: Meta = {
     title: 'Core/Tag',
@@ -16,8 +18,8 @@ const Template: Story<TagProps> = (args) => <Tag {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-    variant:"info",
-    size: "md",
+    variant: CoreVariant.info,
+    size: StandardSize.md,
     data: {
         icon: WhatshotIcon,
         label: "Hot"
@@ -32,8 +34,8 @@ Default.args = {
 
 export const IconOnly = Template.bind({});
 IconOnly.args = {
-    variant:"info",
-    size: "md",
+    variant: CoreVariant.info,
+    size: StandardSize.md,
     data: {
         icon: WhatshotIcon
     },
@@ -47,8 +49,8 @@ IconOnly.args = {
 
 export const TextOnly = Template.bind({});
 TextOnly.args = {
-    variant:"info",
-    size: "md",
+    variant: CoreVariant.info,
+    size: StandardSize.md,
     data: {
         label: "Hot"
     },

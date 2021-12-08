@@ -1,3 +1,5 @@
+import { StandardVariant } from "./Standard.model";
+
 export interface ContextModel {
     config: {
         chain: {
@@ -8,6 +10,6 @@ export interface ContextModel {
     }
     style: {
         palette: {},
-        variant: 'ELEGANT' | 'DYNAMIC'
+        variant: StandardVariant
     }
 }

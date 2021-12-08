@@ -6,6 +6,7 @@ export interface ButtonProps {
     // children: ReactNode,
     backgroundColor?: string,
     color?: string,
+    size?: string
     isRounded?: boolean,
     variant?: 'text' | 'outlined' | 'contained',
     label?: string;
@@ -26,8 +27,9 @@ const useStyles = makeStyles({
 
 export const Button = ({
     startIcon,
+    size = 'md',
     variant = 'outlined',
-    label = "Button",
+    label = "",
     isRounded = false,
     backgroundColor = "error",
     color = "error",
@@ -42,6 +44,7 @@ export const Button = ({
             <MuiButton
                 startIcon={startIcon}
                 variant={variant}
+                size={size}
                 className={isRounded ? classes.rounded : classes.normal}
                 style={{ color, backgroundColor }}
                 target={target}
@@ -56,6 +59,7 @@ export const Button = ({
             <MuiButton
                 startIcon={startIcon}
                 variant={variant}
+                size={size}
                 className={isRounded ? classes.rounded : classes.normal}
                 style={{ color, backgroundColor }}
                 onClick={onClick}

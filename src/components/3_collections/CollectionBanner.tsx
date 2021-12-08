@@ -5,16 +5,10 @@ import MuiGrid from '@mui/material/Grid';
 import { StandardModel } from "../../models/Standard.model";
 import { IPFS_SOURCE } from '../../data/constants/urls';
 import { CollectionDetails } from "./CollectionDetails";
+import { CollectionModel } from '../../models/Collection.model';
 
 export interface CollectionBannerProps extends StandardModel {
-    data: {
-        collection_name: string;
-        author: string;
-        img: string;
-        market_fee: string;
-        desc: string;
-        name: string;
-    },
+    data: CollectionModel,
     config: {
         showViewData?: Boolean
     }
@@ -51,7 +45,7 @@ export const CollectionBanner = ({
         <div className={classes.collectionBanner} style={style}>
             <MuiGrid container direction="row">
                 <MuiGrid item xs={12} md={3} direction="column">
-                    <img src={`${IPFS_SOURCE}${data.img}`} className={classes.collectionImg} />
+                    <img src={`${IPFS_SOURCE}${data.deserialized.img}`} className={classes.collectionImg} />
                 </MuiGrid>
                 <MuiGrid item xs={12} md={9} className={classes.collectionInfo} direction="column">
                     <CollectionDetails data={data} config={config} variant={variant} size={size}/>
