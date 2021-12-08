@@ -12,7 +12,7 @@ export function Chain() {
 
     return (
         <div>
-            
+            Not implemented
         </div>
     )
 }

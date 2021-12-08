@@ -10,7 +10,7 @@ import DataObjectIcon from '@mui/icons-material/DataObject';
 import { LocalizedStandardModel } from "../../models/Standard.model";
 import { Button } from "../1_core/Button";
 import { Tag } from '../1_core/Tag';
-import { COLLECTION_SOURCE } from '../../constants/urls';
+import { COLLECTION_SOURCE } from '../../data/constants/urls';
 import { feeRateToPercentage } from '../../utils/data';
 
 export interface CollectionDetailsProps extends LocalizedStandardModel {

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import MuiGrid from '@mui/material/Grid';
 
 import { StandardModel } from "../../models/Standard.model";
-import { IPFS_SOURCE } from '../../constants/urls';
+import { IPFS_SOURCE } from '../../data/constants/urls';
 import { CollectionDetails } from "./CollectionDetails";
+import DotGemsContext from '../1_core/DotGemsContext';
 
 export interface CollectionBannerProps extends StandardModel {
     data: {
@@ -46,6 +47,12 @@ export const CollectionBanner = ({
 }: CollectionBannerProps) => {
 
     const classes = useStyles();
+
+    const context = useContext(DotGemsContext);
+
+    useEffect(() => {
+        console.log(context);
+    }, [context])
 
     return (
         <div className={classes.collectionBanner} style={style}>

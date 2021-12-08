@@ -1,29 +1,38 @@
-import React, { ReactNode } from 'react';
-import { makeStyles } from '@mui/styles';
+import React from 'react';
 
-export interface DotGemsContextProps {
-    children: ReactNode, 
-    chain: {
-        useCheckout: Boolean;
-        supportedNetworks: Array<String> // User-supported networks, has to be within what we support.
-        supportedWallets: any // User-supported wallets, has to be within what we support.
-    }
+// import { StylesProvider, ThemeProvider } from '@mui/material/styles';
+// import { muiTheme } from 'storybook-addon-material-ui';
+// import { muiTheme } from '../src/9_utils/stylesheet';
+
+// @todo How to merge MUI's ThemeProvider with our own DotGemsProvider
+//       Possible solution; https://medium.com/front-end-weekly/how-to-combine-context-providers-for-cleaner-react-code-9ed24f20225e
+// export const decorators = [
+//   (story) => <ThemeProvider theme={muiTheme}>{story()}</ThemeProvider>,
+// ];
+
+import { SUPPORTED_NETWORKS, SUPPORTED_WALLETS } from '../../data/constants/chain';
+import { ContextModel } from '../../models/Context.model';
+
+const defaultProps: ContextModel = {
+    config: {
+        chain: {
+            useCheckout: false,
+            supportedNetworks: SUPPORTED_NETWORKS, // User-supported networks, has to be within what we support.
+            supportedWallets: SUPPORTED_WALLETS // User-supported wallets, has to be within what we support.
+        }
+    },
+    style: {
+        palette: {},
+        variant: 'elegant'
+    },
 }
-
-const useStyles = makeStyles({});
 
 /**
  * The dotGems Context provides a general context (configuration)
  * for every dotGems components within. If an app uses the UI Library,
  * the dotGems should wrap the section of the app using the components.
  */
-export const DotGemsContext = ({}: DotGemsContextProps) => {
+const DotGemsContext = React.createContext(defaultProps);
 
-    const classes = useStyles();
-
-    return (
-        <div>
-            Not implemented
-        </div>
-    );
-};
+export const DotGemsProvider = DotGemsContext.Provider;
+export default DotGemsContext;
