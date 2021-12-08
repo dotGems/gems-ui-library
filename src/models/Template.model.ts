@@ -1,5 +1,3 @@
-import { LocalizedStandardModel } from "./Standard.model";
-
 export interface TemplateModel {
     template_id: number,
     schema_name: string,

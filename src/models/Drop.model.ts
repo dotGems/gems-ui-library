@@ -25,9 +25,7 @@ export interface DropModel {
 
 export interface DropProps extends LocalizedStandardModel {
     data: DropModel,
-    config?: {
-        
-    },
+    config?: {},
     dict?: {
         buy?: string,
         add_to_cart?: string,

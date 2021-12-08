@@ -2,7 +2,7 @@ import { ContextModel } from "../../models/Context.model";
 import { SUPPORTED_NETWORKS, SUPPORTED_WALLETS } from "../constants/chain";
 import { DEFAULT_THEME } from "../constants/themes";
 
-export const defaultContextModel : ContextModel = {
+export const defaultContext : ContextModel = {
     config: {
         chain: {
             useCheckout: false,
@@ -14,4 +14,4 @@ export const defaultContextModel : ContextModel = {
         palette: {},
         variant: DEFAULT_THEME
     }
-}
+};
