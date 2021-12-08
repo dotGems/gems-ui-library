@@ -1,6 +1,6 @@
-import { ContextModel } from "../models/Context.model";
-import { SUPPORTED_NETWORKS, SUPPORTED_WALLETS } from "./constants/chain";
-import { DEFAULT_THEME } from "./constants/themes";
+import { ContextModel } from "../../models/Context.model";
+import { SUPPORTED_NETWORKS, SUPPORTED_WALLETS } from "../constants/chain";
+import { DEFAULT_THEME } from "../constants/themes";
 
 export const defaultContextModel : ContextModel = {
     config: {

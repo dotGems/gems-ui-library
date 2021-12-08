@@ -1,4 +1,4 @@
-import { CollectionProps } from "../models/Collection.model";
+import { CollectionProps } from "../../models/Collection.model";
 
 export const defaultCollection : CollectionProps = {
     variant: "elegant",
