@@ -41,4 +41,20 @@ To maintain a quality standard, every component should pass through standard ver
 
 ## Documentation
 
+In a UI library, a component really isn't really ready until well documented, therefore, we make some verifications here.
+
+- [] The component is documented in Storybook's doc
+- [] The props of the component are documented in Storybook's doc
+- [] There are at least 2 examples of common component usage
+
 ## Testing
+
+List the tests to be written for every feature of your component to ensure the robustness and predictability of your component.
+
+- <FEATURE_1>
+    - [] <FEATURE_1_TEST_1>
+    - [] <FEATURE_1_TEST_2>
+- <FEATURE_2>
+    - [] <FEATURE_2_TEST_1>
+    - [] <FEATURE_2_TEST_2>
+- ...
