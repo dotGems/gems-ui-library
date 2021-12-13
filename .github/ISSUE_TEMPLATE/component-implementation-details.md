@@ -2,7 +2,7 @@
 name: Component Implementation Details
 about: Document the implementation of a component and standard verifications to go
   through before calling a component done.
-title: "[ feature/<BRANCH_NAME> ] <COMPONENT_TITLE>"
+title: "[ feature/<BRANCH_NAME> ] <COMPONENT_NAME>"
 labels: good first issue
 assignees: ''
 
