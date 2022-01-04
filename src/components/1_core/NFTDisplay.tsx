@@ -64,6 +64,7 @@ const useStyles = makeStyles({
  * different parts by default.
  * 
  * @todo Use MUI Theme / palette instead of hardcoding color value
+ * @todo Implement Loop
  */
 export const NFTDisplay = ({
     className,
@@ -110,7 +111,7 @@ export const NFTDisplay = ({
     return (
         <div className={classes.NFTDisplayContainer}>
             {renderMainDisplay()}
-            {renderSelector()}
+            {config.showSelector ? renderSelector() : null}
         </div>
     );
 };
