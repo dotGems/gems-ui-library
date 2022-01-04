@@ -79,8 +79,8 @@ export const DropDetails = ({
             <Typography variant="h2" style={{ fontSize: "36px", fontWeight: "bold" }} component="div" gutterBottom>{data.template.deserialized.name}</Typography>
             <div className={classes.infoContainer}>
                 <div className={classes.coreInfo}>
-                    <Tag data={{icon:PersonOutlinedIcon, iconTitle:"Author", label:data.template.deserialized.artist}} variant="light" size="lg" config={{custom: {hasPadding: false}}}/>
-                    <Tag data={{icon:CollectionsOutlinedIcon, iconTitle:"Collection", label:data.collection.deserialized.name}} variant="light" size="lg" config={{custom: {hasPadding: false}}}/>
+                    {config.showArtist ? <Tag data={{icon:PersonOutlinedIcon, iconTitle:"Author", label:data.template.deserialized.artist}} variant="light" size="lg" config={{custom: {hasPadding: false}}}/> : null}
+                    {config.showCollection ? <Tag data={{icon:CollectionsOutlinedIcon, iconTitle:"Collection", label:data.collection.deserialized.name}} variant="light" size="lg" config={{custom: {hasPadding: false}}}/> : null}
                     <Tag data={{icon:Filter1Icon, iconTitle:"Mint", label: `${data.template.issued_supply} of ${data.template.max_supply}`}} variant="light" size="lg" config={{custom: {hasPadding: false}}}/>
                     <Button startIcon={<LanguageIcon />} label="Website" variant="text" target="_blank" href={`${COLLECTION_SOURCE}${data.collection_name}`} />
                     {config.showViewData ?
@@ -88,12 +88,12 @@ export const DropDetails = ({
                         : null
                     }
                 </div>
-                <Typography variant="body1" color="primary" className={classes.burnableTransferable}>
+                {config.showBurnableTransferable ? <Typography variant="body1" color="primary" className={classes.burnableTransferable}>
                     {data.template.transferable === 1 ? <CompareArrowsIcon/> : null}
                     {data.template.burnable === 1 ? <LocalFireDepartmentIcon/> : null}
-                </Typography>
+                </Typography> : null}
             </div>
-            <Typography variant="body1" color="gray">{data.template.deserialized.about}</Typography>
+            {config.showAbout ? <Typography variant="body1" color="gray">{data.template.deserialized.about}</Typography> : null}
             <Snackbar
                 open={isSnackbarOpen}
                 autoHideDuration={3000}
