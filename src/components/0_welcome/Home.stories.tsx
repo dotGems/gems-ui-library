@@ -1,15 +1,15 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { Chain } from '../../../src/components/0_welcome/demos/Chain';
+import { Home } from './Home';
 
 const meta: Meta = {
-  title: 'Welcome/Demos/Chain',
-  component: Chain
+  title: 'Welcome/Home',
+  component: Home
 };
 
 export default meta;
 
-const Template: Story = args => <Chain {...args} />;
+const Template: Story = args => <Home {...args} />;
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing

@@ -1,9 +1,9 @@
 import React from "react";
 
 import { Meta, Story } from '@storybook/react';
-import { CollectionBanner, CollectionBannerProps } from '../../src/components/3_collections/CollectionBanner';
-import { defaultCollection } from "../../src/data/mock/collection.mock";
-import { StandardSize } from "../../src/models/Standard.model";
+import { CollectionBanner, CollectionBannerProps } from './CollectionBanner';
+import { defaultCollection } from "../../data/mock/collection.mock";
+import { StandardSize } from "../../models/Standard.model";
 
 const meta: Meta = {
     title: 'Collections/CollectionBanner',

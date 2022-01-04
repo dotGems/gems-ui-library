@@ -1,9 +1,9 @@
 import React from "react";
 
 import { Meta, Story } from '@storybook/react';
-import { DropDetails, DropDetailsProps } from '../../src/components/4_drops/DropDetails';
+import { DropDetails, DropDetailsProps } from './DropDetails';
 
-import { defaultDrop } from "../../src/data/mock/drop.mock";
+import { defaultDrop } from "../../data/mock/drop.mock";
 
 const meta: Meta = {
     title: 'Drops/DropDetails',

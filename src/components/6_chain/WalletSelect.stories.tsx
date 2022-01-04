@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Meta, Story } from '@storybook/react';
-import { WalletSelect, WalletSelectProps } from '../../src/components/6_chain/WalletSelect';
+import { WalletSelect, WalletSelectProps } from './WalletSelect';
 
 const meta: Meta = {
     title: 'Chain/WalletSelect',

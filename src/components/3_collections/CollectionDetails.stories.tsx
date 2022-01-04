@@ -1,9 +1,9 @@
 import React from "react";
 
 import { Meta, Story } from '@storybook/react';
-import { CollectionDetails, CollectionDetailsProps } from '../../src/components/3_collections/CollectionDetails';
-import { defaultCollection } from "../../src/data/mock/collection.mock";
-import { StandardSize } from "../../src/models/Standard.model";
+import { CollectionDetails, CollectionDetailsProps } from './CollectionDetails';
+import { defaultCollection } from "../../data/mock/collection.mock";
+import { StandardSize } from "../../models/Standard.model";
 
 const meta: Meta = {
     title: 'Collections/CollectionDetails',

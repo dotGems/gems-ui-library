@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Meta, Story } from '@storybook/react';
-import { Blend, BlendProps } from '../../src/components/2_blend/Blend';
+import { Blend, BlendProps } from './Blend';
 
 const meta: Meta = {
     title: 'Blend/Blend',

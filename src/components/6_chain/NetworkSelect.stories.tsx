@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Meta, Story } from '@storybook/react';
-import { NetworkSelect, NetworkSelectProps } from '../../src/components/6_chain/NetworkSelect';
+import { NetworkSelect, NetworkSelectProps } from './NetworkSelect';
 
 const meta: Meta = {
     title: 'Chain/NetworkSelect',

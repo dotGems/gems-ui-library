@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Meta, Story } from '@storybook/react';
-import { DotGemsContext, DotGemsContextProps } from '../../src/components/1_core/DotGemsContext';
+import DotGemsContext, { DotGemsProvider } from './DotGemsContext';
 
 const meta: Meta = {
     title: 'Core/DotGemsContext',
@@ -11,7 +11,7 @@ const meta: Meta = {
 export default meta;
 
 
-const Template: Story<DotGemsContextProps> = (args) => <DotGemsContext {...args} />;
+const Template: Story<any> = (args) => <DotGemsProvider {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {}

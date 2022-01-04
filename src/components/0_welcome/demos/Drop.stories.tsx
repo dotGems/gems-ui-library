@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { Drop } from '../../../src/components/0_welcome/demos/Drop';
+import { Drop } from './Drop';
 
 const meta: Meta = {
   title: 'Welcome/Demos/Drop',

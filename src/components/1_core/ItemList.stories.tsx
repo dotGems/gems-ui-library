@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Meta, Story } from '@storybook/react';
-import { ItemList, ItemListProps } from '../../src/components/1_core/ItemList';
+import { ItemList, ItemListProps } from './ItemList';
 
 const meta: Meta = {
     title: 'Core/ItemList',

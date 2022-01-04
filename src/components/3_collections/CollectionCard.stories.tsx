@@ -1,8 +1,8 @@
 import React from "react";
 
 import { Meta, Story } from '@storybook/react';
-import { CollectionCard, CollectionCardProps } from '../../src/components/3_collections/CollectionCard';
-import { defaultCollection } from "../../src/data/mock/collection.mock";
+import { CollectionCard, CollectionCardProps } from './CollectionCard';
+import { defaultCollection } from "../../data/mock/collection.mock";
 
 const meta: Meta = {
     title: 'Collections/CollectionCard',

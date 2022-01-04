@@ -2,9 +2,9 @@ import React from "react";
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 
 import { Meta, Story } from '@storybook/react';
-import { Tag, TagProps } from '../../src/components/1_core/Tag';
-import { CoreVariant } from "../../src/models/StandardCore.model";
-import { StandardSize } from "../../src/models/Standard.model";
+import { Tag, TagProps } from './Tag';
+import { CoreVariant } from "../../models/StandardCore.model";
+import { StandardSize } from "../../models/Standard.model";
 
 const meta: Meta = {
     title: 'Core/Tag',

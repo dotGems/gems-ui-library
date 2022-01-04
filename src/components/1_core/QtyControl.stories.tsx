@@ -1,8 +1,8 @@
 import React from "react";
 
 import { Meta, Story } from '@storybook/react';
-import { QtyControl, QtyControlProps } from '../../src/components/1_core/QtyControl';
-import { StandardSize } from "../../src/models/Standard.model";
+import { QtyControl, QtyControlProps } from './QtyControl';
+import { StandardSize } from "../../models/Standard.model";
 
 const meta: Meta = {
     title: 'Core/QtyControl',

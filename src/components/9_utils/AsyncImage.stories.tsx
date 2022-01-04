@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Meta, Story } from '@storybook/react';
-import { AsyncImage, AsyncImageProps } from '../../src/components/9_utils/AsyncImage';
+import { AsyncImage, AsyncImageProps } from './AsyncImage';
 
 const meta: Meta = {
     title: 'Utils/AsyncImage',

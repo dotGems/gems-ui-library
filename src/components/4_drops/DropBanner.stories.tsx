@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Meta, Story } from '@storybook/react';
-import { DropBanner, DropBannerProps } from '../../src/components/4_drops/DropBanner';
+import { DropBanner, DropBannerProps } from './DropBanner';
 
 const meta: Meta = {
     title: 'Drops/DropBanner',

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Meta, Story } from '@storybook/react';
-import { NFTDisplay, NFTDisplayProps } from '../../src/components/1_core/NFTDisplay';
+import { NFTDisplay, NFTDisplayProps } from './NFTDisplay';
 
 const meta: Meta = {
     title: 'Core/NFTDisplay',

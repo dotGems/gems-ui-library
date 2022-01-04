@@ -1,8 +1,8 @@
 import React from "react";
 
 import { Meta, Story } from '@storybook/react';
-import { Avatar, AvatarProps } from '../../src/components/1_core/Avatar';
-import { StandardSize, StandardVariant } from "../../src/models/Standard.model";
+import { Avatar, AvatarProps } from './Avatar';
+import { StandardSize, StandardVariant } from "../../models/Standard.model";
 
 const meta: Meta = {
     title: 'Core/Avatar',

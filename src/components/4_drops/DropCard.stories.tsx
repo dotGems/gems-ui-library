@@ -1,8 +1,8 @@
 import React from "react";
 import { Meta, Story } from '@storybook/react';
 
-import { DropCard, DropCardProps } from '../../src/components/4_drops/DropCard';
-import { defaultDrop } from "../../src/data/mock/drop.mock"; 
+import { DropCard, DropCardProps } from './DropCard';
+import { defaultDrop } from "../../data/mock/drop.mock"; 
 
 const meta: Meta = {
     title: 'Drops/DropCard',
