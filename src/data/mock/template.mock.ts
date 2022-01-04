@@ -6,7 +6,7 @@ export const defaultTemplate : TemplateModel = {
     transferable: 1,
     burnable: 1,
     max_supply: 21,
-    issued_supply: 21,
+    issued_supply: 12,
     deserialized: {
         name: 'Shangbant',
         img: 'QmWYstiVd25m5CDB2gZiRpmoRCD1FYSEHEvtNcZEHBEyZf',

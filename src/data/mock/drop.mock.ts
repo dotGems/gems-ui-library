@@ -1,4 +1,5 @@
 import { DropModel } from "../../models/Drop.model";
+import { defaultCollection } from "./collection.mock";
 import { defaultTemplate } from "./template.mock";
 
 export const defaultDrop : DropModel = {
@@ -15,9 +16,10 @@ export const defaultDrop : DropModel = {
     account_limit: 0,
     account_limit_cooldown: 0,
     max_claimable: 21,
-    current_claimed: 21,
+    current_claimed: 12,
     start_time: 1634486400,
     end_time: 0,
     display_data: '',
+    collection: defaultCollection,
     template: defaultTemplate
 };

@@ -1,3 +1,4 @@
+import { CollectionModel } from "./Collection.model";
 import { TemplateModel } from "./Template.model";
 
 export interface DropModel {
@@ -19,5 +20,6 @@ export interface DropModel {
     start_time: number,
     end_time: number,
     display_data: string,
+    collection: CollectionModel,
     template: TemplateModel
 }

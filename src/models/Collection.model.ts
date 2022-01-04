@@ -1,3 +1,4 @@
+import { CollectionDeserializedModel } from "./CollectionDeserialized.model";
 import { LocalizedStandardModel } from "./Standard.model";
 
 export interface CollectionModel {
@@ -7,10 +8,5 @@ export interface CollectionModel {
     authorized_accounts: Array<String>,
     notify_accounts: Array<String>,
     market_fee: string,
-    deserialized: {
-        name: string,
-        description: string,
-        img: string,
-        url: string
-    },
+    deserialized: CollectionDeserializedModel
 }

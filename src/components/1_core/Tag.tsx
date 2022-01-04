@@ -1,8 +1,9 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import { Typography } from '@mui/material';
 
 import { StandardCoreModel } from "../../models/StandardCore.model";
+import { combineStyles } from "../../utils/style";
 
 export interface TagProps extends StandardCoreModel {
     data: {
@@ -74,6 +75,29 @@ export const Tag = ({className, style, variant, size, config = defaultConfig, da
     const classes = useStyles();
     const Icon = data.icon;
 
+    const a = {
+        backgroundColor: "red",
+        padding: "2em 1em",
+        color: "pink",
+        border: "1px solid black"
+    }
+
+    const b = {
+        backgroundColor: "darkblue",
+        color: "white",
+        fontWeight: "bold",
+        border: "1px solid rgba(0,0,0,0.25)"
+    }
+
+    const c = {
+        color: "black",
+        borderRadius: "30px"
+    }
+
+    useEffect(() => {
+        console.log(combineStyles([a,b,c]));
+    },[]);
+
     const getTextSize = () : "caption" | "body1" | "body2" => {
         switch(size) {
             case 'sm': return "caption"
@@ -96,7 +120,7 @@ export const Tag = ({className, style, variant, size, config = defaultConfig, da
                 {data.icon ? <div title={data.iconTitle || ""}>
                     <Icon className={data.label ? classes.tagIcon : null} sx={getIconSize()}/>
                 </div> : null}
-                {data.label ? <Typography variant={getTextSize()} style={{fontWeight: "bold"}}>{data.label}</Typography> : null}
+                {data.label ? <Typography variant={getTextSize()}>{data.label}</Typography> : null}
             </div>
         </div>
     );

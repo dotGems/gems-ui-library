@@ -11,7 +11,7 @@ import { LocalizedStandardModel } from "../../models/Standard.model";
 import { Button } from "../1_core/Button";
 import { Tag } from '../1_core/Tag';
 import { COLLECTION_SOURCE } from '../../data/constants/urls';
-import { feeRateToPercentage } from '../../utils/data';
+import { copyToClipboard, feeRateToPercentage } from '../../utils/data';
 import { CollectionModel } from '../../models/Collection.model';
 
 export interface CollectionDetailsProps extends LocalizedStandardModel {
@@ -33,6 +33,11 @@ const useStyles = makeStyles({
  * @todo Translate
  * @todo Handle \n better. Using white-space isn't enough,
  *       maybe we'll need to parse \ns and return multiple <p>s JSX.
+ * @todo Implement className
+ * @todo Implement variant
+ * @todo Implement size
+ * @todo Implement style
+ * @todo Implement dict
  */
 export const CollectionDetails = ({
     className,
@@ -48,27 +53,17 @@ export const CollectionDetails = ({
 
     const [isSnackbarOpen, setSnackbarOpen] = useState(false);
 
-    const copyMetadataToClipboard = () => {
-        if(window.isSecureContext) {       
-            console.log("Metadata has been copied to clipboard");
-            navigator.clipboard.writeText(JSON.stringify(data));
-            setSnackbarOpen(true);
-        } else {
-            console.error("Couldn't copy metadata to clipboard, context is not secure.");
-        }
-    }
-
     return (
         <div>
             <Typography variant="h2" style={{ fontSize: "36px", fontWeight: "bold" }} component="div" gutterBottom><CollectionsOutlinedIcon />&nbsp;{data.deserialized.name}</Typography>
             <Tag data={{icon:PersonOutlinedIcon, iconTitle:"Author", label:data.author}} variant="light" size="lg" config={{custom: {hasPadding: false}}}/>
             <Button startIcon={<LanguageIcon />} label="Website" variant="text" target="_blank" href={`${COLLECTION_SOURCE}${data.collection_name}`}/>
-            {config.showViewData ? <Button startIcon={<DataObjectIcon />} label="Metadata" variant="text" onClick={copyMetadataToClipboard}/> : null}
+            {config.showViewData ? <Button startIcon={<DataObjectIcon />} label="Metadata" variant="text" onClick={() => copyToClipboard(data, () => {setSnackbarOpen(true)})}/> : null}
             <div className={classes.collectionDescription}>
                 <Typography variant="h3" style={{ fontSize: "24px", fontWeight: "bold" }} component="div" gutterBottom>About this Collection</Typography>
-                <Typography variant="body1" gutterBottom>{data.deserialized.description}</Typography>
+                <Typography variant="body1" color="gray" gutterBottom>{data.deserialized.description}</Typography>
             </div>
-            <Typography variant="caption" gutterBottom>All transactions within this collection are subject to a&nbsp;<strong>{feeRateToPercentage(data.market_fee)}&nbsp;fee</strong>&nbsp;to cover network costs.</Typography>
+            <Typography variant="caption" color="gray" gutterBottom>All transactions within this collection are subject to a&nbsp;<strong>{feeRateToPercentage(data.market_fee)}&nbsp;fee</strong>&nbsp;to cover network costs.</Typography>
             <Snackbar
                 open={isSnackbarOpen}
                 autoHideDuration={3000}

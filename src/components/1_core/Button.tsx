@@ -13,6 +13,8 @@ export interface ButtonProps {
     startIcon?: ReactNode,
     target?: string,
     href?: string,
+    style: any,
+    disabled?: Boolean,
     onClick?: () => void;
 }
 
@@ -35,6 +37,8 @@ export const Button = ({
     color = "error",
     target,
     href,
+    style,
+    disabled,
     onClick = () => {}
 }: ButtonProps) => {
     const classes = useStyles();
@@ -46,9 +50,10 @@ export const Button = ({
                 variant={variant}
                 size={size}
                 className={isRounded ? classes.rounded : classes.normal}
-                style={{ color, backgroundColor }}
+                style={{ color, backgroundColor, ...style }}
                 target={target}
                 href={href}
+                disabled={disabled}
                 rel="noreferrer"
             >
                 {label}
@@ -61,8 +66,9 @@ export const Button = ({
                 variant={variant}
                 size={size}
                 className={isRounded ? classes.rounded : classes.normal}
-                style={{ color, backgroundColor }}
+                style={{ color, backgroundColor, ...style }}
                 onClick={onClick}
+                disabled={disabled}
             >
                 {label}
             </MuiButton>

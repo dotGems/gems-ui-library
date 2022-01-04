@@ -1,3 +1,5 @@
+import { TemplateDeserializedModel } from "./TemplateDeserialized.model";
+
 export interface TemplateModel {
     template_id: number,
     schema_name: string,
@@ -5,16 +7,5 @@ export interface TemplateModel {
     burnable: number,
     max_supply: number,
     issued_supply: number,
-    deserialized: {
-        name: string,
-        img: string,
-        artist: string,
-        about: string,
-        type: string,
-        drop: string,
-        website: string,
-        video?: string,
-        backimg?: string,
-        cardimg?: string
-    },
+    deserialized: TemplateDeserializedModel,
 }

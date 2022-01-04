@@ -1,4 +1,4 @@
-import { CollectionModel, CollectionProps } from "../../models/Collection.model";
+import { CollectionModel } from "../../models/Collection.model";
 
 export const defaultCollection : CollectionModel = {
     collection_name: "merijn.gems",

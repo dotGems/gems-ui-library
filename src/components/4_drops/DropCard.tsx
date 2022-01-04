@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@mui/styles';
-import { Card, CardActionArea, CardActions, CardContent, Typography } from '@mui/material';
+import { Card, CardActions, CardContent, Typography } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import CollectionsOutlinedIcon from '@mui/icons-material/CollectionsOutlined';
@@ -11,6 +11,8 @@ import { IPFS_SOURCE } from '../../data/constants/urls';
 import { Button } from '../1_core/Button';
 import { Tag } from '../1_core/Tag';
 import { splitPriceAndCurrency } from "../../utils/data";
+import DotGemsContext from '../1_core/DotGemsContext';
+import { QtyControl, defaultConfig as qtyConfig } from '../1_core/QtyControl';
 
 export enum DropCardOrientation {
     horizontal = "horizontal",
@@ -21,7 +23,11 @@ export interface DropCardProps extends StandardModel {
     data: DropModel,
     config: {
         orientation: DropCardOrientation,
-        showPurchasing: Boolean
+        showPurchasing: Boolean,
+        label?: {
+            startIcon: Node,
+            label: string
+        }
     }
 }
 
@@ -86,6 +92,7 @@ export const DropCard = ({
 }: DropCardProps) => {
 
     const classes = useStyles();
+    const dotGemsCtx =  useContext(DotGemsContext);
 
     const getCardWidth = () => {
         if(config?.orientation?.indexOf("horizontal") !== -1) {
@@ -152,8 +159,8 @@ export const DropCard = ({
                 </div>
             </CardContent>
             <CardActions className={classes.actionsContainer} style={{borderTop: "solid 1px #F6F6F6", padding: "24px"}}>
-                <div>Bla</div>
-                <Button variant="text" label="Add to Cart"/>
+                <QtyControl {...qtyConfig}/>
+                <Button variant="text" label={dotGemsCtx.config.chain.useCheckout ? "Add to Cart" : "Buy"}/>
             </CardActions>
         </Card>
     );
