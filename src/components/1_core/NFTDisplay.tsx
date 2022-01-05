@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
+import { Backdrop, Button, Typography } from '@mui/material';
 
 import { StandardModel } from "../../models/Standard.model";
 import { IPFS_SOURCE } from '../../data/constants/urls';
+import {
+    ArrowBackIos as ArrowBackIosIcon,
+    ArrowForwardIos as ArrowForwardIosIcon,
+    Close as CloseIcon
+} from '@mui/icons-material';
 
 export interface NFTDisplayProps extends StandardModel {
     data: {
@@ -19,8 +25,7 @@ export interface NFTDisplayProps extends StandardModel {
             playFullVideo: Boolean
         },
         video: {
-            autoplay: Boolean,
-            isMuted: Boolean
+            autoplay: Boolean
         },
         showSelector: Boolean
     }
@@ -43,9 +48,26 @@ const useStyles = makeStyles({
     NFTDisplayContainer: {
         display: 'inline-block'
     },
+    mainDisplayContainer: {
+        height: "256px",
+        width: "256px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    mainDisplay: {
+        height: '100%',
+        maxWidth: "100%",
+        cursor: "pointer",
+    },
+    enlargedMainDisplay: {
+        height: '100%',
+        maxWidth: "100%",
+        margin: "auto"
+    },
     selectorContainer: {
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: "space-around",
         padding: "4px"
     },
     selectorItem: {
@@ -55,6 +77,21 @@ const useStyles = makeStyles({
     selectorItemActive: {
         cursor: "pointer",
         border: "solid 5px #42a5f5"
+    },
+    EnlargedBackBtn: {
+        position: 'absolute',
+        left: "32px",
+        top: "50%"
+    },
+    EnlargedForwardBtn: {
+        position: 'absolute',
+        right: "32px",
+        top: "50%"
+    },
+    EnlargedCloseBtn: {
+        position: 'absolute',
+        right: "32px",
+        top: "32px"
     }
 });
 
@@ -65,6 +102,7 @@ const useStyles = makeStyles({
  * 
  * @todo Use MUI Theme / palette instead of hardcoding color value
  * @todo Implement Loop
+ * @todo Fix error in enlarged display when switching to video (POST 404)
  */
 export const NFTDisplay = ({
     className,
@@ -72,18 +110,40 @@ export const NFTDisplay = ({
     size,
     style,
     data,
-    config = defaultConfig
+    config = defaultConfig,
+    dict
 }: NFTDisplayProps) => {
+
+    const SUPPORTED_PARTS = ['img', 'backimg', 'cardimg', 'video'];
 
     const classes = useStyles();
 
     const [activePart, setActivePart] = useState(config.defaultPart || 'img');
-    
-    const renderMainDisplay = () => {
-        if(activePart.indexOf('video') === -1) {
-            return (<img src={`${IPFS_SOURCE}/${data[activePart]}`} width="256px"/>);
+    const [providedParts, setProvidedParts] = useState(SUPPORTED_PARTS.filter(item => Object.keys(data).includes(item)));
+    const [showEnlarged, setShowEnlarged] = useState(false);
+
+    useEffect(() => {
+        document.addEventListener('keydown', handleKeyPresses)
+        return () => {
+            document.removeEventListener("keydown", handleKeyPresses);
+        }
+    }, []);
+
+    const renderMainDisplay = (isEnlarged?: Boolean) => {
+        if (activePart.indexOf('video') === -1) {
+            return (<img
+                src={`${IPFS_SOURCE}/${data[activePart]}`}
+                className={isEnlarged ? classes.enlargedMainDisplay : classes.mainDisplay}
+                onClick={() => setShowEnlarged(true)}
+            />);
         } else {
-            return (<video width="256px" controls muted={true}  onClick={() => setActivePart('video')}>
+            return (<video
+                controls={isEnlarged}
+                loop={true}
+                muted={true}
+                autoPlay={config.video.autoplay}
+                className={isEnlarged ? classes.enlargedMainDisplay : classes.mainDisplay}
+                onClick={() => setShowEnlarged(true)}>
                 <source src={`${IPFS_SOURCE}/${data[activePart]}`} type="video/mp4"></source>
                 Your browser does not support the video tag.
             </video>);
@@ -91,27 +151,89 @@ export const NFTDisplay = ({
     }
 
     const renderSelector = () => {
-
-        const parts = Object.keys(data);
-
         return (
             <div className={classes.selectorContainer}>
-                {parts.map((part) => {
-                    return <img
-                        className={activePart.indexOf(part) !== -1 && activePart.length === part.length ? classes.selectorItemActive : classes.selectorItem}
-                        src={`${IPFS_SOURCE}/${data[part.indexOf('video') === -1 ? part : "img"]}`}
-                        height="64px"
-                        onClick={() => setActivePart(part)}
-                    />
+                {providedParts.map((part) => {
+                    if (SUPPORTED_PARTS.includes(part)) {
+                        return <img
+                            className={activePart.indexOf(part) !== -1 && activePart.length === part.length ? classes.selectorItemActive : classes.selectorItem}
+                            src={`${IPFS_SOURCE}/${data[part.indexOf('video') === -1 ? part : "img"]}`}
+                            width="32px"
+                            onClick={() => setActivePart(part)}
+                            title={renderPartName(part)}
+                        />
+                    } else {
+                        return null;
+                    }
                 })}
             </div>
         );
     }
 
+    /**
+     * Returns the verbose name of the NFT Part.
+     * 
+     * @todo Add dict support 
+     */
+    const renderPartName = (part: string) => {
+        switch (part) {
+            case 'img': return "Image";
+            case 'backimg': return "Back Image";
+            case 'cardimg': return "Card Image";
+            case 'video': return "Video";
+            default: return "Unknown Part";
+        }
+    }
+
+    const handleKeyPresses = useCallback((event) => {
+        if(event) {
+            const ESCAPE = 27;
+            // const LEFT_ARROW = 37;
+            // const RIGHT_ARROW = 39;
+            let key = event.keyCode;
+            if(key === ESCAPE) {
+                setShowEnlarged(false);
+            }
+            // @todo FIX --> Not working for some reason
+            // else if (key === LEFT_ARROW) {
+            //     previousPart();
+            // } else if (key === RIGHT_ARROW) {
+            //     nextPart();
+            // }
+        }
+    }, []);
+
+    const changePart = (isPrevious: Boolean) => {
+        let isActivePart = (element) => element.indexOf(activePart) !== -1 && element.length === activePart.length
+        let activeIndex = providedParts.findIndex(isActivePart);
+        let changedIndex;
+        if(isPrevious === true) {
+            changedIndex = (activeIndex - 1) % providedParts.length;
+        } else {
+            changedIndex = (activeIndex + 1) % providedParts.length;
+        }
+        if(changedIndex < 0) {
+            changedIndex = providedParts.length - 1;
+        }
+        setActivePart(providedParts[changedIndex]);
+    } 
+
+    const previousPart = () => {changePart(true)} 
+
+    const nextPart = () => {changePart(false)} 
+
     return (
-        <div className={classes.NFTDisplayContainer}>
-            {renderMainDisplay()}
+        <div className={classes.NFTDisplayContainer} style={style}>
+            <div className={classes.mainDisplayContainer}>
+                {renderMainDisplay()}
+            </div>
             {config.showSelector ? renderSelector() : null}
+            <Backdrop open={showEnlarged} style={{zIndex: 1000}}>
+                <Button variant="contained" className={classes.EnlargedBackBtn} onClick={previousPart}><ArrowBackIosIcon /></Button>
+                <Button variant="contained" className={classes.EnlargedForwardBtn} onClick={nextPart}><ArrowForwardIosIcon /></Button>
+                <Button variant="contained" className={classes.EnlargedCloseBtn} endIcon={<CloseIcon/>} onClick={() => setShowEnlarged(false)}>Close</Button>
+                {renderMainDisplay(true)}
+            </Backdrop>
         </div>
     );
 };

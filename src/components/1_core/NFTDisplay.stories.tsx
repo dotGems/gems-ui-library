@@ -22,7 +22,7 @@ Default.args = {
         video: "QmVmvNNQ3njPcxu3WnAEC4gRAWgmSvJtm1NZPcifANFhUx",
     },
     config: {
-        defaultPart: 'img',
+        defaultPart: 'backimg',
         loop: {
             isEnabled: false,
             delay: 3000,
