@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 import MuiAvatar from '@mui/material/Avatar';
 
 import { StandardModel } from "../../models/Standard.model";
-import { createTheme, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import MuiButton from '@mui/material/Button';
 
 export interface AvatarProps extends StandardModel {
