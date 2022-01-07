@@ -15,12 +15,7 @@ export default meta;
 
 const Template: Story<CardProps> = (args) => <Card {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
-    variant: "outlined"
-};
-
-export const Secondary = Template.bind({});
-Secondary.args = {
-    variant: "contained"
-};
+export const Default = Template.bind({});
+Default.args = {
+    children: "Hello"
+}

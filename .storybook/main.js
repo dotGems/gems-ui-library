@@ -9,6 +9,7 @@ module.exports = {
     '../src/components/5_secondary_market/**/*.stories.@(ts|tsx|js|jsx)',
     '../src/components/6_chain/**/*.stories.@(ts|tsx|js|jsx)',
     '../src/components/7_dotgems/**/*.stories.@(ts|tsx|js|jsx)',
+    '../src/components/8_legacy/**/*.stories.@(ts|tsx|js|jsx)',
     '../src/components/9_utils/**/*.stories.@(ts|tsx|js|jsx)',
     '../src/components/**/*.stories.@(ts|tsx|js|jsx)',
   ],
