@@ -1,5 +1,5 @@
 import { ContextModel } from "../../models/Context.model";
-import { SUPPORTED_NETWORKS, SUPPORTED_WALLETS } from "../constants/chain";
+import { NETWORK_SUPPORTED_WALLETS, SUPPORTED_NETWORKS } from "../constants/chain";
 import { DEFAULT_THEME } from "../constants/themes";
 
 export const defaultContext : ContextModel = {
@@ -7,7 +7,7 @@ export const defaultContext : ContextModel = {
         chain: {
             useCheckout: false,
             supportedNetworks: SUPPORTED_NETWORKS, // User-supported networks, has to be within what we support.
-            supportedWallets: SUPPORTED_WALLETS, // User-supported wallets, has to be within what we support.
+            networkSupportedWallets: NETWORK_SUPPORTED_WALLETS, // User-supported wallets, has to be within what we support.
         }
     },
     style: {

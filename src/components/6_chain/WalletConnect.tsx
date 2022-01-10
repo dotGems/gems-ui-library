@@ -1,17 +1,36 @@
 
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
-import { Backdrop, Button, Link, Step, StepContent, StepLabel, Stepper, Typography } from "@mui/material";
+import {
+    Backdrop,
+    Button,
+    LinearProgress,
+    ListItemIcon,
+    ListItemText,
+    Menu,
+    MenuItem,
+    MenuList,
+    Step,
+    StepContent,
+    StepLabel,
+    Stepper,
+    Typography
+} from "@mui/material";
 import {
     AccountBalanceWallet as AccountBalanceWalletIcon,
-    AddCircle as AddCircleIcon
+    CompareArrows as CompareArrowsIcon,
+    ExitToApp as ExitToAppIcon,
+    Inventory as InventoryIcon,
+    MergeType as MergeTypeIcon
 } from '@mui/icons-material';
 
+import { Avatar } from "../1_core/Avatar";
 import { Card } from "../1_core/Card";
 import DotGemsContext from '../1_core/DotGemsContext';
 import { NetworkModel } from '../../models/Network.model';
-import { SUPPORTED_NETWORKS, SUPPORTED_WALLETS } from '../../data/constants/chain';
 import { WalletButtonModel, WalletModel } from '../../models/Wallet.model';
+import { StandardSize } from '../../models/Standard.model';
+import { WALLET_BUTTONS } from '../../data/constants/chain';
 
 export interface WalletConnectProps extends StandardModel { }
 
@@ -52,6 +71,18 @@ const useStyles = makeStyles({
     },
     walletsVSpacing: {
         margin: "4px 0"
+    },
+    infoMenuHeaderContainer: {
+        padding: "8px 16px 16px 16px",
+        minWidth: "300px"
+    },
+    headerLineContainer: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center"
+    },
+    dangerMenuItem: {
+        color: "#f44336"
     }
 });
 
@@ -65,9 +96,11 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
 
     const dotGemsCtx = useContext(DotGemsContext);
     const [isConnectWalletOpen, setIsConnectWalletOpen] = useState(false);
+    const [menuAnchorEl, setmenuAnchorEl] = useState(null);
+    const [isWalletInfoOpen, setIsWalletInfoOpen] = useState(false);
     const [selectedNetwork, setSelectedNetwork] = useState<string | undefined>(undefined);
     const [walletConnectStep, setWalletConnectStep] = useState(0);
-    const [walletData, setWalletData] = useState<WalletModel|undefined>(undefined);
+    const [walletData, setWalletData] = useState<WalletModel | undefined>(undefined);
 
     useEffect(() => {
         document.addEventListener('keydown', handleKeyPresses)
@@ -82,9 +115,19 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
             let key = event.keyCode;
             if (key === ESCAPE) {
                 setIsConnectWalletOpen(false);
+                setIsWalletInfoOpen(false);
             }
         }
     }, []);
+
+    const handleWalletButtonClick = (e) => {
+        if (walletData === undefined) {
+            setIsConnectWalletOpen(true)
+        } else {
+            setIsWalletInfoOpen(true);
+            setmenuAnchorEl(e.currentTarget);
+        }
+    }
 
     const handleNetworkSelect = (network: string) => {
         setSelectedNetwork(network);
@@ -127,9 +170,11 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
     }
 
     return (<>
-        <Button className={classes.walletConnectContainer} onClick={() => setIsConnectWalletOpen(true)}>
+        {/*====================== WALLET CONNECT BUTTON =================== */}
+        <Button className={classes.walletConnectContainer} onClick={handleWalletButtonClick}>
             <AccountBalanceWalletIcon className={classes.mrsm} /><Typography className={classes.connectText} variant="body1">{walletData ? walletData.username : "Connect"}</Typography>
         </Button>
+        {/*======================= WALLET CONNECT MENU ==================== */}
         <Backdrop open={isConnectWalletOpen}>
             <Card>
                 <Typography variant="h4" gutterBottom>Connect your wallet</Typography>
@@ -140,8 +185,7 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
                         </StepLabel>
                         <StepContent>
                             <Typography variant="body1" style={{ color: "gray" }} gutterBottom>
-                                Learn more about the different networks and how to purchase NFTs&nbsp;
-                                <Link target="_blank" rel="noreferrer" href="https://example.com">here</Link>.
+                                Please select the Network you wish to use;
                             </Typography>
                             <div className={classes.networksContainer}>
                                 {dotGemsCtx.config.chain.supportedNetworks.map((network: NetworkModel) => {
@@ -158,24 +202,30 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
                         <StepLabel>
                             <Typography variant="body1" style={{ fontWeight: "bolder" }}>Select &amp; Link Your Wallet</Typography>
                         </StepLabel>
-                        <StepContent >
+                        <StepContent>
+                            {console.log(dotGemsCtx.config.chain)}
+                            {console.log(WALLET_BUTTONS)}
                             <Typography variant="body1" style={{ color: "gray" }} gutterBottom>
-                                Don't have a wallet ? Use the + to create one. Please link your supported {selectedNetwork?.toUpperCase()} wallet;
+                                Please link your supported {selectedNetwork?.toUpperCase()} wallet;
                             </Typography>
-                            {selectedNetwork ? SUPPORTED_WALLETS[selectedNetwork].map((wallet: WalletButtonModel) => {
+                            {selectedNetwork ? dotGemsCtx.config.chain.networkSupportedWallets[selectedNetwork].map((wallet: WalletButtonModel) => {
                                 return <div className={classes.walletsVSpacing}>
                                     <Button
                                         style={{
                                             backgroundColor: wallet.bgColor,
                                             color: wallet.fgColor,
-                                            width: "80%"
+                                            width: "100%",
+                                            display: "flex",
+                                            justifyContent: "flex-start",
+                                            alignItems: "center"
                                         }}
                                         onClick={connectMockWallet}
                                     >
-                                        <img src={wallet.icon} className={classes.mrsm} />
-                                        <Typography variant="body2" style={{fontWeight: "bold"}}>{wallet.name}</Typography>
+                                        <div style={{ width: "60px", display: "flex", alignItems: "center" }}>
+                                            <img src={wallet.icon} className={classes.mrsm} />
+                                        </div>
+                                        <Typography variant="body2" style={{ fontWeight: "bold" }}>{wallet.name}</Typography>
                                     </Button>
-                                    <Button style={{width: "20%"}} target="_blank" rel="noreferrer" href={wallet.url}><AddCircleIcon sx={{fontSize: "42px"}}/></Button>
                                 </div>
                             }) : null}
                         </StepContent>
@@ -193,6 +243,59 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
                 </div>
             </Card>
         </Backdrop>
+        {/*====================== CONNECTED WALLET MENU =================== */}
+        <Menu
+            id="wallet-info-menu"
+            anchorEl={menuAnchorEl}
+            open={isWalletInfoOpen}
+            onClose={() => setIsWalletInfoOpen(false)}
+        >
+            <div className={classes.infoMenuHeaderContainer}>
+                <Avatar
+                    className={classes.headerLineContainer}
+                    style={{ paddingBottom: "16px" }}
+                    size={StandardSize.lg}
+                    data={{
+                        img: "/img/avatar/person_2.jpg",
+                        label: "cryptominer400"
+                    }}
+                />
+                <div className={classes.headerLineContainer}><Typography>RAM</Typography><LinearProgress style={{ margin: "0 8px", width: "100%" }} color="info" variant="determinate" value={40} /></div>
+                <div className={classes.headerLineContainer}><Typography>CPU</Typography><LinearProgress style={{ margin: "0 8px", width: "100%" }} color="warning" variant="determinate" value={30} /></div>
+                <div className={classes.headerLineContainer}><Typography>NET</Typography><LinearProgress style={{ margin: "0 8px", width: "100%" }} color="success" variant="determinate" value={80} /></div>
+            </div>
+            <MenuList>
+                <MenuItem>
+                    <ListItemIcon>
+                        <InventoryIcon />
+                    </ListItemIcon>
+                    <ListItemText>INVENTORY</ListItemText>
+                </MenuItem>
+                <MenuItem>
+                    <ListItemIcon>
+                        <MergeTypeIcon />
+                    </ListItemIcon>
+                    <ListItemText>BLEND NFTS</ListItemText>
+                </MenuItem>
+                <MenuItem>
+                    <ListItemIcon>
+                        <CompareArrowsIcon />
+                    </ListItemIcon>
+                    <ListItemText>TRANSACTIONS HISTORY</ListItemText>
+                </MenuItem>
+                <MenuItem className={classes.dangerMenuItem} onClick={() => {
+                    setWalletData(undefined);
+                    setIsWalletInfoOpen(false);
+                    setWalletConnectStep(0);
+                    setSelectedNetwork(undefined);
+                }}>
+                    <ListItemIcon className={classes.dangerMenuItem}>
+                        <ExitToAppIcon />
+                    </ListItemIcon>
+                    <ListItemText>DISCONNECT</ListItemText>
+                </MenuItem>
+            </MenuList>
+        </Menu>
     </>
     );
 };

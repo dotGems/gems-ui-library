@@ -7,8 +7,9 @@ export interface ContextModel {
         chain: {
             useCheckout: Boolean;
             supportedNetworks: Array<NetworkModel> // User-supported networks, has to be within what we support.
-            supportedWallets: {
-                EOS: Array<WalletButtonModel>
+            networkSupportedWallets: {
+                eos: Array<WalletButtonModel>
+                wax: Array<WalletButtonModel>
             } // User-supported wallets, has to be within what we support.
         }
     }

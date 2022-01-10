@@ -10,7 +10,7 @@ import React from 'react';
 //   (story) => <ThemeProvider theme={muiTheme}>{story()}</ThemeProvider>,
 // ];
 
-import { SUPPORTED_NETWORKS, SUPPORTED_WALLETS } from '../../data/constants/chain';
+import { SUPPORTED_NETWORKS, NETWORK_SUPPORTED_WALLETS } from '../../data/constants/chain';
 import { ContextModel } from '../../models/Context.model';
 
 const defaultProps: ContextModel = {
@@ -18,13 +18,9 @@ const defaultProps: ContextModel = {
         chain: {
             useCheckout: false,
             supportedNetworks: SUPPORTED_NETWORKS, // User-supported networks, has to be within what we support.
-            supportedWallets: SUPPORTED_WALLETS // User-supported wallets, has to be within what we support.
+            networkSupportedWallets: NETWORK_SUPPORTED_WALLETS // User-supported wallets, has to be within what we support.
         }
-    },
-    style: {
-        palette: {},
-        variant: 'elegant'
-    },
+    }
 }
 
 /**

@@ -11,7 +11,7 @@ export interface AvatarProps extends StandardModel {
         img: string;
         label?: string;
     },
-    config: {
+    config?: {
         onClick?: Function;
         custom?: {
             isRounded?: Boolean;
@@ -23,7 +23,7 @@ const useStyles = makeStyles({
     avatarContainer: {
         display: "flex",
         flexWrap: "nowrap",
-        textTransform: "none !important",
+        textTransform: "none",
         alignItems: "center",
     },
     avatarImg: {
@@ -89,12 +89,12 @@ export const Avatar = ({ className, variant, style, size = 'md', data, config = 
     }
 
     if(config.onClick) {
-        return (<MuiButton onClick={config.onClick} className={classes.avatarContainer}>
+        return (<MuiButton onClick={config.onClick} className={classes.avatarContainer} style={style}>
             {renderContent()}
         </MuiButton>);
     } else {
         return (
-            <div className={classes.avatarContainer}>
+            <div className={classes.avatarContainer} style={style}>
                 {renderContent()}
             </div>
         );

@@ -2,8 +2,7 @@ export interface WalletButtonModel {
     name: string,
     icon: string,
     bgColor: string,
-    fgColor: string,
-    url: string
+    fgColor: string
 }
 
 export interface WalletModel {
