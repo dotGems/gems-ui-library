@@ -1,5 +1,5 @@
 import { ContextModel } from "../../models/Context.model";
-import { NETWORK_SUPPORTED_WALLETS, SUPPORTED_NETWORKS } from "../constants/chain";
+import { NETWORK_SUPPORTED_WALLETS, SUPPORTED_NETWORKS } from "../constants/networks/networks";
 import { DEFAULT_THEME } from "../constants/themes";
 
 export const defaultContext : ContextModel = {

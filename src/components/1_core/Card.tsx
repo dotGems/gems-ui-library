@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles';
 import { StandardModel } from "../../models/Standard.model";
 
 export interface CardProps extends StandardModel {
-    children: Node
+    children: React.ReactNode
 }
 
 const useStyles = makeStyles({

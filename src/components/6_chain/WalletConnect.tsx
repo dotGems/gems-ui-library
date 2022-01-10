@@ -29,8 +29,8 @@ import { Card } from "../1_core/Card";
 import DotGemsContext from '../1_core/DotGemsContext';
 import { NetworkModel } from '../../models/Network.model';
 import { WalletButtonModel, WalletModel } from '../../models/Wallet.model';
-import { StandardSize } from '../../models/Standard.model';
-import { WALLET_BUTTONS } from '../../data/constants/chain';
+import { StandardModel, StandardSize } from '../../models/Standard.model';
+import { WALLET_BUTTONS } from '../../data/constants/wallets';
 
 export interface WalletConnectProps extends StandardModel { }
 
@@ -203,8 +203,6 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
                             <Typography variant="body1" style={{ fontWeight: "bolder" }}>Select &amp; Link Your Wallet</Typography>
                         </StepLabel>
                         <StepContent>
-                            {console.log(dotGemsCtx.config.chain)}
-                            {console.log(WALLET_BUTTONS)}
                             <Typography variant="body1" style={{ color: "gray" }} gutterBottom>
                                 Please link your supported {selectedNetwork?.toUpperCase()} wallet;
                             </Typography>
