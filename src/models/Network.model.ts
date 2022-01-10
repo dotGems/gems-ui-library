@@ -7,5 +7,6 @@ export interface NetworkModel {
             name: string,
             unit: string
         }>
-    }
+    },
+    explorer_url: string
 }

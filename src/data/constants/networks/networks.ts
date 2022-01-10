@@ -9,15 +9,17 @@ import { EOSIO_RESOURCES } from "./eosio";
  * available to their users.
  */
  export const SUPPORTED_NETWORKS: Array<NetworkModel> = [{
-    name: "eos",
-    icon: "/img/networks/eos.svg",
-    resources: EOSIO_RESOURCES
-},
-{
-    name: "wax",
-    icon: "/img/networks/wax.svg",
-    resources: EOSIO_RESOURCES
-}
+        name: "eos",
+        icon: "/img/networks/eos.svg",
+        resources: EOSIO_RESOURCES,
+        explorer_url: "https://bloks.io/account/"
+    },
+    {
+        name: "wax",
+        icon: "/img/networks/wax.svg",
+        resources: EOSIO_RESOURCES,
+        explorer_url: "https://wax.bloks.io/account/"
+    }
 ];
 
 /**
@@ -25,15 +27,15 @@ import { EOSIO_RESOURCES } from "./eosio";
 * networks.
 */
 export const NETWORK_SUPPORTED_WALLETS: {eos: Array<WalletButtonModel>, wax: Array<WalletButtonModel>} = {
-eos: [
-    WALLET_BUTTONS.anchor,
-    WALLET_BUTTONS.wombat,
-    WALLET_BUTTONS.token_pocket,
-    WALLET_BUTTONS.scatter
-],
-wax: [
-    WALLET_BUTTONS.wax_cloud,
-    WALLET_BUTTONS.anchor,
-    WALLET_BUTTONS.wombat
-]
+    eos: [
+        WALLET_BUTTONS.anchor,
+        WALLET_BUTTONS.wombat,
+        WALLET_BUTTONS.token_pocket,
+        WALLET_BUTTONS.scatter
+    ],
+    wax: [
+        WALLET_BUTTONS.wax_cloud,
+        WALLET_BUTTONS.anchor,
+        WALLET_BUTTONS.wombat
+    ]
 };

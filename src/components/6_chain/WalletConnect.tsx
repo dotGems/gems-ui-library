@@ -5,6 +5,7 @@ import {
     Backdrop,
     Button,
     LinearProgress,
+    Link,
     ListItemIcon,
     ListItemText,
     Menu,
@@ -30,7 +31,6 @@ import DotGemsContext from '../1_core/DotGemsContext';
 import { NetworkModel } from '../../models/Network.model';
 import { WalletButtonModel, WalletModel } from '../../models/Wallet.model';
 import { StandardModel, StandardSize } from '../../models/Standard.model';
-import { WALLET_BUTTONS } from '../../data/constants/wallets';
 
 export interface WalletConnectProps extends StandardModel { }
 
@@ -145,7 +145,12 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
     const connectMockWallet = () => {
         setIsConnectWalletOpen(false);
         setWalletData({
-            username: "Cryptominer400",
+            eosn_id: "4242214.eosn",
+            linkedAccount: "d2a2h2m2e2r2",
+            pfp: "/img/avatar/person_2.jpg",
+            status: "Not connected",
+            visible: false,
+            // balance: "0.4562 EOS",
             currencies: [
                 {
                     name: "EOS",
@@ -172,7 +177,7 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
     return (<>
         {/*====================== WALLET CONNECT BUTTON =================== */}
         <Button className={classes.walletConnectContainer} onClick={handleWalletButtonClick}>
-            <AccountBalanceWalletIcon className={classes.mrsm} /><Typography className={classes.connectText} variant="body1">{walletData ? walletData.username : "Connect"}</Typography>
+            <AccountBalanceWalletIcon className={classes.mrsm} /><Typography className={classes.connectText} variant="body1">{walletData ? walletData.linkedAccount : "Connect"}</Typography>
         </Button>
         {/*======================= WALLET CONNECT MENU ==================== */}
         <Backdrop open={isConnectWalletOpen}>
@@ -242,7 +247,7 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
             </Card>
         </Backdrop>
         {/*====================== CONNECTED WALLET MENU =================== */}
-        <Menu
+        {walletData ? <Menu
             id="wallet-info-menu"
             anchorEl={menuAnchorEl}
             open={isWalletInfoOpen}
@@ -254,8 +259,8 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
                     style={{ paddingBottom: "16px" }}
                     size={StandardSize.lg}
                     data={{
-                        img: "/img/avatar/person_2.jpg",
-                        label: "cryptominer400"
+                        img: walletData.pfp,
+                        label: walletData.linkedAccount
                     }}
                 />
                 <div className={classes.headerLineContainer}><Typography>RAM</Typography><LinearProgress style={{ margin: "0 8px", width: "100%" }} color="info" variant="determinate" value={40} /></div>
@@ -263,37 +268,38 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
                 <div className={classes.headerLineContainer}><Typography>NET</Typography><LinearProgress style={{ margin: "0 8px", width: "100%" }} color="success" variant="determinate" value={80} /></div>
             </div>
             <MenuList>
-                <MenuItem>
+                <MenuItem component={Link} target="_blank" rel="noreferrer" href={`${dotGemsCtx.config.chain.supportedNetworks.filter((elem) => elem.name.indexOf(selectedNetwork) !== -1 && elem.name.length === selectedNetwork.length)[0].explorer_url}${walletData.linkedAccount}#nft`}>
                     <ListItemIcon>
                         <InventoryIcon />
                     </ListItemIcon>
                     <ListItemText>INVENTORY</ListItemText>
                 </MenuItem>
-                <MenuItem>
+                <MenuItem component={Link} target="_blank" rel="noreferrer" href="https://blend.dotgems.io/eos">
                     <ListItemIcon>
                         <MergeTypeIcon />
                     </ListItemIcon>
                     <ListItemText>BLEND NFTS</ListItemText>
                 </MenuItem>
-                <MenuItem>
+                <MenuItem component={Link} target="_blank" rel="noreferrer" href={`${dotGemsCtx.config.chain.supportedNetworks.filter((elem) => elem.name.indexOf(selectedNetwork) !== -1 && elem.name.length === selectedNetwork.length)[0].explorer_url}${walletData.linkedAccount}`}>
                     <ListItemIcon>
                         <CompareArrowsIcon />
                     </ListItemIcon>
                     <ListItemText>TRANSACTIONS HISTORY</ListItemText>
                 </MenuItem>
-                <MenuItem className={classes.dangerMenuItem} onClick={() => {
-                    setWalletData(undefined);
-                    setIsWalletInfoOpen(false);
-                    setWalletConnectStep(0);
-                    setSelectedNetwork(undefined);
-                }}>
-                    <ListItemIcon className={classes.dangerMenuItem}>
-                        <ExitToAppIcon />
-                    </ListItemIcon>
-                    <ListItemText>DISCONNECT</ListItemText>
-                </MenuItem>
-            </MenuList>
-        </Menu>
+            <MenuItem className={classes.dangerMenuItem} onClick={() => {
+                setWalletData(undefined);
+                setIsWalletInfoOpen(false);
+                setWalletConnectStep(0);
+                setSelectedNetwork(undefined);
+            }}>
+                <ListItemIcon className={classes.dangerMenuItem}>
+                    <ExitToAppIcon />
+                </ListItemIcon>
+                <ListItemText>DISCONNECT</ListItemText>
+            </MenuItem>
+        </MenuList>
+        </Menu> : null
+}
     </>
     );
 };
