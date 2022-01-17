@@ -7,6 +7,8 @@ export const parameters = {
   actions: { argTypesRegex: '^on.*' },
 };
 
+// @todo CONSIDER: https://storybook.js.org/addons/storybook-react-context
+
 export const decorators = [
   (Story) => (
     <DotGemsProvider value={defaultContext}>

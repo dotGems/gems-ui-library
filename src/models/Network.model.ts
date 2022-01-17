@@ -1,12 +1,12 @@
+import { EOSIOResourcesModel } from "./chain/EOSIOResources.model";
+
 export interface NetworkModel {
-    name: string,
+    blockchain: string,
     icon: string,
-    resources: {
-        available: Boolean,
-        types: Array<{
-            name: string,
-            unit: string
-        }>
-    },
+    chain_id: string,
+    host: string,
+    protocol: string,
+    port: Number,
+    resources: EOSIOResourcesModel | [],
     explorer_url: string
 }

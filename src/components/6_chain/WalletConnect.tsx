@@ -193,10 +193,10 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
                                 Please select the Network you wish to use;
                             </Typography>
                             <div className={classes.networksContainer}>
-                                {dotGemsCtx.config.chain.supportedNetworks.map((network: NetworkModel) => {
+                                {dotGemsCtx.config.chain.supported_networks.map((network: NetworkModel) => {
                                     return <Button
                                         className={classes.networkButton}
-                                        onClick={() => handleNetworkSelect(network.name)}>
+                                        onClick={() => handleNetworkSelect(network.blockchain)}>
                                         <img src={network.icon} />
                                     </Button>
                                 })}
@@ -211,7 +211,8 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
                             <Typography variant="body1" style={{ color: "gray" }} gutterBottom>
                                 Please link your supported {selectedNetwork?.toUpperCase()} wallet;
                             </Typography>
-                            {selectedNetwork ? dotGemsCtx.config.chain.networkSupportedWallets[selectedNetwork].map((wallet: WalletButtonModel) => {
+                            {console.log(dotGemsCtx.config.chain.network_supported_wallets, dotGemsCtx.config.chain.network_supported_wallets[selectedNetwork])}
+                            {selectedNetwork ? dotGemsCtx.config.chain.network_supported_wallets[selectedNetwork].map((wallet: WalletButtonModel) => {
                                 return <div className={classes.walletsVSpacing}>
                                     <Button
                                         style={{
@@ -230,7 +231,7 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
                                         <Typography variant="body2" style={{ fontWeight: "bold" }}>{wallet.name}</Typography>
                                     </Button>
                                 </div>
-                            }) : null}
+                            }) : null }
                         </StepContent>
                     </Step>
                 </Stepper>
@@ -247,7 +248,7 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
             </Card>
         </Backdrop>
         {/*====================== CONNECTED WALLET MENU =================== */}
-        {walletData ? <Menu
+        {walletData && selectedNetwork ? <Menu
             id="wallet-info-menu"
             anchorEl={menuAnchorEl}
             open={isWalletInfoOpen}
@@ -268,7 +269,7 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
                 <div className={classes.headerLineContainer}><Typography>NET</Typography><LinearProgress style={{ margin: "0 8px", width: "100%" }} color="success" variant="determinate" value={80} /></div>
             </div>
             <MenuList>
-                <MenuItem component={Link} target="_blank" rel="noreferrer" href={`${dotGemsCtx.config.chain.supportedNetworks.filter((elem) => elem.name.indexOf(selectedNetwork) !== -1 && elem.name.length === selectedNetwork.length)[0].explorer_url}${walletData.linkedAccount}#nft`}>
+                <MenuItem component={Link} target="_blank" rel="noreferrer" href={`${dotGemsCtx.config.chain.supported_networks.filter((elem) => elem.blockchain.indexOf(selectedNetwork) !== -1 && elem.blockchain.length === selectedNetwork.length)[0].explorer_url}${walletData.linkedAccount}#nft`}>
                     <ListItemIcon>
                         <InventoryIcon />
                     </ListItemIcon>
@@ -280,7 +281,7 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
                     </ListItemIcon>
                     <ListItemText>BLEND NFTS</ListItemText>
                 </MenuItem>
-                <MenuItem component={Link} target="_blank" rel="noreferrer" href={`${dotGemsCtx.config.chain.supportedNetworks.filter((elem) => elem.name.indexOf(selectedNetwork) !== -1 && elem.name.length === selectedNetwork.length)[0].explorer_url}${walletData.linkedAccount}`}>
+                <MenuItem component={Link} target="_blank" rel="noreferrer" href={`${dotGemsCtx.config.chain.supported_networks.filter((elem) => elem.blockchain.indexOf(selectedNetwork) !== -1 && elem.blockchain.length === selectedNetwork.length)[0].explorer_url}${walletData.linkedAccount}`}>
                     <ListItemIcon>
                         <CompareArrowsIcon />
                     </ListItemIcon>

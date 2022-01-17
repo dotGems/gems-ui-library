@@ -16,11 +16,14 @@ import { ContextModel } from '../../models/Context.model';
 const defaultProps: ContextModel = {
     config: {
         chain: {
-            useCheckout: false,
-            supportedNetworks: SUPPORTED_NETWORKS, // User-supported networks, has to be within what we support.
-            networkSupportedWallets: NETWORK_SUPPORTED_WALLETS // User-supported wallets, has to be within what we support.
+            use_checkout: false,
+            supported_networks: SUPPORTED_NETWORKS, // User-supported networks, has to be within what we support.
+            network_supported_wallets: NETWORK_SUPPORTED_WALLETS, // User-supported wallets, has to be within what we support.
         },
-        wallet: undefined
+    },
+    state: {
+        wallet: undefined,
+        selected_network: undefined
     }
 }
 
@@ -28,6 +31,9 @@ const defaultProps: ContextModel = {
  * The dotGems Context provides a general context (configuration)
  * for every dotGems components within. If an app uses the UI Library,
  * the dotGems should wrap the section of the app using the components.
+ * 
+ * @todo make supported networks configurable
+ * @todo make supported wallets configurable
  */
 const DotGemsContext = React.createContext(defaultProps);
 
