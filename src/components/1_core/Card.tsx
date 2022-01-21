@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 });
 
 /**
- * Simple Card. 
+ * Simple Card.
  */
 export const Card = ({
     children

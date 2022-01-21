@@ -3,7 +3,15 @@ import { makeStyles } from '@mui/styles';
 import { Typography } from '@mui/material';
 
 import { StandardCoreModel } from "../../models/StandardCore.model";
+import { StandardSize } from "../../models/Standard.model";
 import { combineStyles } from "../../utils/style";
+
+export interface TagConfig {
+    custom: {
+        isRounded: boolean;
+        hasPadding: boolean;
+    }
+}
 
 export interface TagProps extends StandardCoreModel {
     data: {
@@ -11,12 +19,7 @@ export interface TagProps extends StandardCoreModel {
         icon?: ReactNode;
         iconTitle?: string;
     },
-    config: {
-        custom: {
-            isRounded: Boolean;
-            hasPadding: Boolean
-        }
-    }
+    config: TagConfig;
 }
 
 const useStyles = makeStyles({
@@ -57,16 +60,16 @@ const useStyles = makeStyles({
     }
 });
 
-const defaultConfig = {
+const defaultConfig: TagConfig = {
     custom: {
-        isRounded: undefined,
+        isRounded: false,
         hasPadding: true
     }
 }
 
 /**
  * Small tag to highlight some information.
- * 
+ *
  * @todo Handle className and style
  * @todo Improve sizes
  */
@@ -99,17 +102,17 @@ export const Tag = ({className, style, variant, size, config = defaultConfig, da
     },[]);
 
     const getTextSize = () : "caption" | "body1" | "body2" => {
-        switch(size) {
-            case 'sm': return "caption"
-            case 'lg': return "body1"
+        switch (size) {
+            case StandardSize.sm: return "caption"
+            case StandardSize.lg: return "body1"
             default: return "body2" // MD and others
         }
     }
 
     const getIconSize = (): {fontSize: string} => {
-        switch(size) {
-            case 'sm': return {fontSize: "20px"};
-            case 'lg': return {fontSize: "24px"};
+        switch (size) {
+            case StandardSize.sm: return {fontSize: "20px"};
+            case StandardSize.lg: return {fontSize: "24px"};
             default: return {fontSize: "20px"}; // MD and others
         }
     }

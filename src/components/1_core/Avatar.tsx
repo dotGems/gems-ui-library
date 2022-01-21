@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import MuiAvatar from '@mui/material/Avatar';
 
-import { StandardModel } from "../../models/Standard.model";
+import { StandardModel, StandardSize } from "../../models/Standard.model";
 import { Typography } from '@mui/material';
 import MuiButton from '@mui/material/Button';
 
@@ -12,7 +12,7 @@ export interface AvatarProps extends StandardModel {
         label?: string;
     },
     config?: {
-        onClick?: Function;
+        onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
         custom?: {
             isRounded?: Boolean;
         }
@@ -39,35 +39,35 @@ const defaultConfig = {
 
 /**
  * Displays a thumbnail followed by a label.
- * 
+ *
  * @todo Replace use of MuiButton with our button.
  * @todo Handle className and style
  */
-export const Avatar = ({ className, variant, style, size = 'md', data, config = defaultConfig }: AvatarProps) => {
+export const Avatar = ({ className, variant, style, size = StandardSize.md, data, config = defaultConfig }: AvatarProps) => {
 
     const classes = useStyles();
 
     const getAvatarSize = () : {width: string, height: string} => {
-        switch(size) {
-            case 'sm': return { width: "24px", height: "24px"}
-            case 'lg': return {  width: "48px", height: "48px"}
+        switch (size) {
+            case StandardSize.sm: return { width: "24px", height: "24px"}
+            case StandardSize.lg: return {  width: "48px", height: "48px"}
             default: return { width: "32px", height: "32px" } // MD and others
         }
     }
 
     const getTextSize = () : "caption" | "body1" | "body2" => {
         switch(size) {
-            case 'sm': return "caption"
-            case 'lg': return "body1"
+            case StandardSize.sm: return "caption"
+            case StandardSize.lg: return "body1"
             default: return "body2" // MD and others
         }
     }
 
     const getRounding = () => {
-        if(config.custom && config.custom.isRounded) {
+        if (config.custom && config.custom.isRounded) {
             return config.custom.isRounded === true ? "circular" : "square"
         } else {
-            switch(variant) {
+            switch (variant) {
                 case 'dynamic': return 'circular'
                 default: return 'square'; // elegant and others
             }
@@ -81,14 +81,13 @@ export const Avatar = ({ className, variant, style, size = 'md', data, config = 
                     alt={data.label}
                     src={data.img}
                     variant={getRounding()}
-                    sx={getAvatarSize()}    
+                    sx={getAvatarSize()}
                 />
             </div>
             <Typography variant={getTextSize()}>{data.label}</Typography>
         </>);
     }
-
-    if(config.onClick) {
+    if (config.onClick) {
         return (<MuiButton onClick={config.onClick} className={classes.avatarContainer} style={style}>
             {renderContent()}
         </MuiButton>);

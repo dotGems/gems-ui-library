@@ -1,20 +1,21 @@
 import React, { ReactNode } from 'react';
 import MuiButton from '@mui/material/Button';
+import { StandardSize } from "../../models/Standard.model";
 import { makeStyles } from '@mui/styles';
 
 export interface ButtonProps {
     // children: ReactNode,
-    backgroundColor?: string,
-    color?: string,
-    size?: string
-    isRounded?: boolean,
-    variant?: 'text' | 'outlined' | 'contained',
+    backgroundColor?: string;
+    color?: string;
+    size?: StandardSize;
+    isRounded?: boolean;
+    variant?: 'text' | 'outlined' | 'contained';
     label?: string;
-    startIcon?: ReactNode,
-    target?: string,
-    href?: string,
-    style: any,
-    disabled?: Boolean,
+    startIcon?: ReactNode;
+    target?: string;
+    href?: string;
+    style: any;
+    disabled?: boolean;
     onClick?: () => void;
 }
 
@@ -29,7 +30,7 @@ const useStyles = makeStyles({
 
 export const Button = ({
     startIcon,
-    size = 'md',
+    size = StandardSize.md,
     variant = 'outlined',
     label = "",
     isRounded = false,
@@ -42,8 +43,8 @@ export const Button = ({
     onClick = () => {}
 }: ButtonProps) => {
     const classes = useStyles();
-    
-    if(href) {
+
+    if (href) {
         return (
             <MuiButton
                 startIcon={startIcon}

@@ -24,14 +24,14 @@ const defaultProps: ContextModel = {
     state: {
         wallet: undefined,
         selected_network: undefined
-    }
+    },
 }
 
 /**
  * The dotGems Context provides a general context (configuration)
  * for every dotGems components within. If an app uses the UI Library,
  * the dotGems should wrap the section of the app using the components.
- * 
+ *
  * @todo make supported networks configurable
  * @todo make supported wallets configurable
  */

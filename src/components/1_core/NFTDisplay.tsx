@@ -10,6 +10,19 @@ import {
     Close as CloseIcon
 } from '@mui/icons-material';
 
+export interface NFTDisplayConfig {
+    defaultPart: 'img' | 'video' | 'backimg' | 'cardimg';
+    loop: {
+        isEnabled: boolean;
+        delay: number;
+        playFullVideo: boolean;
+    },
+    video: {
+        autoplay: boolean;
+    },
+    showSelector: boolean;
+}
+
 export interface NFTDisplayProps extends StandardModel {
     data: {
         img: string,
@@ -17,21 +30,10 @@ export interface NFTDisplayProps extends StandardModel {
         backimg?: string,
         cardimg?: string
     },
-    config: {
-        defaultPart: 'img' | 'video' | 'backimg' | 'cardimg',
-        loop: {
-            isEnabled: Boolean,
-            delay: number,
-            playFullVideo: Boolean
-        },
-        video: {
-            autoplay: Boolean
-        },
-        showSelector: Boolean
-    }
+    config: NFTDisplayConfig
 }
 
-const defaultConfig = {
+const defaultConfig: NFTDisplayConfig = {
     defaultPart: 'img',
     loop: {
         isEnabled: false,
@@ -99,7 +101,7 @@ const useStyles = makeStyles({
  * Displays all parts of an NFT. The user can select which part
  * of the NFT to be displayed in a larger area. Cycles through the
  * different parts by default.
- * 
+ *
  * @todo Use MUI Theme / palette instead of hardcoding color value
  * @todo Implement Loop
  * @todo Fix error in enlarged display when switching to video (POST 404)
@@ -111,7 +113,7 @@ export const NFTDisplay = ({
     style,
     data,
     config = defaultConfig,
-    dict
+    // dict,
 }: NFTDisplayProps) => {
 
     const SUPPORTED_PARTS = ['img', 'backimg', 'cardimg', 'video'];
@@ -129,7 +131,7 @@ export const NFTDisplay = ({
         }
     }, []);
 
-    const renderMainDisplay = (isEnlarged?: Boolean) => {
+    const renderMainDisplay = (isEnlarged?: boolean) => {
         if (activePart.indexOf('video') === -1) {
             return (<img
                 src={`${IPFS_SOURCE}/${data[activePart]}`}
@@ -172,8 +174,8 @@ export const NFTDisplay = ({
 
     /**
      * Returns the verbose name of the NFT Part.
-     * 
-     * @todo Add dict support 
+     *
+     * @todo Add dict support
      */
     const renderPartName = (part: string) => {
         switch (part) {
@@ -203,24 +205,24 @@ export const NFTDisplay = ({
         }
     }, []);
 
-    const changePart = (isPrevious: Boolean) => {
+    const changePart = (isPrevious: boolean) => {
         let isActivePart = (element) => element.indexOf(activePart) !== -1 && element.length === activePart.length
         let activeIndex = providedParts.findIndex(isActivePart);
         let changedIndex;
-        if(isPrevious === true) {
+        if (isPrevious === true) {
             changedIndex = (activeIndex - 1) % providedParts.length;
         } else {
             changedIndex = (activeIndex + 1) % providedParts.length;
         }
-        if(changedIndex < 0) {
+        if (changedIndex < 0) {
             changedIndex = providedParts.length - 1;
         }
         setActivePart(providedParts[changedIndex]);
-    } 
+    }
 
-    const previousPart = () => {changePart(true)} 
+    const previousPart = () => {changePart(true)}
 
-    const nextPart = () => {changePart(false)} 
+    const nextPart = () => {changePart(false)}
 
     return (
         <div className={classes.NFTDisplayContainer} style={style}>

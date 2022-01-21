@@ -33,7 +33,7 @@ export const defaultConfig = {
 }
 
 /**
- * 
+ *
  */
 export const QtyControl = ({
     className,
