@@ -1,5 +1,5 @@
 export interface EOSIOResourcesModel {
-    available: Boolean,
+    available: boolean,
     types: Array<{
         name: string,
         unit: string

@@ -1,12 +1,14 @@
 export interface WalletButtonModel {
     name: string,
-    icon: string,
-    bgColor: string,
-    fgColor: string
+    icon: string
 }
 
 export interface WalletModel {
-    username: string,
+    eosn_id?: string,
+    linkedAccount?: string,
+    pfp?: string,
+    status?: string,
+    visible?: boolean,
     currencies: [{
         name: string,
         amount: string

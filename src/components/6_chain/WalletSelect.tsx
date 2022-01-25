@@ -1,12 +1,12 @@
 
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+// import { makeStyles } from '@mui/styles';
 
 import { StandardModel } from "../../models/Standard.model";
 
 export interface WalletSelectProps extends StandardModel {}
 
-const useStyles = makeStyles({});
+// const useStyles = makeStyles({});
 
 /**
  * Displays a wallet button used to trigger the 'connect wallet'
@@ -15,7 +15,7 @@ const useStyles = makeStyles({});
  */
 export const WalletSelect = ({}: WalletSelectProps) => {
 
-    const classes = useStyles();
+    // const classes = useStyles();
 
     return (
         <div>

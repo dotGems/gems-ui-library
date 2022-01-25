@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 
 import { StandardModel } from "../../models/Standard.model";
-import { NFTDisplay } from '../1_core/NFTDisplay';
+import { NFTDisplay, NFTPart } from '../1_core/NFTDisplay';
 import { DropModel } from '../../models/Drop.model';
 import { DropDetails } from './DropDetails';
 
@@ -10,23 +10,23 @@ export interface DropBannerProps extends StandardModel {
     data: DropModel,
     config: {
         nft_display: {
-            defaultPart: 'img' | 'video' | 'backimg' | 'cardimg',
+            defaultPart: NFTPart,
             loop: {
-                isEnabled: Boolean,
+                isEnabled: boolean,
                 delay: number,
-                playFullVideo: Boolean
+                playFullVideo: boolean
             },
             video: {
-                autoplay: Boolean
+                autoplay: boolean
             },
-            showSelector: Boolean
+            showSelector: boolean
         },
         details: {
-            showArtist?: Boolean,
-            showCollection?: Boolean,
-            showAbout?: Boolean,
-            showBurnableTransferable?: Boolean,
-            showViewData?: Boolean
+            showArtist?: boolean,
+            showCollection?: boolean,
+            showAbout?: boolean,
+            showBurnableTransferable?: boolean,
+            showViewData?: boolean
         }
     }
 }
@@ -41,20 +41,24 @@ const useStyles = makeStyles({
  * Displays a drop's core information next to the NFT display.
  */
 export const DropBanner = ({
-    className,
-    variant,
-    size,
-    style,
+    /*className,*/
+    /*variant,*/
+    // size,
+    // style,
     data,
     config,
-    dict
+    // dict
 }: DropBannerProps) => {
 
     const classes = useStyles();
 
     return (
         <div className={classes.dropBannerContainer}>
-            <NFTDisplay data={data.template.deserialized} config={config.nft_display} style={{marginRight: "2em"}}/>
+            <NFTDisplay
+                data={data.template.deserialized}
+                config={config.nft_display}
+                style={{marginRight: "2em"}}
+            />
             <DropDetails data={data} config={config.details}/>
         </div>
     );

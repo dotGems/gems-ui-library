@@ -1,18 +1,18 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+// import { makeStyles } from '@mui/styles';
 
 import { StandardModel } from "../../models/Standard.model";
 
 export interface CheckoutProps extends StandardModel {}
 
-const useStyles = makeStyles({});
+// const useStyles = makeStyles({});
 
 /**
  * Displays the checkout screen.
  */
 export const Checkout = ({}: CheckoutProps) => {
 
-    const classes = useStyles();
+    // const classes = useStyles();
 
     return (
         <div>

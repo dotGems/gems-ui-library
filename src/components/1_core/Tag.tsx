@@ -1,20 +1,21 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import { Typography } from '@mui/material';
 
-import { StandardCoreModel } from "../../models/StandardCore.model";
-import { combineStyles } from "../../utils/style";
+import { CoreVariant, StandardCoreModel } from "../../models/StandardCore.model";
+import { combineStyles } from "../../common/style";
+import { StandardSize } from '../../models/Standard.model';
 
 export interface TagProps extends StandardCoreModel {
     data: {
-        label: string;
-        icon?: ReactNode;
+        label?: React.ReactElement | string;
+        icon?: React.ElementType;
         iconTitle?: string;
     },
-    config: {
-        custom: {
-            isRounded: Boolean;
-            hasPadding: Boolean
+    config?: {
+        custom?: {
+            isRounded?: boolean;
+            hasPadding?: boolean
         }
     }
 }
@@ -57,6 +58,14 @@ const useStyles = makeStyles({
     }
 });
 
+const enum TagTypes {
+    infoTag = "infoTag",
+    successTag = "successTag",
+    warningTag = "warningTag",
+    dangerTag = "dangerTag",
+    lightTag = "lightTag"
+};
+
 const defaultConfig = {
     custom: {
         isRounded: undefined,
@@ -70,10 +79,16 @@ const defaultConfig = {
  * @todo Handle className and style
  * @todo Improve sizes
  */
-export const Tag = ({className, style, variant, size, config = defaultConfig, data}: TagProps) => {
+export const Tag = ({
+    // className,
+    // style,
+    variant,
+    size,
+    config = defaultConfig,
+    data
+}: TagProps) => {
 
     const classes = useStyles();
-    const Icon = data.icon;
 
     const a = {
         backgroundColor: "red",
@@ -95,30 +110,50 @@ export const Tag = ({className, style, variant, size, config = defaultConfig, da
     }
 
     useEffect(() => {
-        console.log(combineStyles([a,b,c]));
-    },[]);
+        console.log(combineStyles([a, b, c]));
+    }, []);
 
-    const getTextSize = () : "caption" | "body1" | "body2" => {
-        switch(size) {
-            case 'sm': return "caption"
-            case 'lg': return "body1"
+    const getIconSize = (): { fontSize: string } => {
+        switch (size) {
+            case StandardSize.sm: return { fontSize: "20px" };
+            case StandardSize.lg: return { fontSize: "24px" };
+            default: return { fontSize: "20px" }; // MD and others
+        }
+    }
+
+    const iconWithProps = React.Children.map(data.icon, icon => {
+        if (React.isValidElement(icon)) {
+          return React.cloneElement(icon as ReactElement<{className: any, sx: any}>, { 
+              className: data.label ? classes.tagIcon : null,
+              sx: getIconSize()
+            });
+        }
+        return icon;
+    });
+
+    const getTextSize = (): "caption" | "body1" | "body2" => {
+        switch (size) {
+            case StandardSize.sm: return "caption"
+            case StandardSize.lg: return "body1"
             default: return "body2" // MD and others
         }
     }
 
-    const getIconSize = (): {fontSize: string} => {
-        switch(size) {
-            case 'sm': return {fontSize: "20px"};
-            case 'lg': return {fontSize: "24px"};
-            default: return {fontSize: "20px"}; // MD and others
+    const getVariant = (variant?: CoreVariant): TagTypes => {
+        switch(variant) {
+            case CoreVariant.success: return TagTypes.successTag;
+            case CoreVariant.warning: return TagTypes.warningTag;
+            case CoreVariant.danger: return TagTypes.dangerTag;
+            case CoreVariant.light: return TagTypes.lightTag;
+            default: return TagTypes.infoTag;
         }
     }
 
     return (
-        <div className={classes[variant ? `${variant}Tag` : "infoTag"]} style={{borderRadius: config.custom.isRounded ? "999px": "0px"}}>
-            <div className={classes.tagContainer} style={config.custom.hasPadding ? {} : { padding: "0px" }}>
+        <div className={classes[getVariant(variant)]} style={{ borderRadius: config?.custom?.isRounded ? "999px" : "0px" }}>
+            <div className={classes.tagContainer} style={config?.custom?.hasPadding ? {} : { padding: "0px" }}>
                 {data.icon ? <div title={data.iconTitle || ""}>
-                    <Icon className={data.label ? classes.tagIcon : null} sx={getIconSize()}/>
+                {iconWithProps}
                 </div> : null}
                 {data.label ? <Typography variant={getTextSize()}>{data.label}</Typography> : null}
             </div>

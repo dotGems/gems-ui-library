@@ -18,7 +18,7 @@ export interface AsyncImageProps {
  */
 export const AsyncImage = ({ url, alt, className, onLoadStart, onLoadSuccess, onLoadFailure}: AsyncImageProps) => {
 
-    const [isLoaded, setIsLoaded] = useState<Boolean>(true);
+    const [isLoaded, setIsLoaded] = useState<boolean>(true);
     const [error, setError] = useState<SyntheticEvent<HTMLImageElement, Event> | null>(null);
 
     const handleLoadStart = () => {

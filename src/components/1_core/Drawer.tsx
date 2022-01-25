@@ -1,18 +1,18 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+// import { makeStyles } from '@mui/styles';
 
 import { StandardModel } from "../../models/Standard.model";
 
 export interface DrawerProps extends StandardModel {}
 
-const useStyles = makeStyles({});
+// const useStyles = makeStyles({});
 
 /**
  * Drawer container that can open from either side of the browser. 
  */
-export const DrawerProps = ({}: DrawerPropsProps) => {
+export const Drawer = ({}: DrawerProps) => {
 
-    const classes = useStyles();
+    // const classes = useStyles();
 
     return (
         <div>

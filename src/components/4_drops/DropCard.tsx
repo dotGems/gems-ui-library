@@ -5,14 +5,15 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import CollectionsOutlinedIcon from '@mui/icons-material/CollectionsOutlined';
 
-import { StandardModel } from "../../models/Standard.model";
+import { StandardModel, StandardSize } from "../../models/Standard.model";
 import { DropModel } from '../../models/Drop.model';
 import { IPFS_SOURCE } from '../../data/constants/urls';
 import { Button } from '../1_core/Button';
 import { Tag } from '../1_core/Tag';
-import { splitPriceAndCurrency } from "../../utils/data";
+import { splitPriceAndCurrency } from "../../common/data";
 import DotGemsContext from '../1_core/DotGemsContext';
 import { QtyControl, defaultConfig as qtyConfig } from '../1_core/QtyControl';
+import { CoreVariant } from '../../models/StandardCore.model';
 
 export enum DropCardOrientation {
     horizontal = "horizontal",
@@ -23,7 +24,7 @@ export interface DropCardProps extends StandardModel {
     data: DropModel,
     config: {
         orientation: DropCardOrientation,
-        showPurchasing: Boolean,
+        showPurchasing: boolean,
         label?: {
             startIcon: Node,
             label: string
@@ -85,20 +86,20 @@ const defaultConfig = {
  */
 export const DropCard = ({
     size,
-    className,
-    style,
+    // className,
+    // style,
     data,
     config = defaultConfig,
 }: DropCardProps) => {
 
     const classes = useStyles();
-    const dotGemsCtx =  useContext(DotGemsContext);
+    const dotGemsCtx = useContext(DotGemsContext);
 
     const getCardWidth = () => {
-        if(config?.orientation?.indexOf("horizontal") !== -1) {
-            switch(size) {
-                case 'sm': return "200px"
-                case 'lg': return "350px"
+        if (config?.orientation?.indexOf("horizontal") !== -1) {
+            switch (size) {
+                case StandardSize.sm: return "200px"
+                case StandardSize.lg: return "350px"
                 default: return "275px" // Includes md
             }
         } else {
@@ -109,58 +110,65 @@ export const DropCard = ({
     const renderPrice = () => {
         let splitListingPrice = splitPriceAndCurrency(data.listing_price);
         return (<div>
-            <Typography variant="body1" style={{fontSize: "2em", fontWeight: "bold", marginRight: "0.25em", display: "inline-block"}}>{splitListingPrice[0]}</Typography>
-            <Typography variant="body2" color="#A5A5A5" style={{display: "inline-block"}}>{splitListingPrice[1]}</Typography>
+            <Typography variant="body1" style={{ fontSize: "2em", fontWeight: "bold", marginRight: "0.25em", display: "inline-block" }}>{splitListingPrice[0]}</Typography>
+            <Typography variant="body2" color="#A5A5A5" style={{ display: "inline-block" }}>{splitListingPrice[1]}</Typography>
         </div>)
     }
 
     return (
-        <Card className={classes.dropCard} style={{width: getCardWidth()}}>
+        <Card className={classes.dropCard} style={{ width: getCardWidth() }}>
             <CardContent className={classes.dropCardContent}>
-                <img src={`${IPFS_SOURCE}${data.template.deserialized.img}`} className={classes.dropImg}/>
+                <img src={`${IPFS_SOURCE}${data.template.deserialized.img}`} className={classes.dropImg} />
                 <div className={classes.dropInfoContainer}>
                     <div className={classes.titleAndActions}>
-                        <Typography variant="h3" style={{fontSize: "1.5em", fontWeight: "bold"}}>{data.template.deserialized.name}</Typography>
-                        <Button size="sm" label={<ArrowForwardIcon/>} variant="text" onClick={() => {console.log("Show m'details m'lady")}}/>
+                        <Typography variant="h3" style={{ fontSize: "1.5em", fontWeight: "bold" }}>{data.template.deserialized.name}</Typography>
+                        <Button size={StandardSize.sm} label={<ArrowForwardIcon />} variant="text" onClick={() => { console.log("Show m'details m'lady") }} />
                     </div>
                     <Typography
                         className={classes.clampedDesc}
                         variant="caption"
                         color="#AEAEAE">
-                            {data.template.deserialized.about}
+                        {data.template.deserialized.about}
                     </Typography>
-                    <div style={{marginTop: "12px"}}>
+                    <div style={{ marginTop: "12px" }}>
                         <Tag
                             data={{
-                                icon:PersonOutlinedIcon,
-                                iconTitle:"Author",
-                                label:data.template.deserialized.artist}}
-                            variant="light" 
-                            size="lg"
-                            config={{custom: {hasPadding: false}}}/>
+                                icon: PersonOutlinedIcon,
+                                iconTitle: "Author",
+                                label: data.template.deserialized.artist
+                            }}
+                            variant={CoreVariant.light}
+                            size={StandardSize.lg}
+                            config={{ custom: { hasPadding: false } }} />
                         <Tag
                             data={{
-                                icon:CollectionsOutlinedIcon,
-                                iconTitle:"Collection",
-                                label:data.collection_name}}
-                            variant="light"
-                            size="lg"
-                            config={{custom: {hasPadding: false}}}/>
+                                icon: CollectionsOutlinedIcon,
+                                iconTitle: "Collection",
+                                label: data.collection_name
+                            }}
+                            variant={CoreVariant.light}
+                            size={StandardSize.lg}
+                            config={{ custom: { hasPadding: false } }} />
                         <Tag
                             data={{
-                                icon:CollectionsOutlinedIcon,
-                                iconTitle:"Mint Number",
-                                label:<>{data.template.issued_supply}&nbsp;of&nbsp;{data.template.max_supply}</>}}
-                            variant="light"
-                            size="lg"
-                            config={{custom: {hasPadding: false}}}/>
+                                icon: CollectionsOutlinedIcon,
+                                iconTitle: "Mint Number",
+                                label: <>{data.template.issued_supply}&nbsp;of&nbsp;{data.template.max_supply}</>
+                            }}
+                            variant={CoreVariant.light}
+                            size={StandardSize.lg}
+                            config={{ custom: { hasPadding: false } }} />
                     </div>
                     {renderPrice()}
                 </div>
             </CardContent>
-            <CardActions className={classes.actionsContainer} style={{borderTop: "solid 1px #F6F6F6", padding: "24px"}}>
-                <QtyControl {...qtyConfig}/>
-                <Button variant="text" label={dotGemsCtx.config.chain.useCheckout ? "Add to Cart" : "Buy"}/>
+            <CardActions className={classes.actionsContainer} style={{ borderTop: "solid 1px #F6F6F6", padding: "24px" }}>
+                <QtyControl config={{
+                    isEditable: qtyConfig.isEditable,
+                    onChange: qtyConfig.onChange,
+                    maxQty: qtyConfig.maxQty
+                }} />
+                <Button variant="text" label={dotGemsCtx.config.chain.use_checkout ? "Add to Cart" : "Buy"} />
             </CardActions>
         </Card>
     );

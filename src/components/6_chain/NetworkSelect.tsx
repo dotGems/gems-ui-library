@@ -1,11 +1,11 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+// import { makeStyles } from '@mui/styles';
 
 import { StandardModel } from "../../models/Standard.model";
 
 export interface NetworkSelectProps extends StandardModel {}
 
-const useStyles = makeStyles({});
+// const useStyles = makeStyles({});
 
 /**
  * Displays a simple dropdown allowing users to select
@@ -13,7 +13,7 @@ const useStyles = makeStyles({});
  */
 export const NetworkSelect = ({}: NetworkSelectProps) => {
 
-    const classes = useStyles();
+    // const classes = useStyles();
 
     return (
         <div>

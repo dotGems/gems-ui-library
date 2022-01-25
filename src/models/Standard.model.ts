@@ -1,7 +1,7 @@
 export enum StandardSize {
-    sm = "sm",
-    md = "md",
-    lg = "lg"
+    sm = "small",
+    md = "medium",
+    lg = "large"
 }
 
 export enum StandardVariant {

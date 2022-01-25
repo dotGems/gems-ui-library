@@ -1,27 +1,22 @@
-import React, { ReactNode, useState } from 'react';
-import { makeStyles } from '@mui/styles';
+import React, { useState } from 'react';
+// import { makeStyles } from '@mui/styles';
 
 import { StandardCoreModel } from "../../models/StandardCore.model";
 import { Button } from './Button';
 import { Typography } from '@mui/material';
 
 export interface QtyControlProps extends StandardCoreModel {
-    data: {
-        label: string;
-        icon?: ReactNode;
-        iconTitle?: string;
-    },
     config: {
         maxQty?: number,
-        isEditable: Boolean,
+        isEditable: boolean,
         onChange: Function,
         custom?: {
-            isRounded?: Boolean
+            isRounded?: boolean
         }
     }
 }
 
-const useStyles = makeStyles({});
+// const useStyles = makeStyles({});
 
 export const defaultConfig = {
     maxQty: 10,
@@ -36,14 +31,14 @@ export const defaultConfig = {
  * 
  */
 export const QtyControl = ({
-    className,
-    style,
-    size,
+    // className,
+    // style,
+    // size,
     config = defaultConfig,
-    data
+    // data
 }: QtyControlProps) => {
 
-    const classes = useStyles();
+    // const classes = useStyles();
     const [count, setCount] = useState<number>(1);
 
     const handleCount = (val: number) => {
@@ -60,7 +55,11 @@ export const QtyControl = ({
     }
 
     const handleCountUp = () => {
-        if(count < config.maxQty) {
+        if(config?.maxQty) {
+            if(count < config.maxQty) {
+                handleCount(count + 1);
+            }
+        } else {
             handleCount(count + 1);
         }
     }

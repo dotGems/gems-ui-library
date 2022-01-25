@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
-import { Backdrop, Button, Typography } from '@mui/material';
+import { Backdrop, Button } from '@mui/material';
 
 import { StandardModel } from "../../models/Standard.model";
 import { IPFS_SOURCE } from '../../data/constants/urls';
@@ -10,6 +10,13 @@ import {
     Close as CloseIcon
 } from '@mui/icons-material';
 
+export enum NFTPart {
+    img = "img",
+    backimg = "backimg",
+    cardimg = "cardimg",
+    video = "video"
+}
+
 export interface NFTDisplayProps extends StandardModel {
     data: {
         img: string,
@@ -18,21 +25,21 @@ export interface NFTDisplayProps extends StandardModel {
         cardimg?: string
     },
     config: {
-        defaultPart: 'img' | 'video' | 'backimg' | 'cardimg',
+        defaultPart: NFTPart,
         loop: {
-            isEnabled: Boolean,
+            isEnabled: boolean,
             delay: number,
-            playFullVideo: Boolean
+            playFullVideo: boolean
         },
         video: {
-            autoplay: Boolean
+            autoplay: boolean
         },
-        showSelector: Boolean
+        showSelector: boolean
     }
 }
 
 const defaultConfig = {
-    defaultPart: 'img',
+    defaultPart: NFTPart.img,
     loop: {
         isEnabled: false,
         delay: 3000,
@@ -105,21 +112,26 @@ const useStyles = makeStyles({
  * @todo Fix error in enlarged display when switching to video (POST 404)
  */
 export const NFTDisplay = ({
-    className,
-    variant,
-    size,
+    // className,
+    // variant,
+    // size,
     style,
     data,
     config = defaultConfig,
-    dict
+    // dict
 }: NFTDisplayProps) => {
 
-    const SUPPORTED_PARTS = ['img', 'backimg', 'cardimg', 'video'];
+    const SUPPORTED_PARTS = [
+        NFTPart.img,
+        NFTPart.backimg,
+        NFTPart.cardimg,
+        NFTPart.video
+    ];
 
     const classes = useStyles();
 
     const [activePart, setActivePart] = useState(config.defaultPart || 'img');
-    const [providedParts, setProvidedParts] = useState(SUPPORTED_PARTS.filter(item => Object.keys(data).includes(item)));
+    const providedParts = SUPPORTED_PARTS.filter(item => Object.keys(data).includes(item));
     const [showEnlarged, setShowEnlarged] = useState(false);
 
     useEffect(() => {
@@ -129,7 +141,7 @@ export const NFTDisplay = ({
         }
     }, []);
 
-    const renderMainDisplay = (isEnlarged?: Boolean) => {
+    const renderMainDisplay = (isEnlarged?: boolean) => {
         if (activePart.indexOf('video') === -1) {
             return (<img
                 src={`${IPFS_SOURCE}/${data[activePart]}`}
@@ -150,6 +162,10 @@ export const NFTDisplay = ({
         }
     }
 
+    const getSelectorPartImg = (part: NFTPart) : NFTPart => {
+        return part.indexOf(NFTPart.video) === -1 ? part : NFTPart.img;
+    }
+
     const renderSelector = () => {
         return (
             <div className={classes.selectorContainer}>
@@ -157,7 +173,7 @@ export const NFTDisplay = ({
                     if (SUPPORTED_PARTS.includes(part)) {
                         return <img
                             className={activePart.indexOf(part) !== -1 && activePart.length === part.length ? classes.selectorItemActive : classes.selectorItem}
-                            src={`${IPFS_SOURCE}/${data[part.indexOf('video') === -1 ? part : "img"]}`}
+                            src={`${IPFS_SOURCE}/${data[getSelectorPartImg(part)]}`}
                             width="32px"
                             onClick={() => setActivePart(part)}
                             title={renderPartName(part)}
@@ -203,8 +219,8 @@ export const NFTDisplay = ({
         }
     }, []);
 
-    const changePart = (isPrevious: Boolean) => {
-        let isActivePart = (element) => element.indexOf(activePart) !== -1 && element.length === activePart.length
+    const changePart = (isPrevious: boolean) => {
+        let isActivePart = (element : NFTPart) => element.indexOf(activePart) !== -1 && element.length === activePart.length
         let activeIndex = providedParts.findIndex(isActivePart);
         let changedIndex;
         if(isPrevious === true) {

@@ -7,17 +7,18 @@ import LanguageIcon from '@mui/icons-material/Language';
 import CloseIcon from '@mui/icons-material/Close';
 import DataObjectIcon from '@mui/icons-material/DataObject';
 
-import { LocalizedStandardModel } from "../../models/Standard.model";
+import { LocalizedStandardModel, StandardSize } from "../../models/Standard.model";
 import { Button } from "../1_core/Button";
 import { Tag } from '../1_core/Tag';
 import { COLLECTION_SOURCE } from '../../data/constants/urls';
-import { copyToClipboard, feeRateToPercentage } from '../../utils/data';
+import { copyToClipboard, feeRateToPercentage } from '../../common/data';
 import { CollectionModel } from '../../models/Collection.model';
+import { CoreVariant } from '../../models/StandardCore.model';
 
 export interface CollectionDetailsProps extends LocalizedStandardModel {
     data: CollectionModel,
     config: {
-        showViewData?: Boolean
+        showViewData?: boolean
     }
 }
 
@@ -40,13 +41,13 @@ const useStyles = makeStyles({
  * @todo Implement dict
  */
 export const CollectionDetails = ({
-    className,
-    variant,
-    size,
-    style,
+    /*className,*/
+    // variant,
+    // size,
+    // style,
     data,
     config,
-    dict
+    // dict
 }: CollectionDetailsProps) => {
 
     const classes = useStyles();
@@ -56,8 +57,19 @@ export const CollectionDetails = ({
     return (
         <div>
             <Typography variant="h2" style={{ fontSize: "36px", fontWeight: "bold" }} component="div" gutterBottom><CollectionsOutlinedIcon />&nbsp;{data.deserialized.name}</Typography>
-            <Tag data={{icon:PersonOutlinedIcon, iconTitle:"Author", label:data.author}} variant="light" size="lg" config={{custom: {hasPadding: false}}}/>
-            <Button startIcon={<LanguageIcon />} label="Website" variant="text" target="_blank" href={`${COLLECTION_SOURCE}${data.collection_name}`}/>
+            <Tag
+                data={{icon:PersonOutlinedIcon, iconTitle:"Author", label:data.author}}
+                variant={CoreVariant.light}
+                size={StandardSize.lg}
+                config={{custom: {hasPadding: false}}}
+            />
+            <Button
+                startIcon={<LanguageIcon />}
+                label="Website"
+                variant="text"
+                target="_blank"
+                href={`${COLLECTION_SOURCE}${data.collection_name}`}
+            />
             {config.showViewData ? <Button startIcon={<DataObjectIcon />} label="Metadata" variant="text" onClick={() => copyToClipboard(data, () => {setSnackbarOpen(true)})}/> : null}
             <div className={classes.collectionDescription}>
                 <Typography variant="h3" style={{ fontSize: "24px", fontWeight: "bold" }} component="div" gutterBottom>About this Collection</Typography>

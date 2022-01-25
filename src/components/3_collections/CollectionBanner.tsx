@@ -10,7 +10,7 @@ import { CollectionModel } from '../../models/Collection.model';
 export interface CollectionBannerProps extends StandardModel {
     data: CollectionModel,
     config: {
-        showViewData?: Boolean
+        showViewData?: boolean
     }
 }
 
@@ -31,7 +31,7 @@ const useStyles = makeStyles({
  * a banner.
  */
 export const CollectionBanner = ({
-    className,
+    /*className,*/ 
     variant,
     size,
     style,

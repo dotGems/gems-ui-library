@@ -9,25 +9,26 @@ import {
     CollectionsOutlined as CollectionsOutlinedIcon,
     Filter1 as Filter1Icon,
     CompareArrows as CompareArrowsIcon,
-    LocalFireDepartment as LocalFireDepartmentIcon 
+    LocalFireDepartment as LocalFireDepartmentIcon
 } from '@mui/icons-material';
 
 import { Button } from '../1_core/Button';
 import { Tag } from '../1_core/Tag';
 
 import { COLLECTION_SOURCE } from '../../data/constants/urls';
-import { LocalizedStandardModel } from "../../models/Standard.model";
+import { LocalizedStandardModel, StandardSize } from "../../models/Standard.model";
 import { DropModel } from '../../models/Drop.model';
-import { copyToClipboard } from '../../utils/data';
+import { copyToClipboard } from '../../common/data';
+import { CoreVariant } from '../../models/StandardCore.model';
 
 export interface DropDetailsProps extends LocalizedStandardModel {
     data: DropModel,
     config: {
-        showArtist?: Boolean,
-        showCollection?: Boolean,
-        showAbout?: Boolean,
-        showBurnableTransferable?: Boolean,
-        showViewData?: Boolean
+        showArtist?: boolean,
+        showCollection?: boolean,
+        showAbout?: boolean,
+        showBurnableTransferable?: boolean,
+        showViewData?: boolean
     }
 }
 
@@ -61,13 +62,13 @@ const useStyles = makeStyles({
  * @todo Implement dict
  */
 export const DropDetails = ({
-    className,
-    variant,
-    size,
-    style,
+    // className,
+    // variant,
+    // size,
+    // style,
     data,
     config = defaultConfig,
-    dict
+    // dict
 }: DropDetailsProps) => {
 
     const classes = useStyles();
@@ -79,9 +80,9 @@ export const DropDetails = ({
             <Typography variant="h2" style={{ fontSize: "36px", fontWeight: "bold" }} component="div" gutterBottom>{data.template.deserialized.name}</Typography>
             <div className={classes.infoContainer}>
                 <div className={classes.coreInfo}>
-                    {config.showArtist ? <Tag data={{icon:PersonOutlinedIcon, iconTitle:"Author", label:data.template.deserialized.artist}} variant="light" size="lg" config={{custom: {hasPadding: false}}}/> : null}
-                    {config.showCollection ? <Tag data={{icon:CollectionsOutlinedIcon, iconTitle:"Collection", label:data.collection.deserialized.name}} variant="light" size="lg" config={{custom: {hasPadding: false}}}/> : null}
-                    <Tag data={{icon:Filter1Icon, iconTitle:"Mint", label: `${data.template.issued_supply} of ${data.template.max_supply}`}} variant="light" size="lg" config={{custom: {hasPadding: false}}}/>
+                    {config.showArtist ? <Tag data={{ icon: PersonOutlinedIcon, iconTitle: "Author", label: data.template.deserialized.artist }} variant={CoreVariant.light} size={StandardSize.lg} config={{ custom: { hasPadding: false } }} /> : null}
+                    {config.showCollection ? <Tag data={{ icon: CollectionsOutlinedIcon, iconTitle: "Collection", label: data.collection.deserialized.name }} variant={CoreVariant.light} size={StandardSize.lg} config={{ custom: { hasPadding: false } }} /> : null}
+                    <Tag data={{ icon: Filter1Icon, iconTitle: "Mint", label: `${data.template.issued_supply} of ${data.template.max_supply}` }} variant={CoreVariant.light} size={StandardSize.lg} config={{ custom: { hasPadding: false } }} />
                     <Button startIcon={<LanguageIcon />} label="Website" variant="text" target="_blank" href={`${COLLECTION_SOURCE}${data.collection_name}`} />
                     {config.showViewData ?
                         <Button startIcon={<DataObjectIcon />} label="Metadata" variant="text" onClick={() => copyToClipboard(data, () => { setSnackbarOpen(true) })} />
@@ -89,8 +90,8 @@ export const DropDetails = ({
                     }
                 </div>
                 {config.showBurnableTransferable ? <Typography variant="body1" color="primary" className={classes.burnableTransferable}>
-                    {data.template.transferable === 1 ? <CompareArrowsIcon/> : null}
-                    {data.template.burnable === 1 ? <LocalFireDepartmentIcon/> : null}
+                    {data.template.transferable === 1 ? <CompareArrowsIcon /> : null}
+                    {data.template.burnable === 1 ? <LocalFireDepartmentIcon /> : null}
                 </Typography> : null}
             </div>
             {config.showAbout ? <Typography variant="body1" color="gray">{data.template.deserialized.about}</Typography> : null}

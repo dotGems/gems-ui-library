@@ -1,11 +1,11 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+// import { makeStyles } from '@mui/styles';
 
 import { StandardModel } from "../../models/Standard.model";
 
 export interface CollectionCardProps extends StandardModel {}
 
-const useStyles = makeStyles({});
+// const useStyles = makeStyles({});
 
 /**
  * Displays a small card with a collection's core information.
@@ -13,7 +13,7 @@ const useStyles = makeStyles({});
  */
 export const CollectionCard = ({}: CollectionCardProps) => {
 
-    const classes = useStyles();
+    // const classes = useStyles();
 
     return (
         <div>

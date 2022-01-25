@@ -1,11 +1,11 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+// import { makeStyles } from '@mui/styles';
 
 import { StandardModel } from "../../models/Standard.model";
 
 export interface ItemListProps extends StandardModel {}
 
-const useStyles = makeStyles({});
+// const useStyles = makeStyles({});
 
 /**
  * Container for various elements to be displayed in
@@ -13,7 +13,7 @@ const useStyles = makeStyles({});
  */
 export const ItemList = ({}: ItemListProps) => {
 
-    const classes = useStyles();
+    // const classes = useStyles();
 
     return (
         <div>

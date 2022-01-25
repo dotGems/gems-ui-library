@@ -9,7 +9,7 @@ export interface ContextModel {
     }
     config: {
         chain: {
-            use_checkout: Boolean;
+            use_checkout: boolean;
             supported_networks: Array<NetworkModel> // User-supported networks, has to be within what we support.
             network_supported_wallets: {
                 eos?: Array<WalletButtonModel>
@@ -17,8 +17,8 @@ export interface ContextModel {
             } // User-supported wallets, has to be within what we support.
         }
     }
-    style: {
-        palette: {},
-        variant: StandardVariant
+    style?: {
+        palette?: {},
+        variant?: StandardVariant
     }
 }
