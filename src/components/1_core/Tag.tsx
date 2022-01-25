@@ -7,9 +7,9 @@ import { combineStyles } from "../../common/style";
 import { StandardSize } from '../../models/Standard.model';
 
 export interface TagConfig {
-    custom: {
-        isRounded: boolean;
-        hasPadding: boolean;
+    custom?: {
+        isRounded?: boolean;
+        hasPadding?: boolean;
     }
 }
 
@@ -19,7 +19,7 @@ export interface TagProps extends StandardCoreModel {
         icon?: React.ElementType;
         iconTitle?: string;
     },
-    config: TagConfig;
+    config?: TagConfig;
 }
 
 const useStyles = makeStyles({

@@ -242,7 +242,7 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
                             <Typography variant="body1" style={{ color: "gray" }} gutterBottom>
                                 Please link your supported {selectedNetwork?.toUpperCase()} wallet;
                             </Typography>
-                            {selectedNetwork ? dotGemsCtx.config.chain.network_supported_wallets[selectedNetwork!].map((wallet: WalletButtonModel) => {
+                            {selectedNetwork ? dotGemsCtx.config.chain.network_supported_wallets[selectedNetwork].map((wallet: WalletButtonModel) => {
                                 return <div className={classes.walletsVSpacing}>
                                     <Button
                                         style={{
