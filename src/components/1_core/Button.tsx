@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import MuiButton from '@mui/material/Button';
+import { StandardSize } from "../../models/Standard.model";
 import { makeStyles } from '@mui/styles';
 import { StandardSize } from '../../models/Standard.model';
 
@@ -43,8 +44,8 @@ export const Button = ({
     onClick = () => {}
 }: ButtonProps) => {
     const classes = useStyles();
-    
-    if(href) {
+
+    if (href) {
         return (
             <MuiButton
                 startIcon={startIcon}

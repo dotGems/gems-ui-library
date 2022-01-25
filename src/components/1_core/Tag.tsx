@@ -6,18 +6,20 @@ import { CoreVariant, StandardCoreModel } from "../../models/StandardCore.model"
 import { combineStyles } from "../../common/style";
 import { StandardSize } from '../../models/Standard.model';
 
+export interface TagConfig {
+    custom: {
+        isRounded: boolean;
+        hasPadding: boolean;
+    }
+}
+
 export interface TagProps extends StandardCoreModel {
     data: {
         label?: React.ReactElement | string;
         icon?: React.ElementType;
         iconTitle?: string;
     },
-    config?: {
-        custom?: {
-            isRounded?: boolean;
-            hasPadding?: boolean
-        }
-    }
+    config: TagConfig;
 }
 
 const useStyles = makeStyles({
@@ -66,16 +68,16 @@ const enum TagTypes {
     lightTag = "lightTag"
 };
 
-const defaultConfig = {
+const defaultConfig: TagConfig = {
     custom: {
-        isRounded: undefined,
+        isRounded: false,
         hasPadding: true
     }
 }
 
 /**
  * Small tag to highlight some information.
- * 
+ *
  * @todo Handle className and style
  * @todo Improve sizes
  */

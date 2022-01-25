@@ -12,7 +12,7 @@ export interface AvatarProps extends StandardModel {
         label?: string;
     },
     config?: {
-        onClick?: (e: React.MouseEvent<HTMLElement>) => void;
+        onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
         custom?: {
             isRounded?: boolean;
         }
@@ -39,7 +39,7 @@ const defaultConfig = {
 
 /**
  * Displays a thumbnail followed by a label.
- * 
+ *
  * @todo Replace use of MuiButton with our button.
  * @todo Handle className and style
  */
@@ -64,7 +64,7 @@ export const Avatar = ({ /*className,*/ variant, style, size = StandardSize.md, 
     }
 
     const getRounding = () => {
-        if(config.custom && config.custom.isRounded) {
+        if (config.custom && config.custom.isRounded) {
             return config.custom.isRounded === true ? "circular" : "square"
         } else {
             switch(variant) {
@@ -81,14 +81,13 @@ export const Avatar = ({ /*className,*/ variant, style, size = StandardSize.md, 
                     alt={data.label}
                     src={data.img}
                     variant={getRounding()}
-                    sx={getAvatarSize()}    
+                    sx={getAvatarSize()}
                 />
             </div>
             <Typography variant={getTextSize()}>{data.label}</Typography>
         </>);
     }
-
-    if(config.onClick) {
+    if (config.onClick) {
         return (<MuiButton onClick={config.onClick} className={classes.avatarContainer} style={style}>
             {renderContent()}
         </MuiButton>);

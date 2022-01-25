@@ -8,7 +8,7 @@ export interface DrawerProps extends StandardModel {}
 // const useStyles = makeStyles({});
 
 /**
- * Drawer container that can open from either side of the browser. 
+ * Drawer container that can open from either side of the browser.
  */
 export const Drawer = ({}: DrawerProps) => {
 

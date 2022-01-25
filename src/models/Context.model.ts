@@ -5,7 +5,7 @@ import { WalletButtonModel, WalletModel } from "./Wallet.model";
 export interface ContextModel {
     state: {
         wallet?: WalletModel,
-        selected_network?: NetworkModel 
+        selected_network?: NetworkModel
     }
     config: {
         chain: {

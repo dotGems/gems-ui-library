@@ -5,12 +5,12 @@ import React, { useEffect, useRef } from 'react';
  * To remedy to the situation, we can use this custom hook (made by
  * Dan Abramov -- React developer @ Facebook) as described here;
  * https://overreacted.io/making-setinterval-declarative-with-react-hooks/
- * 
+ *
  * @param {Function} callback Function to be called when the delay is up
  * @param {Number} delay delay in ms
  */
-function useInterval(callback, delay) {
-  const savedCallback = useRef();
+function useInterval(callback: any, delay: number) {
+  const savedCallback: any = useRef();
 
   // Remember the latest callback.
   useEffect(() => {

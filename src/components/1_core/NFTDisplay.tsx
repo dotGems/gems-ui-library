@@ -106,7 +106,7 @@ const useStyles = makeStyles({
  * Displays all parts of an NFT. The user can select which part
  * of the NFT to be displayed in a larger area. Cycles through the
  * different parts by default.
- * 
+ *
  * @todo Use MUI Theme / palette instead of hardcoding color value
  * @todo Implement Loop
  * @todo Fix error in enlarged display when switching to video (POST 404)
@@ -188,8 +188,8 @@ export const NFTDisplay = ({
 
     /**
      * Returns the verbose name of the NFT Part.
-     * 
-     * @todo Add dict support 
+     *
+     * @todo Add dict support
      */
     const renderPartName = (part: string) => {
         switch (part) {
@@ -223,20 +223,20 @@ export const NFTDisplay = ({
         let isActivePart = (element : NFTPart) => element.indexOf(activePart) !== -1 && element.length === activePart.length
         let activeIndex = providedParts.findIndex(isActivePart);
         let changedIndex;
-        if(isPrevious === true) {
+        if (isPrevious === true) {
             changedIndex = (activeIndex - 1) % providedParts.length;
         } else {
             changedIndex = (activeIndex + 1) % providedParts.length;
         }
-        if(changedIndex < 0) {
+        if (changedIndex < 0) {
             changedIndex = providedParts.length - 1;
         }
         setActivePart(providedParts[changedIndex]);
-    } 
+    }
 
-    const previousPart = () => {changePart(true)} 
+    const previousPart = () => {changePart(true)}
 
-    const nextPart = () => {changePart(false)} 
+    const nextPart = () => {changePart(false)}
 
     return (
         <div className={classes.NFTDisplayContainer} style={style}>
