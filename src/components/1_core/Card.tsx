@@ -18,13 +18,14 @@ const useStyles = makeStyles({
  * Simple Card.
  */
 export const Card = ({
-    children
+    children,
+    style
 }: CardProps) => {
 
     const classes = useStyles();
 
     return (
-        <div className={classes.card}>
+        <div className={classes.card} style={style}>
             {children}
         </div>
     );

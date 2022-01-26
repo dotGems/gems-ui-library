@@ -28,3 +28,16 @@ export interface WalletModel {
         }
     }]
 }
+
+export enum SupportedWallet {
+    anchor = "anchor",
+    im_token = "im_token",
+    leaf = "leaf",
+    math = "math",
+    my_key = "my_key",
+    scatter = "scatter",
+    starteos = "starteos",
+    token_pocket = "token_pocket",
+    wombat = "wombat",
+    wax_cloud = "wax_cloud"
+};

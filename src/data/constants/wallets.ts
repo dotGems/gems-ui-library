@@ -33,7 +33,7 @@
         icon: "/img/wallets/starteos.png"
     },
     token_pocket: {
-        name: "Token Pocket",
+        name: "TP",
         icon: "/img/wallets/token_pocket.png"
     },
     wax_cloud: {

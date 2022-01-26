@@ -3,7 +3,9 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import {
     Backdrop,
+    Badge,
     Button,
+    Chip,
     FormControl,
     LinearProgress,
     Link,
@@ -14,10 +16,6 @@ import {
     MenuList,
     Select,
     SelectChangeEvent,
-    Step,
-    StepContent,
-    StepLabel,
-    Stepper,
     Typography
 } from "@mui/material";
 import {
@@ -26,7 +24,8 @@ import {
     Settings as SettingsIcon,
     ExitToApp as ExitToAppIcon,
     Inventory as InventoryIcon,
-    MergeType as MergeTypeIcon
+    MergeType as MergeTypeIcon,
+    CheckCircle as CheckCircleIcon
 } from '@mui/icons-material';
 
 import { Avatar } from "../1_core/Avatar";
@@ -35,6 +34,9 @@ import DotGemsContext from '../1_core/DotGemsContext';
 import { NetworkModel } from '../../models/Network.model';
 import { WalletButtonModel, WalletModel } from '../../models/Wallet.model';
 import { StandardModel, StandardSize } from '../../models/Standard.model';
+import { SUPPORTED_NETWORK_KEYS } from '../../data/constants/networks/networks';
+import { combineStyles } from '../../common/style';
+import { WALLET_BUTTONS } from '../../data/constants/wallets';
 
 export interface WalletConnectProps extends StandardModel { }
 
@@ -52,24 +54,21 @@ const useStyles = makeStyles({
     },
     networksContainer: {
         display: "flex",
-        justifyContent: "flex-start"
+        justifyContent: "flex-start",
+        flexWrap: "wrap"
     },
-    networkButton: {
+    sqButton: {
+        padding: "16px",
         marginRight: "16px",
-        height: "64px"
+        height: "80px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center"
     },
     cardFooter: {
         borderTop: "1px solid lightgray",
         margin: "0 -16px -16px -16px",
         padding: "8px",
-        display: "flex",
-        justifyContent: "space-between"
-    },
-    cardFooterActionsStart: {
-        display: "flex",
-        justifyContent: "flex-start"
-    },
-    cardFooterActionsEnd: {
         display: "flex",
         justifyContent: "flex-end"
     },
@@ -102,8 +101,7 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
     const [isConnectWalletOpen, setIsConnectWalletOpen] = useState(false);
     const [menuAnchorEl, setmenuAnchorEl] = useState<EventTarget & HTMLElement | null>(null);
     const [isWalletInfoOpen, setIsWalletInfoOpen] = useState(false);
-    const [selectedNetwork, setSelectedNetwork] = useState<string | undefined>("eos"); // TODO configurable
-    const [walletConnectStep, setWalletConnectStep] = useState(0);
+    const [selectedNetwork, setSelectedNetwork] = useState<SUPPORTED_NETWORK_KEYS>(SUPPORTED_NETWORK_KEYS.eos); // TODO configurable
     const [walletData, setWalletData] = useState<WalletModel | undefined>(undefined);
 
     useEffect(() => {
@@ -134,20 +132,10 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
     }
 
     const handleNetworkSelectEvent = (event: SelectChangeEvent) => {
-        setSelectedNetwork(event.target.value);
-        setWalletConnectStep(1);
+        setSelectedNetwork(event.target.value as SUPPORTED_NETWORK_KEYS);
     }
-    const handleNetworkSelect = (network: string) => {
+    const handleNetworkSelect = (network: SUPPORTED_NETWORK_KEYS) => {
         setSelectedNetwork(network);
-        setWalletConnectStep(1);
-    }
-
-    const handleBackPressed = () => {
-        let newStep = Math.max(0, walletConnectStep - 1);
-        setWalletConnectStep(newStep);
-        if (newStep === 0) {
-            setSelectedNetwork(undefined);
-        }
     }
 
     const connectMockWallet = () => {
@@ -212,122 +200,116 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
         </FormControl>
         {/*======================= WALLET CONNECT MENU ==================== */}
         <Backdrop open={isConnectWalletOpen}>
-            <Card>
+            <Card style={{ maxWidth: "435px" }}>
                 <Typography variant="h4" gutterBottom>Connect your wallet</Typography>
-                <Stepper orientation="vertical" activeStep={walletConnectStep}>
-                    <Step>
-                        <StepLabel>
-                            <Typography variant="body1" style={{ fontWeight: "bolder" }}>{selectedNetwork ? `Using the ${selectedNetwork.toUpperCase()} Network` : "Select Your Network"}</Typography>
-                        </StepLabel>
-                        <StepContent>
-                            <Typography variant="body1" style={{ color: "gray" }} gutterBottom>
-                                Please select the Network you wish to use;
-                            </Typography>
-                            <div className={classes.networksContainer}>
-                                {dotGemsCtx.config.chain.supported_networks.map((network: NetworkModel) => {
-                                    return <Button
-                                        className={classes.networkButton}
-                                        onClick={() => handleNetworkSelect(network.blockchain)}>
-                                        <img src={network.icon} />
-                                    </Button>
-                                })}
+                <div style={{ padding: "16px 0" }}>
+                    <Typography variant="h6" gutterBottom><Chip label="1" className={classes.mrsm} />Select Your Network</Typography>
+                    <Typography variant="body1" style={{ color: "gray" }} gutterBottom>
+                        Please select the Network you wish to use;
+                    </Typography>
+                    <div className={classes.networksContainer}>
+                        {dotGemsCtx.config.chain.supported_networks.map((network: NetworkModel) => {
+                            return <Button
+                                className={classes.sqButton}
+                                onClick={() => handleNetworkSelect(network.blockchain)}>
+                                <Badge
+                                    invisible={selectedNetwork.indexOf(network.blockchain) === -1}
+                                    overlap='circular'
+                                    anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                                    badgeContent={<CheckCircleIcon />}
+                                >
+                                    <img src={network.icon} style={{ width: "41px" }} />
+                                </Badge>
+                                <Typography variant="caption" style={{ fontWeight: "bold", fontSize: "10px" }}>{network.blockchain}</Typography>
+                            </Button>
+                        })}
+                    </div>
+                </div>
+                <div style={{ padding: "16px 0" }}>
+                    <Typography variant="h6" gutterBottom><Chip label="2" className={classes.mrsm} />Select &amp; Link Your Wallet</Typography>
+                    <Typography variant="body1" style={{ color: "gray" }} gutterBottom>
+                        Please link your supported {selectedNetwork?.toUpperCase()} wallet;
+                    </Typography>
+                    <div className={classes.networksContainer}>
+                        {Object.values(WALLET_BUTTONS).map((wallet) => {
+                            return <div className={classes.walletsVSpacing}>
+                                <Button
+                                    disabled={selectedNetwork === undefined}
+                                    className={classes.sqButton}
+                                    onClick={connectMockWallet}
+                                >
+                                    <div style={{ width: "60px", margin: "auto" }}>
+                                        <img src={wallet.icon} className={classes.mrsm} />
+                                    </div>
+                                    <Typography variant="caption" style={{ fontWeight: "bold", fontSize: "10px" }}>{wallet.name}</Typography>
+                                </Button>
                             </div>
-                        </StepContent>
-                    </Step>
-                    <Step>
-                        <StepLabel>
-                            <Typography variant="body1" style={{ fontWeight: "bolder" }}>Select &amp; Link Your Wallet</Typography>
-                        </StepLabel>
-                        <StepContent>
-                            <Typography variant="body1" style={{ color: "gray" }} gutterBottom>
-                                Please link your supported {selectedNetwork?.toUpperCase()} wallet;
-                            </Typography>
-                            {selectedNetwork ? dotGemsCtx.config.chain.network_supported_wallets[selectedNetwork].map((wallet: WalletButtonModel) => {
-                                return <div className={classes.walletsVSpacing}>
-                                    <Button
-                                        style={{
-                                            width: "100%",
-                                            display: "flex",
-                                            justifyContent: "flex-start",
-                                            alignItems: "center"
-                                        }}
-                                        onClick={connectMockWallet}
-                                    >
-                                        <div style={{ width: "60px", display: "flex", alignItems: "center" }}>
-                                            <img src={wallet.icon} className={classes.mrsm} />
-                                        </div>
-                                        <Typography variant="body2" style={{ fontWeight: "bold" }}>{wallet.name}</Typography>
-                                    </Button>
-                                </div>
-                            }) : null}
-                        </StepContent>
-                    </Step>
-                </Stepper>
+                        })}
+                        {/* {selectedNetwork ? dotGemsCtx?.config?.chain?.network_supported_wallets[typeof selectedNetwork === "string" ? selectedNetwork : "eos"].map((wallet: WalletButtonModel) => {
+
+                        }) : null} */}
+                    </div>
+                </div>
                 <div className={classes.cardFooter}>
-                    <div className={classes.cardFooterActionsStart}>
-                        {walletConnectStep > 0 ? <Button onClick={handleBackPressed}>Back</Button> : null}
-                    </div>
-                    <div className={classes.cardFooterActionsEnd}>
-                        <Button onClick={() => setIsConnectWalletOpen(false)}>
-                            Cancel
-                        </Button>
-                    </div>
+                    <Button onClick={() => setIsConnectWalletOpen(false)}>
+                        Cancel
+                    </Button>
                 </div>
             </Card>
         </Backdrop>
         {/*====================== CONNECTED WALLET MENU =================== */}
-        {walletData && selectedNetwork ? <Menu
-            id="wallet-info-menu"
-            anchorEl={menuAnchorEl}
-            open={isWalletInfoOpen}
-            onClose={() => setIsWalletInfoOpen(false)}
-        >
-            <div className={classes.infoMenuHeaderContainer}>
-                <Avatar
-                    className={classes.headerLineContainer}
-                    style={{ paddingBottom: "16px" }}
-                    size={StandardSize.lg}
-                    data={{
-                        img: walletData.pfp,
-                        label: walletData.linkedAccount
-                    }}
-                />
-                <div className={classes.headerLineContainer}><Typography>RAM</Typography><LinearProgress style={{ margin: "0 8px", width: "100%" }} color="info" variant="determinate" value={40} /></div>
-                <div className={classes.headerLineContainer}><Typography>CPU</Typography><LinearProgress style={{ margin: "0 8px", width: "100%" }} color="warning" variant="determinate" value={30} /></div>
-                <div className={classes.headerLineContainer}><Typography>NET</Typography><LinearProgress style={{ margin: "0 8px", width: "100%" }} color="success" variant="determinate" value={80} /></div>
-            </div>
-            <MenuList>
-                <MenuItem component={Link} target="_blank" rel="noreferrer" href={`${dotGemsCtx.config.chain.supported_networks.filter((elem) => elem.blockchain.indexOf(selectedNetwork) !== -1 && elem.blockchain.length === selectedNetwork.length)[0].explorer_url}${walletData.linkedAccount}#nft`}>
-                    <ListItemIcon>
-                        <InventoryIcon />
-                    </ListItemIcon>
-                    <ListItemText>INVENTORY</ListItemText>
-                </MenuItem>
-                <MenuItem component={Link} target="_blank" rel="noreferrer" href="https://blend.dotgems.io/eos">
-                    <ListItemIcon>
-                        <MergeTypeIcon />
-                    </ListItemIcon>
-                    <ListItemText>BLEND NFTS</ListItemText>
-                </MenuItem>
-                <MenuItem component={Link} target="_blank" rel="noreferrer" href={`${dotGemsCtx.config.chain.supported_networks.filter((elem) => elem.blockchain.indexOf(selectedNetwork) !== -1 && elem.blockchain.length === selectedNetwork.length)[0].explorer_url}${walletData.linkedAccount}`}>
-                    <ListItemIcon>
-                        <CompareArrowsIcon />
-                    </ListItemIcon>
-                    <ListItemText>TRANSACTIONS HISTORY</ListItemText>
-                </MenuItem>
-                <MenuItem className={classes.dangerMenuItem} onClick={() => {
-                    setWalletData(undefined);
-                    setIsWalletInfoOpen(false);
-                    setWalletConnectStep(0);
-                    setSelectedNetwork(undefined);
-                }}>
-                    <ListItemIcon className={classes.dangerMenuItem}>
-                        <ExitToAppIcon />
-                    </ListItemIcon>
-                    <ListItemText>DISCONNECT</ListItemText>
-                </MenuItem>
-            </MenuList>
-        </Menu> : null
+        {
+            walletData && selectedNetwork ? <Menu
+                id="wallet-info-menu"
+                anchorEl={menuAnchorEl}
+                open={isWalletInfoOpen}
+                onClose={() => setIsWalletInfoOpen(false)}
+            >
+                <div className={classes.infoMenuHeaderContainer}>
+                    <Avatar
+                        className={classes.headerLineContainer}
+                        style={{ paddingBottom: "16px" }}
+                        size={StandardSize.lg}
+                        data={{
+                            img: walletData.pfp,
+                            label: walletData.linkedAccount
+                        }}
+                    />
+                    <div className={classes.headerLineContainer}><Typography>RAM</Typography><LinearProgress style={{ margin: "0 8px", width: "100%" }} color="info" variant="determinate" value={40} /></div>
+                    <div className={classes.headerLineContainer}><Typography>CPU</Typography><LinearProgress style={{ margin: "0 8px", width: "100%" }} color="warning" variant="determinate" value={30} /></div>
+                    <div className={classes.headerLineContainer}><Typography>NET</Typography><LinearProgress style={{ margin: "0 8px", width: "100%" }} color="success" variant="determinate" value={80} /></div>
+                </div>
+                <MenuList>
+                    <MenuItem component={Link} target="_blank" rel="noreferrer" href={`${dotGemsCtx.config.chain.supported_networks.filter((elem) => elem.blockchain.indexOf(selectedNetwork) !== -1 && elem.blockchain.length === selectedNetwork.length)[0].explorer_url}${walletData.linkedAccount}#nft`}>
+                        <ListItemIcon>
+                            <InventoryIcon />
+                        </ListItemIcon>
+                        <ListItemText>INVENTORY</ListItemText>
+                    </MenuItem>
+                    <MenuItem component={Link} target="_blank" rel="noreferrer" href="https://blend.dotgems.io/eos">
+                        <ListItemIcon>
+                            <MergeTypeIcon />
+                        </ListItemIcon>
+                        <ListItemText>BLEND NFTS</ListItemText>
+                    </MenuItem>
+                    <MenuItem component={Link} target="_blank" rel="noreferrer" href={`${dotGemsCtx.config.chain.supported_networks.filter((elem) => elem.blockchain.indexOf(selectedNetwork) !== -1 && elem.blockchain.length === selectedNetwork.length)[0].explorer_url}${walletData.linkedAccount}`}>
+                        <ListItemIcon>
+                            <CompareArrowsIcon />
+                        </ListItemIcon>
+                        <ListItemText>TRANSACTIONS HISTORY</ListItemText>
+                    </MenuItem>
+                    <MenuItem className={classes.dangerMenuItem} onClick={() => {
+                        setWalletData(undefined);
+                        setIsWalletInfoOpen(false);
+                        // setSelectedNetwork(undefined);
+                    }}>
+                        <ListItemIcon className={classes.dangerMenuItem}>
+                            <ExitToAppIcon />
+                        </ListItemIcon>
+                        <ListItemText>DISCONNECT</ListItemText>
+                    </MenuItem>
+                </MenuList>
+            </Menu> : null
         }
     </>
     );

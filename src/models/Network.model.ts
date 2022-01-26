@@ -1,7 +1,8 @@
+import { SUPPORTED_NETWORK_KEYS } from "../data/constants/networks/networks";
 import { EOSIOResourcesModel } from "./chain/EOSIOResources.model";
 
 export interface NetworkModel {
-    blockchain: string,
+    blockchain: SUPPORTED_NETWORK_KEYS,
     icon: string,
     colors: {
         bg_1: string,

@@ -1,7 +1,14 @@
 import { NetworkModel } from "../../../models/Network.model";
-import { WalletButtonModel } from "../../../models/Wallet.model";
-import { WALLET_BUTTONS } from "../wallets";
+import { SupportedWallet, WalletButtonModel } from "../../../models/Wallet.model";
+import { SUPPORTED_WALLETS, WALLET_BUTTONS } from "../wallets";
 import { EOSIO_RESOURCES } from "./eosio";
+
+export enum SUPPORTED_NETWORK_KEYS {
+    eos = "eos",
+    wax = "wax",
+    // ethereum = "ethereum",
+    // solana = "solana"
+}
 
 /**
  * List of all supported networks by the UI library.
@@ -10,7 +17,7 @@ import { EOSIO_RESOURCES } from "./eosio";
  */
  export const SUPPORTED_NETWORKS: Array<NetworkModel> = [
     {
-        blockchain: "eos",
+        blockchain: SUPPORTED_NETWORK_KEYS.eos,
         icon: "/img/networks/eos.svg",
         colors: {
             bg_1: "#000",
@@ -25,7 +32,7 @@ import { EOSIO_RESOURCES } from "./eosio";
         explorer_url: "https://wax.bloks.io/account/"
     },
     {
-        blockchain: "wax",
+        blockchain: SUPPORTED_NETWORK_KEYS.wax,
         icon: "/img/networks/wax.svg",
         colors: {
             bg_1: "#f78f1f",
@@ -39,38 +46,38 @@ import { EOSIO_RESOURCES } from "./eosio";
         resources: EOSIO_RESOURCES,
         explorer_url: "https://bloks.io/account/"
     },
-    {
-        // TODO: SUPPORT
-        blockchain: "solana",
-        icon: "/img/networks/solana.svg",
-        colors: {
-            bg_1: "#C100E0",
-            bg_2: "#CE00EF",
-            fg: "white"
-        },
-        chain_id: "1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4",
-        host: "???",
-        protocol: "https",
-        port: 443,
-        resources: [],
-        explorer_url: "https://explorer.solana.com/"
-    },
-    {
-        // TODO: SUPPORT
-        blockchain: "ethereum",
-        icon: "/img/networks/ethereum.svg",
-        colors: {
-            bg_1: "#0066FF",
-            bg_2: "#2C80FF",
-            fg: "white"
-        },
-        chain_id: "1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4",
-        host: "???",
-        protocol: "https",
-        port: 443,
-        resources: [],
-        explorer_url: "https://etherscan.io/account/"
-    }
+    // {
+    //     // TODO: SUPPORT
+    //     blockchain: SUPPORTED_NETWORK_KEYS.solana,
+    //     icon: "/img/networks/solana.svg",
+    //     colors: {
+    //         bg_1: "#C100E0",
+    //         bg_2: "#CE00EF",
+    //         fg: "white"
+    //     },
+    //     chain_id: "1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4",
+    //     host: "???",
+    //     protocol: "https",
+    //     port: 443,
+    //     resources: [],
+    //     explorer_url: "https://explorer.solana.com/"
+    // },
+    // {
+    //     // TODO: SUPPORT
+    //     blockchain: SUPPORTED_NETWORK_KEYS.ethereum,
+    //     icon: "/img/networks/ethereum.svg",
+    //     colors: {
+    //         bg_1: "#0066FF",
+    //         bg_2: "#2C80FF",
+    //         fg: "white"
+    //     },
+    //     chain_id: "1064487b3cd1a897ce03ae5b6a865651747e2e152090f99c1d19d44e01aea5a4",
+    //     host: "???",
+    //     protocol: "https",
+    //     port: 443,
+    //     resources: [],
+    //     explorer_url: "https://etherscan.io/account/"
+    // }
 ];
 
 /**
@@ -78,30 +85,30 @@ import { EOSIO_RESOURCES } from "./eosio";
 * networks.
 */
 export const NETWORK_SUPPORTED_WALLETS: {
-        eos: Array<WalletButtonModel>,
-        wax: Array<WalletButtonModel>,
-        ethereum?: Array<WalletButtonModel>,
-        solana?: Array<WalletButtonModel>} = {
+        eos: Array<SupportedWallet>,
+        wax: Array<SupportedWallet>,
+        ethereum?: Array<SupportedWallet>,
+        solana?: Array<SupportedWallet>} = {
     eos: [
-        WALLET_BUTTONS.anchor,
-        WALLET_BUTTONS.im_token,
-        WALLET_BUTTONS.leaf,
-        WALLET_BUTTONS.math,
-        WALLET_BUTTONS.my_key,
-        WALLET_BUTTONS.scatter,
-        WALLET_BUTTONS.starteos,
-        WALLET_BUTTONS.token_pocket,
-        WALLET_BUTTONS.wombat
+        SupportedWallet.anchor,
+        SupportedWallet.im_token,
+        SupportedWallet.leaf,
+        SupportedWallet.math,
+        SupportedWallet.my_key,
+        SupportedWallet.scatter,
+        SupportedWallet.starteos,
+        SupportedWallet.token_pocket,
+        SupportedWallet.wombat
     ],
-    ethereum: [
-        WALLET_BUTTONS.anchor
-    ],
-    solana: [
-        WALLET_BUTTONS.anchor
-    ],
+    // ethereum: [
+    //     SupportedWallet.anchor,
+    // ],
+    // solana: [
+    //     SupportedWallet.anchor,
+    // ],
     wax: [
-        WALLET_BUTTONS.wax_cloud,
-        WALLET_BUTTONS.anchor,
-        WALLET_BUTTONS.wombat
+        SupportedWallet.anchor,
+        SupportedWallet.wax_cloud,
+        SupportedWallet.wombat
     ]
 };
