@@ -1,47 +1,59 @@
+import { SupportedWallet } from '../../models/Wallet.model';
+
 /**
  * List of supported wallets (and their button styling)
  * across all supported networks, making referencing easier
  * in multiple networks.
  */
- export const WALLET_BUTTONS = {
-    anchor: {
+ export const WALLET_BUTTONS = [
+    {
+        id: SupportedWallet.anchor,
         name: "Anchor",
         icon: "/img/wallets/anchor.png"
     },
-    im_token: {
+    {
+        id: SupportedWallet.im_token,
         name: "imToken",
         icon: "/img/wallets/im_token.png"
     },
-    leaf: {
+    {
+        id: SupportedWallet.leaf,
         name: "Leaf",
         icon: "/img/wallets/leaf.png"
     },
-    math: {
+    {
+        id: SupportedWallet.math,
         name: "Math",
         icon: "/img/wallets/math.png"
     },
-    my_key: {
+    {
+        id: SupportedWallet.my_key,
         name: "MyKey",
         icon: "/img/wallets/my_key.png"
     },
-    scatter: {
+    {
+        id: SupportedWallet.scatter,
         name: "Scatter",
         icon: "/img/wallets/scatter.png"
     },
-    starteos: {
+    {
+        id: SupportedWallet.starteos,
         name: "Starteos",
         icon: "/img/wallets/starteos.png"
     },
-    token_pocket: {
+    {
+        id: SupportedWallet.token_pocket,
         name: "TP",
         icon: "/img/wallets/token_pocket.png"
     },
-    wax_cloud: {
+    {
+        id: SupportedWallet.wax_cloud,
         name: "WAX Cloud",
         icon: "/img/wallets/wax_cloud.png"
     },
-    wombat: {
+    {
+        id: SupportedWallet.wombat,
         name: "Wombat",
         icon: "/img/wallets/wombat.png"
     }
-}
+ ];

@@ -8,7 +8,7 @@ import MuiButton from '@mui/material/Button';
 
 export interface AvatarProps extends StandardModel {
     data: {
-        img: string;
+        img?: string;
         label?: string;
     },
     config?: {

@@ -32,10 +32,9 @@ import { Avatar } from "../1_core/Avatar";
 import { Card } from "../1_core/Card";
 import DotGemsContext from '../1_core/DotGemsContext';
 import { NetworkModel } from '../../models/Network.model';
-import { SupportedWallet, WalletButtonModel, WalletModel } from '../../models/Wallet.model';
+import { WalletButtonModel, WalletModel } from '../../models/Wallet.model';
 import { StandardModel, StandardSize } from '../../models/Standard.model';
 import { NETWORK_SUPPORTED_WALLETS, SUPPORTED_NETWORK_KEYS } from '../../data/constants/networks/networks';
-import { combineStyles } from '../../common/style';
 import { WALLET_BUTTONS } from '../../data/constants/wallets';
 
 export interface WalletConnectProps extends StandardModel { }
@@ -231,17 +230,17 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
                         Please link your supported {selectedNetwork?.toUpperCase()} wallet;
                     </Typography>
                     <div className={classes.networksContainer}>
-                        {Object.keys(WALLET_BUTTONS).map((key: SupportedWallet) => {
+                        {WALLET_BUTTONS.map((wallet: WalletButtonModel) => {
                             return <div className={classes.walletsVSpacing}>
                                 <Button
-                                    disabled={selectedNetwork === undefined || !NETWORK_SUPPORTED_WALLETS[selectedNetwork].includes(key)}
+                                    disabled={selectedNetwork === undefined || !NETWORK_SUPPORTED_WALLETS[selectedNetwork].includes(wallet.id)}
                                     className={classes.sqButton}
                                     onClick={connectMockWallet}
                                 >
                                     <div style={{ width: "60px", margin: "auto" }}>
-                                        <img src={WALLET_BUTTONS[key].icon} className={classes.mrsm} />
+                                        <img src={wallet.icon} className={classes.mrsm} />
                                     </div>
-                                    <Typography variant="caption" style={{ fontWeight: "bold", fontSize: "10px" }}>{WALLET_BUTTONS[key].name}</Typography>
+                                    <Typography variant="caption" style={{ fontWeight: "bold", fontSize: "10px" }}>{wallet.name}</Typography>
                                 </Button>
                             </div>
                         })}

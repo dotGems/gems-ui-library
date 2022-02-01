@@ -1,4 +1,5 @@
 export interface WalletButtonModel {
+    id: SupportedWallet,
     name: string,
     icon: string
 }

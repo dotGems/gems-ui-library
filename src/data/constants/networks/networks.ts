@@ -1,6 +1,5 @@
 import { NetworkModel } from "../../../models/Network.model";
-import { SupportedWallet, WalletButtonModel } from "../../../models/Wallet.model";
-import { SUPPORTED_WALLETS, WALLET_BUTTONS } from "../wallets";
+import { SupportedWallet } from "../../../models/Wallet.model";
 import { EOSIO_RESOURCES } from "./eosio";
 
 export enum SUPPORTED_NETWORK_KEYS {
