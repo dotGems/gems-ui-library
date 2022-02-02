@@ -48,7 +48,7 @@ export const Nav = ({
     return (<nav>
       <div className={classes.navContent}>
         <img className={classes.logo}src={data.logo_src} alt={data.logo_alt}/>
-
+        Hello
       </div>
     </nav>);
 };
