@@ -31,8 +31,10 @@ const useStyles = makeStyles({
     }
 });
 
-const defaultConfig = {
-    custom: {
+export const defaultProps = {
+    size: StandardSize.md,
+    variant: StandardVariant.elegant,
+    config: {
         isRounded: undefined
     }
 }
@@ -43,7 +45,7 @@ const defaultConfig = {
  * @todo Replace use of MuiButton with our button.
  * @todo Handle className and style
  */
-export const Avatar = ({ /*className,*/ variant, style, size = StandardSize.md, data, config = defaultConfig }: AvatarProps) => {
+export const Avatar = ({ /*className,*/ variant, style, size, data, config }: AvatarProps) => {
 
     const classes = useStyles();
 
@@ -64,8 +66,8 @@ export const Avatar = ({ /*className,*/ variant, style, size = StandardSize.md, 
     }
 
     const getRounding = () => {
-        if (config.custom && config.custom.isRounded) {
-            return config.custom.isRounded === true ? "circular" : "square"
+        if (config&& config.isRounded) {
+            return config.isRounded === true ? "circular" : "square"
         } else {
             switch(variant) {
                 case StandardVariant.dynamic: return 'circular'
