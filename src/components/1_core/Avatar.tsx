@@ -13,9 +13,7 @@ export interface AvatarProps extends StandardModel {
     },
     config?: {
         onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
-        custom?: {
-            isRounded?: boolean;
-        }
+        isRounded?: boolean;
     }
 }
 
