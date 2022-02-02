@@ -16,7 +16,7 @@ export interface TagConfig {
 export interface TagProps extends StandardCoreModel {
     data: {
         label?: React.ReactElement | string;
-        icon?: React.ElementType;
+        icon?: any;
         iconTitle?: string;
     },
     config?: TagConfig;
@@ -123,15 +123,7 @@ export const Tag = ({
         }
     }
 
-    const iconWithProps = React.Children.map(data.icon, icon => {
-        if (React.isValidElement(icon)) {
-          return React.cloneElement(icon as ReactElement<{className: any, sx: any}>, { 
-              className: data.label ? classes.tagIcon : null,
-              sx: getIconSize()
-            });
-        }
-        return icon;
-    });
+    const Icon = data.icon;
 
     const getTextSize = (): "caption" | "body1" | "body2" => {
         switch (size) {
@@ -155,7 +147,7 @@ export const Tag = ({
         <div className={classes[getVariant(variant)]} style={{ borderRadius: config?.custom?.isRounded ? "999px" : "0px" }}>
             <div className={classes.tagContainer} style={config?.custom?.hasPadding ? {} : { padding: "0px" }}>
                 {data.icon ? <div title={data.iconTitle || ""}>
-                {iconWithProps}
+                    <Icon className={data.label ? classes.tagIcon : null} sx={getIconSize()}/>
                 </div> : null}
                 {data.label ? <Typography variant={getTextSize()}>{data.label}</Typography> : null}
             </div>
