@@ -1,181 +1,170 @@
-# TSDX React w/ Storybook User Guide
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/dotGems">
+    <img src="https://avatars.githubusercontent.com/u/75587337?s=200&v=4" alt="dotGems Logo">
+  </a>
 
-Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
+  <h3 align="center">dotGems React UI Library</h3>
 
-> This TSDX setup is meant for developing React component libraries (not apps!) that can be published to NPM. If you’re looking to build a React-based app, you should use `create-react-app`, `razzle`, `nextjs`, `gatsby`, or `react-static`.
+![Package Version](https://img.shields.io/npm/v/@dotgems/ui?style=flat-square)
+![Build Status](https://img.shields.io/cirrus/github/dotGems/gems-ui-library?style=flat-square)
+![License](https://img.shields.io/npm/l/@dotgems/ui?style=flat-square)
 
-> If you’re new to TypeScript and React, checkout [this handy cheatsheet](https://github.com/sw-yx/react-typescript-cheatsheet/)
+  <p align="center">
+    A React UI Library for building NFT marketplaces based on EOSIO.
+    <br />
+    <!-- <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a> 
+    · -->
+    <a href="https://github.com/dotGems/gems-ui-library/issues/new?assignees=&labels=bug&template=bug-report.md&title=">Report Bug</a>
+    ·
+    <a href="https://github.com/dotGems/gems-ui-library/issues/new?assignees=&labels=&template=feature-request.md&title=">Request Feature</a>
+  </p>
+</div>
 
-## Commands
 
-TSDX scaffolds your new library inside `/src`, and also sets up a [Parcel-based](https://parceljs.org) playground for it inside `/example`.
 
-The recommended workflow is to run TSDX in one terminal:
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-```bash
-npm start # or yarn start
-```
+<br/>
 
-This builds to `/dist` and runs the project in watch mode so any edits you save inside `src` causes a rebuild to `/dist`.
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-Then run either Storybook or the example playground:
+Building an NFT marketplace is no small feat. It requires a lot of different kind of expertise and is a time consuming task. With the dotGems UI Library, we aim to simplify the development of NFT marketplaces based on EOSIO by providing core components to help you develop and ship faster.
 
-### Storybook
+Currently, we focus on building reusable components for React, but we are considering making a Vue compatible version once this one is more stable and mature.
 
-Run inside another terminal:
+### Built With
 
-```bash
-yarn storybook
-```
+* [React](https://reactjs.org/)
+* [Storybook](https://storybook.js.org/)
+* [TypeScript](https://www.typescriptlang.org/)
+* [Material UI](https://mui.com/)
 
-This loads the stories from `./stories`.
+## Getting Started
 
-> NOTE: Stories should reference the components as if using the library, similar to the example playground. This means importing from the root project directory. This has been aliased in the tsconfig and the storybook webpack config as a helper.
+If you wish to contribute to the project, please the README under `src`. Otherwise, proceed to the installation section.
 
-### Example
+### Installation
 
-Then run the example inside another:
 
-```bash
-cd example
-npm i # or yarn to install dependencies
-npm start # or yarn start
-```
-
-The default example imports and live reloads whatever is in `/dist`, so if you are seeing an out of date component, make sure TSDX is running in watch mode like we recommend above. **No symlinking required**, we use [Parcel's aliasing](https://parceljs.org/module_resolution.html#aliases).
-
-To do a one-off build, use `npm run build` or `yarn build`.
-
-To run tests, use `npm test` or `yarn test`.
-
-## Configuration
-
-Code quality is set up for you with `prettier`, `husky`, and `lint-staged`. Adjust the respective fields in `package.json` accordingly.
-
-### Jest
-
-Jest tests are set up to run with `npm test` or `yarn test`.
-
-### Bundle analysis
-
-Calculates the real cost of your library using [size-limit](https://github.com/ai/size-limit) with `npm run size` and visulize it with `npm run analyze`.
-
-#### Setup Files
-
-This is the folder structure we set up for you:
-
-```txt
-/example
-  index.html
-  index.tsx       # test your component here in a demo app
-  package.json
-  tsconfig.json
-/src
-  index.tsx       # EDIT THIS
-/test
-  blah.test.tsx   # EDIT THIS
-/stories
-  Thing.stories.tsx # EDIT THIS
-/.storybook
-  main.js
-  preview.js
-.gitignore
-package.json
-README.md         # EDIT THIS
-tsconfig.json
-```
-
-#### React Testing Library
-
-We do not set up `react-testing-library` for you yet, we welcome contributions and documentation on this.
-
-### Rollup
-
-TSDX uses [Rollup](https://rollupjs.org) as a bundler and generates multiple rollup configs for various module formats and build settings. See [Optimizations](#optimizations) for details.
-
-### TypeScript
-
-`tsconfig.json` is set up to interpret `dom` and `esnext` types, as well as `react` for `jsx`. Adjust according to your needs.
-
-## Continuous Integration
-
-### GitHub Actions
-
-Two actions are added by default:
-
-- `main` which installs deps w/ cache, lints, tests, and builds on all pushes against a Node and OS matrix
-- `size` which comments cost comparison of your library on every pull request using [size-limit](https://github.com/ai/size-limit)
-
-## Optimizations
-
-Please see the main `tsdx` [optimizations docs](https://github.com/palmerhq/tsdx#optimizations). In particular, know that you can take advantage of development-only optimizations:
+1. Clone the repo
+   ```sh
+   git clone https://github.com/oreus-initiative/split.backend
+   ```
+2. Install Dependencies
+   ```sh
+   npm install
+   ```
+3. Create your environment file `.env` at the project's root.
 
 ```js
-// ./types/index.d.ts
-declare var __DEV__: boolean;
+    # SETUP DEVELOPMENT / PRODUCTION ENVIRONMENT
+    NODE_ENV=development                # development, test or production
+    DEBUG_LEVEL=debug                   # See winston logging levels
 
-// inside your code...
-if (__DEV__) {
-  console.log('foo');
-}
+    # GLOBAL SETTINGS
+    SALT_ROUNDS=YOUR_SALT_ROUNDS        # Suggested: 10
+    JWT_SECRET_KEY=YOUR_SECRET_KEY      # Generate using `node -e "console.log(require('crypto').randomBytes(256).toString('base64'))"`
+
+    # DATABASE CONNECTION
+    DB_CLIENT=YOUR_DATABASE_CLIENT      # Default: pg
+    DB_HOST=YOUR_DATABASE_HOST          # Default: 127.0.0.1
+    DB_PORT=YOUR_DATABASE_PORT          # Default: 5433
+    DB_USER=YOUR_DATABASE_USER          # Default: postgres
+    DB_PASSWORD=YOUR_DATABASE_PASSWORD  # Default: postgres
+    DB_NAME=YOUR_DATABASE_NAME          # Suggested: "oreus-split"
+
+    # Establishes Google OAuth connection for mailing
+    # To retrieve those values, see the docs.
+    GOOGLE_USER=PROVIDED_GMAIL          # Request it at info@oreus.ca
+    GOOGLE_CLIENT_ID=PROVIDED_CLIENT_ID # Request it at info@oreus.ca
+    GOOGLE_SECRET=PROVIDED_SECRET       # Request it at info@oreus.ca
+    GOOGLE_REDIRECT_URI                 # Request it at info@oreus.ca
+    GOOGLE_REFRESH                      # Request it at info@oreus.ca
 ```
 
-You can also choose to install and use [invariant](https://github.com/palmerhq/tsdx#invariant) and [warning](https://github.com/palmerhq/tsdx#warning) functions.
+At the root of the project, we also provide the insomnia_apidoc.json file, that can be imported into the Insomnia HTTP Client to better understand and test the API.
 
-## Module Formats
+<!-- USAGE EXAMPLES -->
+## Usage
 
-CJS, ESModules, and UMD module formats are supported.
-
-The appropriate paths are configured in `package.json` and `dist/index.js` accordingly. Please report if any issues are found.
-
-## Deploying the Example Playground
-
-The Playground is just a simple [Parcel](https://parceljs.org) app, you can deploy it anywhere you would normally deploy that. Here are some guidelines for **manually** deploying with the Netlify CLI (`npm i -g netlify-cli`):
-
-```bash
-cd example # if not already in the example folder
-npm run build # builds to dist
-netlify deploy # deploy the dist folder
+```js
+// TODO
 ```
 
-Alternatively, if you already have a git repo connected, you can set up continuous deployment with Netlify:
 
-```bash
-netlify init
-# build command: yarn build && cd example && yarn && yarn build
-# directory to deploy: example/dist
-# pick yes for netlify.toml
-```
+<!-- ROADMAP -->
+## Roadmap
 
-## Named Exports
+Our roadmap is described using milestones associated to issues, please refer to those to understand our roadmap.
 
-Per Palmer Group guidelines, [always use named exports.](https://github.com/palmerhq/typescript#exports) Code split inside your React app instead of your React library.
 
-## Including Styles
+<!-- CONTRIBUTING -->
+## Contributing
 
-There are many ways to ship styles, including with CSS-in-JS. TSDX has no opinion on this, configure how you like.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-For vanilla CSS, you can include it at the root directory and add it to the `files` section in your `package.json`, so that it can be imported separately by your users and run through their bundler's loader.
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
 
-## Publishing to NPM
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-We recommend using [np](https://github.com/sindresorhus/np).
 
-## Usage with Lerna
+<!-- LICENSE -->
+## License
 
-When creating a new package with TSDX within a project set up with Lerna, you might encounter a `Cannot resolve dependency` error when trying to run the `example` project. To fix that you will need to make changes to the `package.json` file _inside the `example` directory_.
+Distributed under the GNUv3 License. See `LICENSE` for more information.
 
-The problem is that due to the nature of how dependencies are installed in Lerna projects, the aliases in the example project's `package.json` might not point to the right place, as those dependencies might have been installed in the root of your Lerna project.
 
-Change the `alias` to point to where those packages are actually installed. This depends on the directory structure of your Lerna project, so the actual path might be different from the diff below.
+<!-- CONTACT -->
+## Contact
 
-```diff
-   "alias": {
--    "react": "../node_modules/react",
--    "react-dom": "../node_modules/react-dom"
-+    "react": "../../../node_modules/react",
-+    "react-dom": "../../../node_modules/react-dom"
-   },
-```
+Dominic Fournier - [@DominicF96](https://twitter.com/DominicF96) - me@dominicfournier.com
 
-An alternative to fixing this problem would be to remove aliases altogether and define the dependencies referenced as aliases as dev dependencies instead. [However, that might cause other problems.](https://github.com/palmerhq/tsdx/issues/64)
+Project Link: [https://github.com/oreus-initiative/split.backend/projects/1](https://github.com/oreus-initiative/split.backend/projects/1)
+
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+* [Choose an Open Source License](https://choosealicense.com)
+* [Express](https://expressjs.com/)
+
+## Special Thanks
+
+Special thanks to all [Pomelo donors who contributed to help kickstart this project](https://pomelo.io/grants/ems.oreus) !
+
+<p align="right">(<a href="#top">back to top</a>)</p>

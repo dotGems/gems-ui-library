@@ -111,10 +111,6 @@ export const Tag = ({
         borderRadius: "30px"
     }
 
-    useEffect(() => {
-        console.log(combineStyles([a, b, c]));
-    }, []);
-
     const getIconSize = (): { fontSize: string } => {
         switch (size) {
             case StandardSize.sm: return { fontSize: "20px" };

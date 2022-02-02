@@ -11,7 +11,7 @@ export interface AvatarProps extends StandardModel {
         img?: string;
         label?: string;
     },
-    config: {
+    config?: {
         onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
         isRounded?: boolean;
     }
@@ -64,8 +64,8 @@ export const Avatar = ({ /*className,*/ variant, style, size, data, config }: Av
     }
 
     const getRounding = () => {
-        if (config&& config.isRounded) {
-            return config.isRounded === true ? "circular" : "square"
+        if (config && config.isRounded) {
+            return config.isRounded ? "circular" : "square"
         } else {
             switch(variant) {
                 case StandardVariant.dynamic: return 'circular'
@@ -87,8 +87,8 @@ export const Avatar = ({ /*className,*/ variant, style, size, data, config }: Av
             <Typography variant={getTextSize()}>{data.label}</Typography>
         </>);
     }
-    if (config.onClick) {
-        return (<MuiButton onClick={config.onClick} className={classes.avatarContainer} style={style}>
+    if (config?.onClick) {
+        return (<MuiButton onClick={config?.onClick} className={classes.avatarContainer} style={style}>
             {renderContent()}
         </MuiButton>);
     } else {
