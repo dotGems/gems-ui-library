@@ -6,6 +6,9 @@
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "description": "dotGems UI Library for Building NFT shops.",
+  "repository": "git@github.com:dotGems/gems-ui-library.git",
+  "private": true,
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
@@ -40,6 +43,7 @@
     "@storybook/react": "^6.4.10",
     "@types/react": "^17.0.36",
     "@types/react-dom": "^17.0.11",
+    "auto": "^10.32.6",
     "babel-loader": "^8.2.3",
     "husky": "^7.0.4",
     "react": "^17.0.2",
