@@ -1,4 +1,4 @@
-# v0.1.1 (Wed Feb 02 2022)
+# v0.1.0 (Wed Feb 02 2022)
 
 - Created first version of the design system, with `Avatar`, `Button`, `Card`, `DotGemsContext`, `NFTDisplay`, `QtyControl`, `Tag`, `CollectionBanner`, `CollectionDetails`, `DropBanner`, `DropCard`, `DropDetails` and `WalletConnect` components.
 
