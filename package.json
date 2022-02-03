@@ -19,9 +19,7 @@
     "size": "size-limit",
     "analyze": "size-limit --why",
     "storybook": "start-storybook -s ./public -p 6006",
-    "build-storybook": "build-storybook -o docs-build -s ./public",
-    "predeploy-storybook": "npm run build-storybook",
-    "deploy-storybook": "gh-pages -d storybook-static"
+    "build-storybook": "build-storybook -o docs-build -s ./public"
   },
   "dependencies": {
     "@emotion/react": "^11.6.0",
