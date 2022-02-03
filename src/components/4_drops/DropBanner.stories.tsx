@@ -4,6 +4,7 @@ import { Meta, Story } from '@storybook/react';
 import { DropBanner, DropBannerProps } from './DropBanner';
 import { defaultDrop } from "../../data/mock/drop.mock";
 import { StandardSize, StandardVariant } from "../../models/Standard.model";
+import { NFTPart } from '../1_core/NFTDisplay';
 
 const meta: Meta = {
     title: 'Drops/DropBanner',
@@ -23,7 +24,7 @@ Default.args = {
     data: defaultDrop,
     config: {
         nft_display: {
-            defaultPart: 'img',
+            defaultPart: NFTPart.img,
             loop: {
                 isEnabled: false,
                 delay: 3000,
