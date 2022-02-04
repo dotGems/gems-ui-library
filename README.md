@@ -73,75 +73,11 @@ Currently, we focus on building reusable components for React, but we are consid
 
 If you wish to contribute to the project, please the README under `src`. Otherwise, proceed to the installation section.
 
-### Installation
+To learn how to install and use the package and its components, please head over to our [official documentation](https://dotgems.github.io/gems-ui-library).
 
-
-1. Clone the repo
-   ```sh
-   git clone https://github.com/oreus-initiative/split.backend
-   ```
-2. Install Dependencies
-   ```sh
-   npm install
-   ```
-3. Create your environment file `.env` at the project's root.
-
-```js
-    # SETUP DEVELOPMENT / PRODUCTION ENVIRONMENT
-    NODE_ENV=development                # development, test or production
-    DEBUG_LEVEL=debug                   # See winston logging levels
-
-    # GLOBAL SETTINGS
-    SALT_ROUNDS=YOUR_SALT_ROUNDS        # Suggested: 10
-    JWT_SECRET_KEY=YOUR_SECRET_KEY      # Generate using `node -e "console.log(require('crypto').randomBytes(256).toString('base64'))"`
-
-    # DATABASE CONNECTION
-    DB_CLIENT=YOUR_DATABASE_CLIENT      # Default: pg
-    DB_HOST=YOUR_DATABASE_HOST          # Default: 127.0.0.1
-    DB_PORT=YOUR_DATABASE_PORT          # Default: 5433
-    DB_USER=YOUR_DATABASE_USER          # Default: postgres
-    DB_PASSWORD=YOUR_DATABASE_PASSWORD  # Default: postgres
-    DB_NAME=YOUR_DATABASE_NAME          # Suggested: "oreus-split"
-
-    # Establishes Google OAuth connection for mailing
-    # To retrieve those values, see the docs.
-    GOOGLE_USER=PROVIDED_GMAIL          # Request it at info@oreus.ca
-    GOOGLE_CLIENT_ID=PROVIDED_CLIENT_ID # Request it at info@oreus.ca
-    GOOGLE_SECRET=PROVIDED_SECRET       # Request it at info@oreus.ca
-    GOOGLE_REDIRECT_URI                 # Request it at info@oreus.ca
-    GOOGLE_REFRESH                      # Request it at info@oreus.ca
-```
-
-At the root of the project, we also provide the insomnia_apidoc.json file, that can be imported into the Insomnia HTTP Client to better understand and test the API.
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-```js
-// TODO
-```
-
-
-<!-- ROADMAP -->
 ## Roadmap
 
 Our roadmap is described using milestones associated to issues, please refer to those to understand our roadmap.
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
 
 <!-- LICENSE -->
 ## License
@@ -152,19 +88,7 @@ Distributed under the GNUv3 License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Dominic Fournier - [@DominicF96](https://twitter.com/DominicF96) - me@dominicfournier.com
+Dominic Fournier - [@DominicF96](https://github.com/DominicF96) - dominic@eosnation.io
+Jay Bhavsar - [@Mellowjay](https://github.com/mellowjayb) - jay@eosnation.io
 
 Project Link: [https://github.com/oreus-initiative/split.backend/projects/1](https://github.com/oreus-initiative/split.backend/projects/1)
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* [Choose an Open Source License](https://choosealicense.com)
-* [Express](https://expressjs.com/)
-
-## Special Thanks
-
-Special thanks to all [Pomelo donors who contributed to help kickstart this project](https://pomelo.io/grants/ems.oreus) !
-
-<p align="right">(<a href="#top">back to top</a>)</p>
