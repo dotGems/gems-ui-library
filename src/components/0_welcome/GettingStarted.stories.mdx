@@ -1,0 +1,45 @@
+import { Meta } from '@storybook/addon-docs';
+import { CollectionBanner } from '../3_collections/CollectionBanner';
+
+<Meta title="Welcome/Getting Started" />
+
+![dotGems Logo](https://avatars.githubusercontent.com/u/75587337?s=200&v=4)
+
+# dotGems React UI Library
+
+![Package Version](https://img.shields.io/npm/v/@dotgems/ui?style=flat-square)
+![Build Status](https://img.shields.io/cirrus/github/dotGems/gems-ui-library?style=flat-square)
+![License](https://img.shields.io/npm/l/@dotgems/ui?style=flat-square)
+
+The goal of this project is to provide high quality, flexible components to enable developers to build their NFT platforms faster. dotGems is an NFT platform developed by EOS Nation, therefore, the initial focus will be to provide those tools for EOS-based NFT projects.
+
+## Installation
+
+```shell
+npm install @dotGems/react
+```
+**Note:** Requires React 16.8 or higher.
+
+## Import Components
+```jsx
+import {CollectionBanner} from '@dotGems/react';
+
+export default (props) => {
+
+  const collectionData = {
+    collection_name: "merijn.gems",
+    author: "merijn.gems",
+    market_fee: "0.06000000000000000",
+    deserialized: {
+        name: "Merijn Kavelaars Art Collection",
+        description: "Merijn Kavelaars is an internationally celebrated artist from the Netherlands.",
+        img: "QmZrvhAVRDkJijyMsf1ETHSwqZWjbAXaRYihKFH4XNV2eY",
+        url: "https://www.merijnkavelaars.nl/"
+    }
+  };
+
+  return (
+    <CollectionBanner data={collectionData}/>
+  )
+}
+```
