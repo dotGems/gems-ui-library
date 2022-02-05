@@ -5,7 +5,7 @@ module.exports = {
     '../src/components/1_core/**/*.stories.@(ts|tsx|js|jsx)',
     '../src/components/2_blend/**/*.stories.@(ts|tsx|js|jsx)',
     '../src/components/3_collections/**/*.stories.@(ts|tsx|js|jsx)',
-    '../src/components/4_drops/**/*.stories.@(ts|tsx|js|jsx)',
+    '../src/components/4_drops/**/*.stories.@(ts|tsx|js|jsx|mdx)',
     // '../src/components/5_secondary_market/**/*.stories.@(ts|tsx|js|jsx)',
     '../src/components/6_chain/**/*.stories.@(ts|tsx|js|jsx)',
     '../src/components/7_dotgems/**/*.stories.@(ts|tsx|js|jsx)',
