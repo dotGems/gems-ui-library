@@ -66,6 +66,7 @@ const useStyles = makeStyles({
         height: '100%',
         maxWidth: "100%",
         cursor: "pointer",
+        position: "static",
     },
     enlargedMainDisplay: {
         height: '100%',
