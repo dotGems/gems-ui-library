@@ -46,7 +46,9 @@ const useStyles = makeStyles({
         justifyContent: "space-between",
         alignItems: "top"
     },
-    coreInfo: {},
+    coreInfo: {
+        margin: "0px"
+    },
     burnableTransferable: {
         textAlign: "right"
     }
