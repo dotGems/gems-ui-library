@@ -39,9 +39,6 @@ export const defaultProps = {
 
 /**
  * Displays a thumbnail followed by a label.
- *
- * @todo Replace use of MuiButton with our button.
- * @todo Handle className and style
  */
 export const Avatar = ({ /*className,*/ variant, style, size, data, config }: AvatarProps) => {
 

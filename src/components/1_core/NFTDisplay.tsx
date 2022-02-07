@@ -106,10 +106,6 @@ const useStyles = makeStyles({
  * Displays all parts of an NFT. The user can select which part
  * of the NFT to be displayed in a larger area. Cycles through the
  * different parts by default.
- *
- * @todo Use MUI Theme / palette instead of hardcoding color value
- * @todo Implement Loop
- * @todo Fix error in enlarged display when switching to video (POST 404)
  */
 export const NFTDisplay = ({
     // className,
