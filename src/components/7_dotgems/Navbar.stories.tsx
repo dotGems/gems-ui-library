@@ -4,11 +4,8 @@ import { Meta, Story } from '@storybook/react';
 import { Navbar, NavbarProps } from './Navbar';
 
 const meta: Meta = {
-    title: 'Core/Navbar',
-    component: Navbar,
-    argTypes: {
-
-    }
+    title: 'dotGems/Navbar',
+    component: Navbar
 }
 
 export default meta;
