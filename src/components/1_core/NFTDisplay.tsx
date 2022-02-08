@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 import { Backdrop, Button } from '@mui/material';
 
 import { StandardModel } from "../../models/Standard.model";
-import { IPFS_SOURCE } from '../../data/constants/urls';
+import { IPFS_SOURCE, IPFS_SOURCE_FALLBACK, IPFS_VIDEO_SOURCE } from '../../data/constants/urls';
 import {
     ArrowBackIos as ArrowBackIosIcon,
     ArrowForwardIos as ArrowForwardIosIcon,
@@ -66,6 +66,7 @@ const useStyles = makeStyles({
         height: '100%',
         maxWidth: "100%",
         cursor: "pointer",
+        position: "static",
     },
     enlargedMainDisplay: {
         height: '100%',
@@ -144,7 +145,8 @@ export const NFTDisplay = ({
     const renderMainDisplay = (isEnlarged?: boolean) => {
         if (activePart.indexOf('video') === -1) {
             return (<img
-                src={`${IPFS_SOURCE}/${data[activePart]}`}
+                onError={(event: any) => event.target.src = `${IPFS_SOURCE_FALLBACK}${data[activePart]}`}
+                src={`${IPFS_SOURCE}${data[activePart]}?size=700`}
                 className={isEnlarged ? classes.enlargedMainDisplay : classes.mainDisplay}
                 onClick={() => setShowEnlarged(true)}
             />);
@@ -156,7 +158,7 @@ export const NFTDisplay = ({
                 autoPlay={config.video.autoplay}
                 className={isEnlarged ? classes.enlargedMainDisplay : classes.mainDisplay}
                 onClick={() => setShowEnlarged(true)}>
-                <source src={`${IPFS_SOURCE}/${data[activePart]}`} type="video/mp4"></source>
+                <source src={`${IPFS_VIDEO_SOURCE}${data[activePart]}`} type="video/mp4"></source>
                 Your browser does not support the video tag.
             </video>);
         }
@@ -173,7 +175,8 @@ export const NFTDisplay = ({
                     if (SUPPORTED_PARTS.includes(part)) {
                         return <img
                             className={activePart.indexOf(part) !== -1 && activePart.length === part.length ? classes.selectorItemActive : classes.selectorItem}
-                            src={`${IPFS_SOURCE}/${data[getSelectorPartImg(part)]}`}
+                            src={`${IPFS_SOURCE}${data[getSelectorPartImg(part)]}?size=700`}
+                            onError={(event: any) => event.target.src = `${IPFS_SOURCE_FALLBACK}${data[getSelectorPartImg(part)]}`}
                             width="32px"
                             onClick={() => setActivePart(part)}
                             title={renderPartName(part)}
