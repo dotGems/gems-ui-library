@@ -41,6 +41,11 @@ const defaultConfig = {
 };
 
 const useStyles = makeStyles({
+    root: {
+        "@media (max-width: 600px)": {
+            paddingTop: "16px"
+        }
+    },
     infoContainer: {
         display: "flex",
         justifyContent: "space-between",
@@ -78,7 +83,7 @@ export const DropDetails = ({
     const [isSnackbarOpen, setSnackbarOpen] = useState(false);
 
     return (
-        <div>
+        <div className={classes.root}>
             <Typography variant="h2" style={{ fontSize: "36px", fontWeight: "bold" }} component="div" gutterBottom>{data.template.deserialized.name}</Typography>
             <div className={classes.infoContainer}>
                 <div className={classes.coreInfo}>
