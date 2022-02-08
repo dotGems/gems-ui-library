@@ -106,6 +106,8 @@ export const Footer = ({
     },
   ];
 
+  const artistApplicationUrl = "https://forms.monday.com/forms/4f7995d7277d876cdea679eba924d56a?r=use1";
+
   const renderCopyrightYear = () => {
     const curYear = new Date().getFullYear();
     const startDate = 2022;
@@ -121,7 +123,7 @@ export const Footer = ({
       <Grid container spacing={{xs: 6, md: 16}}>
         <Grid item xs={12} md={3}>
           <img className={classes.footerLogo}src={data.logo.src} alt={data.logo.alt}/>
-          <Button style={{marginTop: "48px"}} variant="contained">Apply as an artist</Button>
+          <Button style={{marginTop: "48px"}} variant="contained" href={artistApplicationUrl} target="_blank" rel="noreferrer">Apply as an artist</Button>
         </Grid>
         <Grid item xs={12} md={3}>
           <Typography variant='body1' style={{fontWeight: "bold"}}>Community</Typography>
