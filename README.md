@@ -25,7 +25,9 @@
   </p>
 </div>
 
-
+<div style="background-color: lightyellow; color: orange; padding: 1em; border-radius: 5px; margin: 16px 0;">
+  <h4>This package is in alpha and is subject to a lot of breaking changes in the coming weeks.</h4>
+</div>
 
 <!-- TABLE OF CONTENTS -->
 <details>
