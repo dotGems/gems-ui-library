@@ -1,14 +1,19 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-
-import { AppBar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
-import MenuIcon from "@mui/icons-material/Menu";
-import { WalletConnect } from '../6_chain/WalletConnect';
+import { IconButton, Menu, MenuItem } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { Box } from '@mui/system';
 
 export interface NavbarProps {
   data: {
-    logo_src: string,
-    logo_alt: string,
+    logo: {
+      src: string,
+      alt: string
+    },
+    links?: Array<{
+      label: string,
+      onClick: Function,
+    }>,
   },
   config?: {
     hasShadow: boolean
@@ -16,24 +21,40 @@ export interface NavbarProps {
 }
 
 const useStyles = makeStyles({
-  lightAppBar: {
-    backgroundColor: "white"
+  navContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
   },
-  navContent: {
-    position: "relative",
-    width: "100%",
+  navTop: {
+    position: 'absolute',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    top: 0,
+    left: 0,
+    right: 0,
+    padding: '15px 30px',
+    boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
   },
-  logo: {
-    height: "70px"
+  navBottom: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: '15px 30px',
+    boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+  },
+  navLogo: {
+    height: "50px"
   }
 });
 
 const defaultConfig = {
   hasShadow: true
 }
-
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 /**
  * Displays a nav bar
@@ -42,127 +63,58 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
  * @todo Handle className and style
  */
 export const Navbar = ({
-  /*className,*/
+  className,
   data,
   config = defaultConfig
 }: NavbarProps) => {
 
-    const classes = useStyles();
+  const classes = useStyles();
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
 
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const handleOpenNavMenu = (event: any) => {
+    setAnchorElNav(event.currentTarget);
+  };
 
-    const handleOpenNavMenu = (event) => {
-      setAnchorElNav(event.currentTarget);
-    };
-    const handleOpenUserMenu = (event) => {
-      setAnchorElUser(event.currentTarget);
-    };
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
 
-    const handleCloseNavMenu = () => {
-      setAnchorElNav(null);
-    };
-
-    const handleCloseUserMenu = () => {
-      setAnchorElUser(null);
-    };
-
-    return (<AppBar position="static" style={{ background: 'white', color: "black" }}>
-    <Container maxWidth="xl">
-      <Toolbar disableGutters>
-        <Typography
-          variant="h6"
-          noWrap
-          component="div"
-          sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+  return (<div className={classes.navContainer}>
+    <nav className={classes.navTop}>
+      <img className={classes.navLogo} src={data.logo.src} alt={data.logo.alt} />
+      {data?.links ? <Box>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
+          onClick={handleOpenNavMenu}
+          color="inherit"
         >
-          <img src={data.logo_src} alt={data.logo_alt} className={classes.logo}/>
-        </Typography>
-
-        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={handleOpenNavMenu}
-            color="inherit"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Menu
-            id="menu-appbar"
-            anchorEl={anchorElNav}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'left',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
-            }}
-            open={Boolean(anchorElNav)}
-            onClose={handleCloseNavMenu}
-            sx={{
-              display: { xs: 'block', md: 'none' },
-            }}
-          >
-            {pages.map((page) => (
-              <MenuItem key={page} onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">{page}</Typography>
-              </MenuItem>
-            ))}
-          </Menu>
-        </Box>
-        <Typography
-          variant="h6"
-          noWrap
-          component="div"
-          sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+          <MenuIcon />
+        </IconButton>
+        <Menu
+          id="nav-appbar"
+          anchorEl={anchorElNav}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'left',
+          }}
+          open={Boolean(anchorElNav)}
+          onClose={handleCloseNavMenu}
         >
-          <img src={data.logo_src} alt={data.logo_alt} className={classes.logo}/>
-        </Typography>
-        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          {pages.map((page) => (
-            <Button
-              key={page}
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'black', display: 'block' }}
-            >
-              {page}
-            </Button>
-          ))}
-        </Box>
-
-        <Box sx={{ flexGrow: 0 }}>
-          <Tooltip title="Open settings">
-            <WalletConnect/>
-          </Tooltip>
-          <Menu
-            sx={{ mt: '45px' }}
-            id="menu-appbar"
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
-          >
-            {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">{setting}</Typography>
-              </MenuItem>
-            ))}
-          </Menu>
-        </Box>
-      </Toolbar>
-    </Container>
-  </AppBar>);
+          {data?.links?.map((link) => <MenuItem onClick={link.onClick}>{link.label}</MenuItem>)}
+        </Menu>
+      </Box> : null}
+    </nav>
+    {/*Bottom nav shows in mobile*/}
+    <nav className={classes.navBottom}>
+      Bottom
+    </nav>
+  </div>);
 }
