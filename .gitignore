@@ -6,3 +6,4 @@ dist
 .env
 storybook-static
 docs-build
+package-lock.json
