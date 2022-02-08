@@ -7,9 +7,9 @@
 
   <h3 align="center">dotGems React UI Library</h3>
 
-![Package Version](https://img.shields.io/npm/v/@dotgems/ui?style=flat-square)
+![Package Version](https://img.shields.io/npm/v/@dotgems/react?style=flat-square)
 ![Build Status](https://img.shields.io/cirrus/github/dotGems/gems-ui-library?style=flat-square)
-![License](https://img.shields.io/npm/l/@dotgems/ui?style=flat-square)
+![License](https://img.shields.io/npm/l/@dotgems/react?style=flat-square)
 
   <p align="center">
     A React UI Library for building NFT marketplaces based on EOSIO.
