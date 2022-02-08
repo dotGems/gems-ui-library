@@ -1,19 +1,20 @@
 import React from "react";
 import { Meta, Story } from '@storybook/react';
 
-import { DropCard, DropCardProps } from './DropCard';
+import { DropActionPanel, DropActionPanelProps } from './DropActionPanel';
 import { defaultDrop } from "../../data/mock/drop.mock"; 
-import { StandardSize } from '../../models/Standard.model';
+import { StandardSize } from "../../models/Standard.model";
+
 
 const meta: Meta = {
-    title: 'Drops/DropCard',
-    component: DropCard
+    title: 'Drops/DropActionPanel',
+    component: DropActionPanel
 }
 
 export default meta;
 
 
-const Template: Story<DropCardProps> = (args) => <DropCard {...args} />;
+const Template: Story<DropActionPanelProps> = (args) => <DropActionPanel {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

@@ -5,6 +5,11 @@ import { StandardModel } from "../../models/Standard.model";
 import { NFTDisplay, NFTPart } from '../1_core/NFTDisplay';
 import { DropModel } from '../../models/Drop.model';
 import { DropDetails } from './DropDetails';
+import { Theme } from '@mui/material';
+
+import { ThemeProvider } from "@mui/styles";
+
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
 export interface DropBannerProps extends StandardModel {
     data: DropModel,
@@ -31,11 +36,14 @@ export interface DropBannerProps extends StandardModel {
     }
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme:Theme) => ({
     dropBannerContainer: {
-        display: 'flex'
+        display: 'flex',
+        "@media (max-width: 600px)": {
+            flexDirection: "column"
+        }
     }
-});
+}));
 
 /**
  * Displays a drop's core information next to the NFT display.

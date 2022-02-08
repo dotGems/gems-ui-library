@@ -41,12 +41,19 @@ const defaultConfig = {
 };
 
 const useStyles = makeStyles({
+    root: {
+        "@media (max-width: 600px)": {
+            paddingTop: "16px"
+        }
+    },
     infoContainer: {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "top"
     },
-    coreInfo: {},
+    coreInfo: {
+        margin: "0px"
+    },
     burnableTransferable: {
         textAlign: "right"
     }
@@ -76,18 +83,19 @@ export const DropDetails = ({
     const [isSnackbarOpen, setSnackbarOpen] = useState(false);
 
     return (
-        <div>
+        <div className={classes.root}>
             <Typography variant="h2" style={{ fontSize: "36px", fontWeight: "bold" }} component="div" gutterBottom>{data.template.deserialized.name}</Typography>
             <div className={classes.infoContainer}>
                 <div className={classes.coreInfo}>
-                    {config.showArtist ? <Tag data={{ icon: PersonOutlinedIcon, iconTitle: "Author", label: data.template.deserialized.artist }} variant={CoreVariant.light} size={StandardSize.lg} config={{ custom: { hasPadding: false } }} /> : null}
+                    {/* TODO: Add enable/disable attributes for each UI item */}
+                    {/* {config.showArtist ? <Tag data={{ icon: PersonOutlinedIcon, iconTitle: "Author", label: data.template.deserialized.artist }} variant={CoreVariant.light} size={StandardSize.lg} config={{ custom: { hasPadding: false } }} /> : null} */}
                     {config.showCollection ? <Tag data={{ icon: CollectionsOutlinedIcon, iconTitle: "Collection", label: data.collection.deserialized.name }} variant={CoreVariant.light} size={StandardSize.lg} config={{ custom: { hasPadding: false } }} /> : null}
                     <Tag data={{ icon: Filter1Icon, iconTitle: "Mint", label: `${data.template.issued_supply} of ${data.template.max_supply}` }} variant={CoreVariant.light} size={StandardSize.lg} config={{ custom: { hasPadding: false } }} />
                     <Button startIcon={<LanguageIcon />} label="Website" variant="text" target="_blank" href={`${COLLECTION_SOURCE}${data.collection_name}`} />
-                    {config.showViewData ?
+                    {/* {config.showViewData ?
                         <Button startIcon={<DataObjectIcon />} label="Metadata" variant="text" onClick={() => copyToClipboard(data, () => { setSnackbarOpen(true) })} />
                         : null
-                    }
+                    } */}
                 </div>
                 {config.showBurnableTransferable ? <Typography variant="body1" color="primary" className={classes.burnableTransferable}>
                     {data.template.transferable === 1 ? <CompareArrowsIcon /> : null}
