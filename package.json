@@ -27,8 +27,8 @@
     "lint": "tsdx lint",
     "size": "size-limit",
     "analyze": "size-limit --why",
-    "storybook": "start-storybook -s ./public -p 6006",
-    "build-storybook": "build-storybook -o docs-build -s ./public"
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook -o docs-build"
   },
   "dependencies": {
     "@emotion/react": "^11.6.0",
