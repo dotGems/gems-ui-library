@@ -91,6 +91,7 @@ Distributed under the GNUv3 License. See `LICENSE` for more information.
 ## Contact
 
 Dominic Fournier - [@DominicF96](https://github.com/DominicF96) - dominic@eosnation.io<br/>
-Jay Bhavsar - [@Mellowjay](https://github.com/mellowjayb) - jay@eosnation.io
+Jay Bhavsar - [@Mellowjay](https://github.com/mellowjayb) - jay@eosnation.io<br/>
+Denis Carriere - [@DenisCarriere](https://github.com/DenisCarriere) - denis@eosnation.io<br/>
 
 Project Link: [https://github.com/orgs/dotGems/projects/2](https://github.com/orgs/dotGems/projects/2)
