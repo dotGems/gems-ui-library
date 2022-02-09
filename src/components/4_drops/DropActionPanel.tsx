@@ -65,23 +65,23 @@ export const DropActionPanel = ({
     // className,
     // style,
     data,
-    config = defaultConfig,
+    // config = defaultConfig,
 }: DropActionPanelProps) => {
 
     const classes = useStyles();
     const dotGemsCtx = useContext(DotGemsContext);
 
-    const getCardWidth = () => {
-        if (config?.orientation?.indexOf("horizontal") !== -1) {
-            switch (size) {
-                case StandardSize.sm: return "200px"
-                case StandardSize.lg: return "350px"
-                default: return "275px" // Includes md
-            }
-        } else {
-            return "100%";
-        }
-    }
+    // const getCardWidth = () => {
+    //     if (config?.orientation?.indexOf("horizontal") !== -1) {
+    //         switch (size) {
+    //             case StandardSize.sm: return "200px"
+    //             case StandardSize.lg: return "350px"
+    //             default: return "275px" // Includes md
+    //         }
+    //     } else {
+    //         return "100%";
+    //     }
+    // }
 
     const renderPrice = () => {
         let splitListingPrice = splitPriceAndCurrency(data.listing_price);

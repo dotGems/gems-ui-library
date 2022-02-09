@@ -22,5 +22,5 @@ Default.args = {
     style: {},
     className: undefined,
     data: defaultDrop,
-    config: {}
+    // config: {}
 };
