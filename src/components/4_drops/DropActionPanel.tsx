@@ -17,7 +17,7 @@ export enum DropActionPanelOrientation {
 
 export interface DropActionPanelProps extends StandardModel {
     data: DropModel,
-    config: {
+    config?:{
         orientation: DropActionPanelOrientation,
         showPurchasing: boolean,
         label?: {
