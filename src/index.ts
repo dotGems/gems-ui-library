@@ -19,6 +19,7 @@ export * from "./components/3_collections/CollectionDetails";
 
 // DROPS ======================================================================
 export * from "./components/4_drops/DropBanner";
+export * from "./components/4_drops/DropActionPanel";
 export * from "./components/4_drops/DropCard";
 export * from "./components/4_drops/DropDetails";
 

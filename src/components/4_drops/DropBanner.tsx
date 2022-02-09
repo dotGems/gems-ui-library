@@ -6,11 +6,6 @@ import { NFTDisplay, NFTPart } from '../1_core/NFTDisplay';
 import { DropModel } from '../../models/Drop.model';
 import { DropDetails } from './DropDetails';
 import { Theme } from '@mui/material';
-
-import { ThemeProvider } from "@mui/styles";
-
-import { createTheme, responsiveFontSizes } from '@mui/material/styles';
-
 export interface DropBannerProps extends StandardModel {
     data: DropModel,
     config: {

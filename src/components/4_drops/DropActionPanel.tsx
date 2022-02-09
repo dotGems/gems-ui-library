@@ -4,7 +4,7 @@ import { Card, Grid, Typography } from '@mui/material';
 
 import { StandardModel, StandardSize } from "../../models/Standard.model";
 import { DropModel } from '../../models/Drop.model';
-import { IPFS_SOURCE } from '../../data/constants/urls';
+import { IPFS_SOURCE, IPFS_SOURCE_FALLBACK } from '../../data/constants/urls';
 import { Button } from '../1_core/Button';
 import { splitPriceAndCurrency } from "../../common/data";
 import DotGemsContext from '../1_core/DotGemsContext';
@@ -91,13 +91,20 @@ export const DropActionPanel = ({
         </div>)
     }
 
+    const buyNow = () => {
+        window.location.href = "https://eos.atomichub.io/drops/117";
+    }
+
     return (
         <Card className={classes.dropActionPanel} style={{ width: "100%" }} elevation={elevation}>
             <Grid container flexDirection={'row'} style={{padding:"16px 32px 16px 16px"}}>
                 <Grid item xs={12} md={6} style={{ display:"flex", flexDirection:"row" }}>
                     <div style={{ width:"80px", paddingRight:"16px" }}>
-                        <img src={`${IPFS_SOURCE}${data.template.deserialized.img}`} 
-                            style={{ height:"80px", display:"flex", margin:"auto" }}
+                        <img 
+                            src={`${IPFS_SOURCE}${data.template.deserialized.img}`} 
+                            // onError={(event: any) => event.target.src = `${IPFS_SOURCE_FALLBACK}${data[activePart]}`}
+                            // src={`${IPFS_SOURCE}${data[activePart]}?size=700`}
+                            style={{ height:"80px", display:"xflex", margin:"auto" }}
                         />
                     </div>
                     <div style={{ display:"flex", flexDirection:"column" }}>
@@ -107,7 +114,7 @@ export const DropActionPanel = ({
                 </Grid>
                 <Grid item xs={12} md={6} style={{ display:"flex", flexDirection:"row", justifyContent:"flex-end" }}>
                     <div style={{ margin:"auto 16px" }}>
-                        <Button label="Buy Now" variant='contained' style={{ padding:"8px 48px", fontSize:"16px" }}/>
+                        <Button label="Buy Now" variant='contained' style={{ padding:"8px 48px", fontSize:"16px" }} onClick={buyNow}/>
                     </div>
                     <QtyControl 
                         config={{
