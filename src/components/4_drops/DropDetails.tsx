@@ -84,13 +84,13 @@ export const DropDetails = ({
 
     return (
         <div className={classes.root}>
-            <Typography variant="h2" style={{ fontSize: "36px", fontWeight: "bold" }} component="div" gutterBottom>{data.template.deserialized.name}</Typography>
+            <Typography variant="h2" style={{ fontSize: "36px", fontWeight: "bold" }} component="div" gutterBottom>{data.immutable_serialized_data.name}</Typography>
             <div className={classes.infoContainer}>
                 <div className={classes.coreInfo}>
                     {/* TODO: Add enable/disable attributes for each UI item */}
                     {/* {config.showArtist ? <Tag data={{ icon: PersonOutlinedIcon, iconTitle: "Author", label: data.template.deserialized.artist }} variant={CoreVariant.light} size={StandardSize.lg} config={{ custom: { hasPadding: false } }} /> : null} */}
-                    {config.showCollection ? <Tag data={{ icon: CollectionsOutlinedIcon, iconTitle: "Collection", label: data.collection.deserialized.name }} variant={CoreVariant.light} size={StandardSize.lg} config={{ custom: { hasPadding: false } }} /> : null}
-                    <Tag data={{ icon: Filter1Icon, iconTitle: "Mint", label: `${data.template.issued_supply} of ${data.template.max_supply}` }} variant={CoreVariant.light} size={StandardSize.lg} config={{ custom: { hasPadding: false } }} />
+                    {config.showCollection ? <Tag data={{ icon: CollectionsOutlinedIcon, iconTitle: "Collection", label: data.immutable_serialized_data.name }} variant={CoreVariant.light} size={StandardSize.lg} config={{ custom: { hasPadding: false } }} /> : null}
+                    <Tag data={{ icon: Filter1Icon, iconTitle: "Mint", label: `${data.issued_supply} of ${data.max_supply}` }} variant={CoreVariant.light} size={StandardSize.lg} config={{ custom: { hasPadding: false } }} />
                     <Button startIcon={<LanguageIcon />} label="Website" variant="text" target="_blank" href={`${COLLECTION_SOURCE}${data.collection_name}`} />
                     {/* {config.showViewData ?
                         <Button startIcon={<DataObjectIcon />} label="Metadata" variant="text" onClick={() => copyToClipboard(data, () => { setSnackbarOpen(true) })} />
@@ -98,11 +98,11 @@ export const DropDetails = ({
                     } */}
                 </div>
                 {config.showBurnableTransferable ? <Typography variant="body1" color="primary" className={classes.burnableTransferable}>
-                    {data.template.transferable === 1 ? <CompareArrowsIcon /> : null}
-                    {data.template.burnable === 1 ? <LocalFireDepartmentIcon /> : null}
+                    {data.transferable === true ? <CompareArrowsIcon /> : null}
+                    {data.burnable === true ? <LocalFireDepartmentIcon /> : null}
                 </Typography> : null}
             </div>
-            {config.showAbout ? <Typography variant="body1" color="gray">{data.template.deserialized.about}</Typography> : null}
+            {config.showAbout ? <Typography variant="body1" color="gray">{data.immutable_serialized_data.context}</Typography> : null}
             <Snackbar
                 open={isSnackbarOpen}
                 autoHideDuration={3000}

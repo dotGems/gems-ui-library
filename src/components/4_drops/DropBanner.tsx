@@ -58,7 +58,7 @@ export const DropBanner = ({
     return (
         <div className={classes.dropBannerContainer}>
             <NFTDisplay
-                data={data.template.deserialized}
+                data={data.immutable_serialized_data}
                 config={config.nft_display}
                 style={{marginRight: "2em"}}
             />

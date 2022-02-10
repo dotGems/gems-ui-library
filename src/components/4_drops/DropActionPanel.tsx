@@ -101,14 +101,14 @@ export const DropActionPanel = ({
                 <Grid item xs={12} md={6} style={{ display:"flex", flexDirection:"row" }}>
                     <div style={{ width:"80px", paddingRight:"16px" }}>
                         <img 
-                            src={`${IPFS_SOURCE}${data.template.deserialized.img}`} 
+                            src={`${IPFS_SOURCE}${data.immutable_serialized_data.img}?size=700`} 
                             // onError={(event: any) => event.target.src = `${IPFS_SOURCE_FALLBACK}${data[activePart]}`}
                             // src={`${IPFS_SOURCE}${data[activePart]}?size=700`}
                             style={{ height:"80px", display:"xflex", margin:"auto" }}
                         />
                     </div>
                     <div style={{ display:"flex", flexDirection:"column" }}>
-                        <Typography variant="h3" style={{ fontSize: "1.5em", fontWeight: "bold" }}>{data.template.deserialized.name}</Typography>
+                        <Typography variant="h3" style={{ fontSize: "1.5em", fontWeight: "bold" }}>{data.immutable_serialized_data.name}</Typography>
                         {renderPrice()}
                     </div>
                 </Grid>
