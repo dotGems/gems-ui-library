@@ -118,24 +118,24 @@ export const DropCard = ({
     return (
         <Card className={classes.dropCard} style={{ width: getCardWidth() }}>
             <CardContent className={classes.dropCardContent}>
-                <img src={`${IPFS_SOURCE}${data.template.deserialized.img}`} className={classes.dropImg} />
+                <img src={`${IPFS_SOURCE}${data.immutable_serialized_data.img}?size=700`} className={classes.dropImg} />
                 <div className={classes.dropInfoContainer}>
                     <div className={classes.titleAndActions}>
-                        <Typography variant="h3" style={{ fontSize: "1.5em", fontWeight: "bold" }}>{data.template.deserialized.name}</Typography>
+                        <Typography variant="h3" style={{ fontSize: "1.5em", fontWeight: "bold" }}>{data.immutable_serialized_data.name}</Typography>
                         <Button size={StandardSize.sm} label={<ArrowForwardIcon />} variant="text" onClick={() => { console.log("Show m'details m'lady") }} />
                     </div>
                     <Typography
                         className={classes.clampedDesc}
                         variant="caption"
                         color="#AEAEAE">
-                        {data.template.deserialized.about}
+                        {data.immutable_serialized_data.context}
                     </Typography>
                     <div style={{ marginTop: "12px" }}>
                         <Tag
                             data={{
                                 icon: PersonOutlinedIcon,
                                 iconTitle: "Author",
-                                label: data.template.deserialized.artist
+                                label: data.immutable_serialized_data.artist
                             }}
                             variant={CoreVariant.light}
                             size={StandardSize.lg}
@@ -153,7 +153,7 @@ export const DropCard = ({
                             data={{
                                 icon: CollectionsOutlinedIcon,
                                 iconTitle: "Mint Number",
-                                label: <>{data.template.issued_supply}&nbsp;of&nbsp;{data.template.max_supply}</>
+                                label: <>{data.issued_supply}&nbsp;of&nbsp;{data.max_supply}</>
                             }}
                             variant={CoreVariant.light}
                             size={StandardSize.lg}
