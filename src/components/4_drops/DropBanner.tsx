@@ -5,7 +5,7 @@ import { StandardModel } from "../../models/Standard.model";
 import { NFTDisplay, NFTPart } from '../1_core/NFTDisplay';
 import { DropModel } from '../../models/Drop.model';
 import { DropDetails } from './DropDetails';
-import { Theme } from '@mui/material';
+import { Grid, Theme } from '@mui/material';
 export interface DropBannerProps extends StandardModel {
     data: DropModel,
     config: {
@@ -62,13 +62,16 @@ export const DropBanner = ({
     const classes = useStyles();
 
     return (
-        <div className={classes.dropBannerContainer}>
-            <NFTDisplay
-                data={data.immutable_serialized_data}
-                config={config.nft_display}
-                style={{paddingRight: "2em"}}
-            />
-            <DropDetails data={data} config={config.details}/>
-        </div>
+        <Grid container className={classes.dropBannerContainer}>
+            <Grid item xs={12} md={4} lg={3}>
+                <NFTDisplay
+                    data={data.immutable_serialized_data}
+                    config={config.nft_display}
+                />
+            </Grid>
+            <Grid item xs={12} md={8} lg={9}>
+                <DropDetails data={data} config={config.details}/>
+            </Grid>
+        </Grid>
     );
 };

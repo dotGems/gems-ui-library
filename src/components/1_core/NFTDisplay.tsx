@@ -61,6 +61,7 @@ const useStyles = makeStyles({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        margin: "auto"
     },
     mainDisplay: {
         height: '100%',
@@ -88,15 +89,18 @@ const useStyles = makeStyles({
         border: "solid 5px #42a5f5"
     },
     EnlargedBackBtn: {
+        position: "absolute",
         width: "55px",
         left: "32px",
         top: "50%"
     },
     EnlargedForwardBtn: {
+        position: "absolute",
         right: "32px",
         top: "50%"
     },
     EnlargedCloseBtn: {
+        position:"absolute",
         right: "32px",
         top: "32px"
     }
