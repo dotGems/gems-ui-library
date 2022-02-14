@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { makeStyles } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 import { Backdrop, Button } from '@mui/material';
 
 import { StandardModel } from "../../models/Standard.model";
@@ -51,7 +51,7 @@ const defaultConfig = {
     showSelector: true
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     NFTDisplayContainer: {
         // display: 'inline-block'
     },
@@ -86,7 +86,7 @@ const useStyles = makeStyles({
     },
     selectorItemActive: {
         cursor: "pointer",
-        border: "solid 5px #42a5f5"
+        border: `solid 5px ${theme.palette.primary.main}`
     },
     EnlargedBackBtn: {
         position: "absolute",
@@ -104,7 +104,7 @@ const useStyles = makeStyles({
         right: "32px",
         top: "32px"
     }
-});
+}));
 
 /**
  * Displays all parts of an NFT. The user can select which part
@@ -128,7 +128,8 @@ export const NFTDisplay = ({
         NFTPart.video
     ];
 
-    const classes = useStyles();
+    const theme = useTheme();
+    const classes = useStyles(theme);
 
     const [activePart, setActivePart] = useState(config.defaultPart || 'img');
     const providedParts = SUPPORTED_PARTS.filter(item => Object.keys(data).includes(item));

@@ -34,13 +34,13 @@ export interface DropBannerProps extends StandardModel {
 const useStyles = makeStyles((theme:Theme) => ({
     dropBannerContainer: {
         display: 'flex',
-        "@media (max-width: 600px)": {
+        [theme.breakpoints.down('md')]: {
             flexDirection: "column"
         }
     },
     nftDisplay: {
         display: 'flex',
-        "@media (max-width: 600px)": {
+        [theme.breakpoints.down('md')]: {
             flexDirection: "column"
         }
     }

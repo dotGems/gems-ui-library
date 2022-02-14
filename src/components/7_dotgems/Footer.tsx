@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 
 import { StandardModel } from "../../models/Standard.model";
 import { Button, Grid, Typography } from '@mui/material';
@@ -13,9 +13,9 @@ export interface FooterProps extends StandardModel {
   }
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   footer: {
-    borderTop: "4px solid #F3F3F3",
+    borderTop: `4px solid ${theme.palette.grey[50]}`,
     padding: "48px",
   },
   footerLogo: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   },
   footerColumnLink: {
     textDecoration: "none",
-    color: "#6B6B6B",
+    color: theme.palette.grey[600],
     display: "flex",
     flexWrap: "nowrap",
     justifyContent: "flex-start",
@@ -46,10 +46,10 @@ const useStyles = makeStyles({
   footerCopyrights: {
     width: "100%",
     paddingTop: "24px",
-    color: "#C8C8C8",
+    color: theme.palette.grey[500],
     textAlign: "center"
   },
-});
+}));
 
 /**
  * Displays the checkout screen.
@@ -58,7 +58,8 @@ export const Footer = ({
   data
 }: FooterProps) => {
 
-  const classes = useStyles();
+  const theme = useTheme();
+  const classes = useStyles(theme);
 
   const socialLinks = [
     {

@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect } from 'react';
-import { makeStyles } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 import { Typography } from '@mui/material';
 
 import { CoreVariant, StandardCoreModel } from "../../models/StandardCore.model";
@@ -22,7 +22,7 @@ export interface TagProps extends StandardCoreModel {
     config?: TagConfig;
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     tagContainer: {
         width: "fit-content",
         textAlign: "center",
@@ -32,22 +32,22 @@ const useStyles = makeStyles({
         alignItems: "center"
     },
     infoTag: {
-        backgroundColor: "#42a5f5",
+        backgroundColor: theme.palette.primary.main,
         color: "white",
         width: "fit-content",
     },
     successTag: {
-        backgroundColor: "#388e3c",
+        backgroundColor: theme.palette.success.main,
         color: "white",
         width: "fit-content",
     },
     warningTag: {
-        backgroundColor: "#f57c00",
+        backgroundColor: theme.palette.warning.main,
         color: "white",
         width: "fit-content",
     },
     dangerTag: {
-        backgroundColor: "#d32f2f",
+        backgroundColor: theme.palette.error.main,
         color: "white",
         width: "fit-content",
     },
@@ -58,7 +58,7 @@ const useStyles = makeStyles({
     tagIcon: {
         marginRight: "4px"
     }
-});
+}));
 
 const enum TagTypes {
     infoTag = "infoTag",
@@ -90,26 +90,8 @@ export const Tag = ({
     data
 }: TagProps) => {
 
-    const classes = useStyles();
-
-    const a = {
-        backgroundColor: "red",
-        padding: "2em 1em",
-        color: "pink",
-        border: "1px solid black"
-    }
-
-    const b = {
-        backgroundColor: "darkblue",
-        color: "white",
-        fontWeight: "bold",
-        border: "1px solid rgba(0,0,0,0.25)"
-    }
-
-    const c = {
-        color: "black",
-        borderRadius: "30px"
-    }
+    const theme = useTheme();
+    const classes = useStyles(theme);
 
     const getIconSize = (): { fontSize: string } => {
         switch (size) {
