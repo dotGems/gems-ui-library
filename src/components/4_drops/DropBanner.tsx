@@ -37,6 +37,12 @@ const useStyles = makeStyles((theme:Theme) => ({
         "@media (max-width: 600px)": {
             flexDirection: "column"
         }
+    },
+    nftDisplay: {
+        display: 'flex',
+        "@media (max-width: 600px)": {
+            flexDirection: "column"
+        }
     }
 }));
 
@@ -60,7 +66,7 @@ export const DropBanner = ({
             <NFTDisplay
                 data={data.immutable_serialized_data}
                 config={config.nft_display}
-                style={{marginRight: "2em"}}
+                style={{paddingRight: "2em"}}
             />
             <DropDetails data={data} config={config.details}/>
         </div>

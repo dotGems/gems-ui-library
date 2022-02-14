@@ -1,20 +1,21 @@
+
 import React from "react";
 import { Meta, Story } from '@storybook/react';
 
-import { DropActionPanel, DropActionPanelProps } from './DropActionPanel';
+import { DropCard, DropCardProps } from './DropCard';
 import { defaultDrop } from "../../data/mock/drop.mock"; 
-import { StandardSize } from "../../models/Standard.model";
-
+import { StandardSize } from '../../models/Standard.model';
+import { Drop } from './Drop';
 
 const meta: Meta = {
-    title: 'Drops/DropActionPanel',
-    component: DropActionPanel
+    title: 'Drops/Drop',
+    component: Drop
 }
 
 export default meta;
 
 
-const Template: Story<DropActionPanelProps> = (args) => <DropActionPanel {...args} elevation={0}/>;
+const Template: Story<any> = (args) => <Drop {...args} dropId={117} />;
 
 export const Default = Template.bind({});
 Default.args = {
@@ -22,5 +23,5 @@ Default.args = {
     style: {},
     className: undefined,
     data: defaultDrop,
-    // config: {}
+    config: {}
 };

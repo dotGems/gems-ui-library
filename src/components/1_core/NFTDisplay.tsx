@@ -53,7 +53,7 @@ const defaultConfig = {
 
 const useStyles = makeStyles({
     NFTDisplayContainer: {
-        display: 'inline-block'
+        // display: 'inline-block'
     },
     mainDisplayContainer: {
         height: "256px",
@@ -66,17 +66,18 @@ const useStyles = makeStyles({
         height: '100%',
         maxWidth: "100%",
         cursor: "pointer",
-        position: "static",
+        // position: "static",
     },
     enlargedMainDisplay: {
-        height: '100%',
+        height: 'auto',
         maxWidth: "100%",
         margin: "auto"
     },
     selectorContainer: {
         display: "flex",
         justifyContent: "space-around",
-        padding: "4px"
+        padding: "4px",
+        height: "55px"
     },
     selectorItem: {
         cursor: "pointer",
@@ -87,17 +88,15 @@ const useStyles = makeStyles({
         border: "solid 5px #42a5f5"
     },
     EnlargedBackBtn: {
-        position: 'absolute',
+        width: "55px",
         left: "32px",
         top: "50%"
     },
     EnlargedForwardBtn: {
-        position: 'absolute',
         right: "32px",
         top: "50%"
     },
     EnlargedCloseBtn: {
-        position: 'absolute',
         right: "32px",
         top: "32px"
     }
@@ -245,9 +244,9 @@ export const NFTDisplay = ({
             {config.showSelector ? renderSelector() : null}
             <Backdrop open={showEnlarged} style={{zIndex: 1000}}>
                 <Button variant="contained" className={classes.EnlargedBackBtn} onClick={previousPart}><ArrowBackIosIcon /></Button>
-                <Button variant="contained" className={classes.EnlargedForwardBtn} onClick={nextPart}><ArrowForwardIosIcon /></Button>
                 <Button variant="contained" className={classes.EnlargedCloseBtn} endIcon={<CloseIcon/>} onClick={() => setShowEnlarged(false)}>Close</Button>
                 {renderMainDisplay(true)}
+                <Button variant="contained" className={classes.EnlargedForwardBtn} onClick={nextPart}><ArrowForwardIosIcon /></Button>
             </Backdrop>
         </div>
     );

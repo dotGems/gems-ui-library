@@ -39,6 +39,7 @@
     "@mui/styles": "^5.2.0",
     "anchor-link": "^3.3.5",
     "anchor-link-browser-transport": "^3.2.5",
+    "axios": "^0.26.0",
     "eosjs": "^22.1.0",
     "isomorphic-fetch": "^3.0.0",
     "scatter-ts": "^0.1.9",
