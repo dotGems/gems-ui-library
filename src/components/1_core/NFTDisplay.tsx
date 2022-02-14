@@ -173,6 +173,7 @@ export const NFTDisplay = ({
                 {providedParts.map((part) => {
                     if (SUPPORTED_PARTS.includes(part)) {
                         return <img
+                            key={part}
                             className={activePart.indexOf(part) !== -1 && activePart.length === part.length ? classes.selectorItemActive : classes.selectorItem}
                             src={`${IPFS_SOURCE}${data[getSelectorPartImg(part)]}?size=700`}
                             onError={(event: any) => event.target.src = `${IPFS_SOURCE_FALLBACK}${data[getSelectorPartImg(part)]}`}

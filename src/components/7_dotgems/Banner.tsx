@@ -10,12 +10,10 @@ import { /* Theme, */ useMediaQuery } from '@mui/material';
 
 const useStyles = makeStyles((/*theme: Theme*/) => ({
     card: {
-
         padding: "16px",
-        borderRadius: "25px",
         // background: "#011B4D",
         color: "#FFF",
-        width: "750px",
+        width: "100%",
         backgroundImage: "linear-gradient(140deg, #021b4d , #2435a9)",
         // [theme.breakpoints.down("xs")]: {
         //     display: "none"
@@ -23,7 +21,6 @@ const useStyles = makeStyles((/*theme: Theme*/) => ({
     },
     cardMobile: {
         padding: "16px",
-        borderRadius: "25px",
         // background: "#011B4D",
         color: "#FFF",
         // width: "700px",
@@ -43,7 +40,6 @@ const useStyles = makeStyles((/*theme: Theme*/) => ({
     },
     cardImage: {
         // backgroundColor: "#FFF",
-        borderRadius: "18px",
         objectFit: "cover",
         width: "100%",
     },

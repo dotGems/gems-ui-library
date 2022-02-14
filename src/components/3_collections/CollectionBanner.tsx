@@ -43,11 +43,11 @@ export const CollectionBanner = ({
 
     return (
         <div className={classes.collectionBanner} style={style}>
-            <MuiGrid container direction="row">
-                <MuiGrid item xs={12} md={3} direction="column">
-                    <img src={`${IPFS_SOURCE}${data.deserialized.img}`} className={classes.collectionImg} />
+            <MuiGrid container>
+                <MuiGrid item xs={12} md={3} container direction="column">
+                    <img src={`${IPFS_SOURCE}${data.deserialized.img}?size=700`} className={classes.collectionImg} />
                 </MuiGrid>
-                <MuiGrid item xs={12} md={9} className={classes.collectionInfo} direction="column">
+                <MuiGrid item xs={12} md={9} className={classes.collectionInfo} container direction="column">
                     <CollectionDetails data={data} config={config} variant={variant} size={size}/>
                 </MuiGrid>
             </MuiGrid>

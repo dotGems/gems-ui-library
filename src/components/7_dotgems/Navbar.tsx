@@ -1,6 +1,8 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
+
 import { IconButton, Menu, MenuItem } from '@mui/material';
+
 import MenuIcon from '@mui/icons-material/Menu';
 import { Box } from '@mui/system';
 
@@ -20,7 +22,7 @@ export interface NavbarProps {
   }
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   navContainer: {
     position: 'absolute',
     top: 0,
@@ -46,11 +48,14 @@ const useStyles = makeStyles({
     right: 0,
     padding: '15px 30px',
     boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+    [theme.breakpoints.up('md')]: {
+      display: "none"
+    }
   },
   navLogo: {
     height: "50px"
   }
-});
+}));
 
 const defaultConfig = {
   hasShadow: true
@@ -68,7 +73,8 @@ export const Navbar = ({
   config = defaultConfig
 }: NavbarProps) => {
 
-  const classes = useStyles();
+  const theme = useTheme();
+  const classes = useStyles(theme);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event: any) => {
@@ -108,7 +114,7 @@ export const Navbar = ({
           open={Boolean(anchorElNav)}
           onClose={handleCloseNavMenu}
         >
-          {data?.links?.map((link) => <MenuItem onClick={link.onClick}>{link.label}</MenuItem>)}
+          {data?.links?.map((link) => <MenuItem key={link.label} onClick={link.onClick}>{link.label}</MenuItem>)}
         </Menu>
       </Box> : null}
     </nav>

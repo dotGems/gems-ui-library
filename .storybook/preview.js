@@ -1,5 +1,4 @@
-import { DotGemsProvider } from "../src/components/1_core/DotGemsContext";
-import { defaultContext } from "../src/data/mock/context.mock";
+import { DotGemsWrapper } from "../src/components/1_core/DotGemsWrapper";
 
 // https://storybook.js.org/docs/react/writing-stories/parameters#global-parameters
 export const parameters = {
@@ -11,8 +10,8 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <DotGemsProvider value={defaultContext}>
+    <DotGemsWrapper>
       <Story/>
-    </DotGemsProvider>
+    </DotGemsWrapper>
   ),
 ];

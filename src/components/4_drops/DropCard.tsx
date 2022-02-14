@@ -109,10 +109,15 @@ export const DropCard = ({
 
     const renderPrice = () => {
         let splitListingPrice = splitPriceAndCurrency(data.listing_price);
-        return (<div>
-            <Typography variant="body1" style={{ fontSize: "2em", fontWeight: "bold", marginRight: "0.25em", display: "inline-block" }}>{splitListingPrice[0]}</Typography>
-            <Typography variant="body2" color="#A5A5A5" style={{ display: "inline-block" }}>{splitListingPrice[1]}</Typography>
-        </div>)
+        if(splitListingPrice && splitListingPrice.length === 2) {
+            return (<div>
+                <Typography variant="body1" style={{ fontSize: "2em", fontWeight: "bold", marginRight: "0.25em", display: "inline-block" }}>{splitListingPrice[0]}</Typography>
+                <Typography variant="body2" color="#A5A5A5" style={{ display: "inline-block" }}>{splitListingPrice[1]}</Typography>
+            </div>)
+        } else {
+            console.warn('Unable to render price.');
+            return null;
+        }
     }
 
     return (
