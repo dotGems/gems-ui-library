@@ -34,9 +34,9 @@
   "dependencies": {
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
-    "@mui/icons-material": "^5.2.0",
-    "@mui/material": "^5.2.0",
-    "@mui/styles": "^5.2.0",
+    "@mui/icons-material": "5.1.1",
+    "@mui/material": "5.1.1",
+    "@mui/styles": "5.1.1",
     "anchor-link": "^3.3.5",
     "anchor-link-browser-transport": "^3.2.5",
     "axios": "^0.26.0",
