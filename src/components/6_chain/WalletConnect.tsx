@@ -45,6 +45,9 @@ const useStyles = makeStyles({
         justifyContent: "flex-start",
         alignItems: "center"
     },
+    networkItem: {
+        justifyContent: "center",
+    },
     mrsm: {
         marginRight: "8px"
     },
@@ -178,14 +181,11 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={selectedNetwork}
-                    label="Age"
                     onChange={handleNetworkSelectEvent}
-                    style={{ minWidth: "200px" }}
                 >
                     {dotGemsCtx.config.chain.supported_networks.map((network: NetworkModel) => {
-                        return <MenuItem value={network.blockchain}>
-                            <img src={network.icon} height={"18px"} className={classes.mrsm} style={{ display: "inline-block" }} />
-                            <div style={{ display: "inline-block" }}>{network.blockchain.toUpperCase()}</div>
+                        return <MenuItem value={network.blockchain} className={classes.networkItem}>
+                            <img src={network.icon} height={"18px"} style={{ display: "inline-block" }} />
                         </MenuItem>
                     })}
                 </Select>
