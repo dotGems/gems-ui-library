@@ -35,6 +35,8 @@ export * from "./components/6_chain/WalletConnect";
 
 // DOTGEMS ====================================================================
 // export * from "./components/7_dotgems/Banner";
+export * from "./components/7_dotgems/Footer";
+export * from "./components/7_dotgems/Navbar";
 
 // UTILS ======================================================================
 export * from "./components/9_utils/AsyncImage";
