@@ -1,3 +1,16 @@
+# v0.1.6 (Tue Feb 14 2022)
+
+- Various UI Fixes
+- Various Build Fixes
+- Updated data model to better match SDK responses
+- Added Countdown Timer, Footer and Navbar components
+- Other Small Fixes
+
+#### Authors: 3
+
+- DominicF96 ([@DominicF96](https://github.com/DominicF96))
+- Mellowjay ([@mellowjayb](https://github.com/mellowjayb))
+
 # v0.1.5 (Tue Feb 14 2022)
 
 - Various UI Fixes
@@ -7,7 +20,7 @@
 
 #### Authors: 3
 
-- Dominic Fournier ([@DominicF96](https://github.com/DominicF96))
+- DominicF96 ([@DominicF96](https://github.com/DominicF96))
 - Denis ([@DenisCarriere](https://github.com/DenisCarriere))
 - Mellowjay ([@mellowjayb](https://github.com/mellowjayb))
 
@@ -17,7 +30,7 @@
 
 #### Authors: 1
 
-- Dominic Fournier ([@DominicF96](https://github.com/DominicF96))
+- DominicF96 ([@DominicF96](https://github.com/DominicF96))
 
 # v0.1.0 (Wed Feb 02 2022)
 
@@ -25,6 +38,6 @@
 
 #### Authors: 3
 
-- Dominic Fournier ([@DominicF96](https://github.com/DominicF96))
+- DominicF96 ([@DominicF96](https://github.com/DominicF96))
 - Denis ([@DenisCarriere](https://github.com/DenisCarriere))
 - Mellowjay ([@mellowjayb](https://github.com/mellowjayb))
