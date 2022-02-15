@@ -1,5 +1,5 @@
 import { NetworkModel } from "./Network.model";
-import { StandardVariant } from "./Standard.model";
+import { AVAILABLE_THEMES } from "../data/constants/themes";
 import { SupportedWallet, WalletModel } from "./Wallet.model";
 
 export interface ContextModel {
@@ -19,6 +19,6 @@ export interface ContextModel {
     }
     style?: {
         palette?: {},
-        variant?: StandardVariant
+        variant?: typeof AVAILABLE_THEMES
     }
 }
