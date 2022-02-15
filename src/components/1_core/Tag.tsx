@@ -25,7 +25,7 @@ export interface TagProps extends StandardCoreModel {
 const useStyles = makeStyles((theme) => ({
     tagContainer: {
         width: "fit-content",
-        textAlign: "center",
+        textAlign: "left",
         padding: "4px 16px",
         display: "flex",
         justifyContent: "center",

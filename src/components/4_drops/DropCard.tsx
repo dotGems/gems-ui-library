@@ -14,6 +14,7 @@ import { splitPriceAndCurrency } from "../../common/data";
 import DotGemsContext from '../1_core/DotGemsContext';
 import { QtyControl, defaultConfig as qtyConfig } from '../1_core/QtyControl';
 import { CoreVariant } from '../../models/StandardCore.model';
+import { textAlign } from '@mui/system';
 
 export enum DropCardOrientation {
     horizontal = "horizontal",
