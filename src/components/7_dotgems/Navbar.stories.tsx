@@ -4,8 +4,8 @@ import { Meta, Story } from '@storybook/react';
 import { Navbar, NavbarProps } from './Navbar';
 
 const meta: Meta = {
-    title: 'dotGems/Navbar',
-    component: Navbar
+  title: 'dotGems/Navbar',
+  component: Navbar
 }
 
 export default meta;
@@ -19,12 +19,31 @@ Default.args = {
       src: '/img/dotGems_logo.png',
       alt: 'dotGems Logo',
     },
-    links: [{
-      label: "Hello",
-      onClick: () => console.log("Hello")
-    }]
+    links: [
+      {
+        id: "discover",
+        label: "Discover",
+        onClick: () => console.log("Discover")
+      },
+      {
+        id: "drops",
+        label: "Drops",
+        onClick: () => console.log("Drops")
+      },
+      {
+        id: "market",
+        label: "Market",
+        onClick: () => console.log("Market")
+      },
+      {
+        id: "constructs",
+        label: "Constructs",
+        onClick: () => console.log("Constructs")
+      },
+    ],
+    activeLink: "discover",
   },
   config: {
-      hasShadow: true
+    hasShadow: true
   }
 }

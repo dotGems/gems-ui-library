@@ -1,6 +1,6 @@
 
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { makeStyles } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 import {
     Backdrop,
     Badge,
@@ -39,7 +39,7 @@ import { WALLET_BUTTONS } from '../../data/constants/wallets';
 
 export interface WalletConnectProps extends StandardModel { }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     walletConnectContainer: {
         display: 'flex',
         justifyContent: "flex-start",
@@ -52,7 +52,8 @@ const useStyles = makeStyles({
         marginRight: "8px"
     },
     connectText: {
-        display: "inline-block"
+        display: "inline-block",
+        whiteSpace: "nowrap"
     },
     networksContainer: {
         display: "flex",
@@ -89,15 +90,16 @@ const useStyles = makeStyles({
     dangerMenuItem: {
         color: "#f44336"
     }
-});
+}));
 
 /**
  * Displays a modal to allow users to connect their
  * compatible wallet.
  */
-export const WalletConnect = ({ }: WalletConnectProps) => {
+export const WalletConnect = ({ className }: WalletConnectProps) => {
 
-    const classes = useStyles();
+    const theme = useTheme();
+    const classes = useStyles(theme);
 
     const dotGemsCtx = useContext(DotGemsContext);
     const [isConnectWalletOpen, setIsConnectWalletOpen] = useState(false);
@@ -174,22 +176,22 @@ export const WalletConnect = ({ }: WalletConnectProps) => {
 
     return (<>
         {/*============================= BUTTONS ========================== */}
-        <FormControl>
+        <FormControl className={className}>
             <div className={classes.walletConnectContainer}>
                 <Select
-                    variant='filled'
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
+                    id="network-select"
                     value={selectedNetwork}
                     onChange={handleNetworkSelectEvent}
+                    size="small"
+                    className={classes.mrsm}
                 >
                     {dotGemsCtx.config.chain.supported_networks.map((network: NetworkModel) => {
-                        return <MenuItem value={network.blockchain} className={classes.networkItem}>
-                            <img src={network.icon} height={"18px"} style={{ display: "inline-block" }} />
+                        return <MenuItem key={network.blockchain} value={network.blockchain} className={classes.networkItem}>
+                            <img src={network.icon} height={"32px"} style={{ display: "inline-block" }} />
                         </MenuItem>
                     })}
                 </Select>
-                <Button onClick={handleWalletButtonClick}>
+                <Button onClick={handleWalletButtonClick} className={classes.mrsm}>
                     <AccountBalanceWalletIcon className={classes.mrsm} /><Typography className={classes.connectText} variant="body1">{walletData ? walletData.linkedAccount : "Connect Wallet"}</Typography>
                 </Button>
                 <Button>
