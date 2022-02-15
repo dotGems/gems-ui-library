@@ -86,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
     },
     selectorItemActive: {
         cursor: "pointer",
-        border: `solid 5px ${theme.palette.primary.main}`
+        border: `solid 5px #1976d2`
     },
     EnlargedBackBtn: {
         position: "absolute",
