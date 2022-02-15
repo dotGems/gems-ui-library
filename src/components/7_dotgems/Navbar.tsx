@@ -5,9 +5,10 @@ import { Button, IconButton, Menu, MenuItem } from '@mui/material';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import { Box } from '@mui/system';
-import { WalletConnect } from '../..';
+import { StandardModel } from '../../models/Standard.model';
+import { WalletConnect } from '../6_chain/WalletConnect';
 
-export interface NavbarProps {
+export interface NavbarProps extends StandardModel {
   data: {
     logo: {
       src: string,
