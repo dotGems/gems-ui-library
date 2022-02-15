@@ -19,6 +19,6 @@ export interface ContextModel {
     }
     style?: {
         palette?: {},
-        variant?: typeof AVAILABLE_THEMES
+        variant?: string
     }
 }
