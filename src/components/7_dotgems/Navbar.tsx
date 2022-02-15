@@ -108,7 +108,7 @@ export const Navbar = ({
       <Button
         key={link.id}
         size="large"
-        onClick={link.onClick}
+        onClick={() => link.onClick}
         className={data?.activeLink?.indexOf(link.id) !== -1 && data?.activeLink?.length === link.id.length ? classes.activeLink : classes.inactiveLink}
       >
         {link.label}
@@ -146,7 +146,7 @@ export const Navbar = ({
       >
         {data?.links?.map((link) => <MenuItem
           key={link.label}
-          onClick={link.onClick}
+          onClick={() => link.onClick}
           className={data?.activeLink?.indexOf(link.id) !== -1 && data?.activeLink?.length === link.id.length ? classes.activeLink : classes.inactiveLink}
         >
           {link.label}
@@ -166,7 +166,7 @@ export const Navbar = ({
     </nav>
     {/*Bottom nav shows in mobile*/}
     <nav className={classes.navBottom}>
-      <WalletConnect className={classes.mobileWalletConnect}/>
+      <WalletConnect />
     </nav>
   </div>);
 }
