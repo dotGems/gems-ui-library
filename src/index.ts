@@ -3,6 +3,7 @@ export * from "./components/1_core/Avatar";
 export * from "./components/1_core/Button";
 export * from "./components/1_core/Card";
 export * from "./components/1_core/DotGemsContext";
+export * from "./components/1_core/DotGemsWrapper";
 // export * from "./components/1_core/Drawer";
 // export * from "./components/1_core/ItemList";
 export * from "./components/1_core/NFTDisplay";

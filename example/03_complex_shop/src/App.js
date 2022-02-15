@@ -1,11 +1,13 @@
-import { Navbar } from "@dotgems/react";
+import { Navbar, DotGemsWrapper } from "@dotgems/react";
 
 import './App.scss';
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      <DotGemsWrapper>
+        <Navbar />
+      </DotGemsWrapper>
     </div>
   );
 }
