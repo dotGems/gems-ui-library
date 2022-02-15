@@ -9,9 +9,9 @@ import { Box, Card, CircularProgress, Theme } from '@mui/material';
 import { DropActionPanel } from './DropActionPanel';
 import { DropBanner } from './DropBanner';
 import dropAPIs from '../../data/services/drop';
+import CountdownTimer from '../1_core/CountDownTimer';
 
 export interface DropProps extends StandardModel {
-    data?: DropModel,
     config?: {
         nft_display: {
             defaultPart: NFTPart,
@@ -48,14 +48,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export const Drop = (dropId:number) => {
+export const Drop = ({dropId}:DropProps) => {
     const classes = useStyles();
-    const [startTime, setStartTime] = useState();
+    const [startTime, setStartTime] = useState(0);
     const [data, setData] = useState<DropModel>();
     // const classes = useStyles();
 
     
     useEffect(() => {
+        console.log(dropId);
       dropAPIs.getDropInfo().then((resp:any) => {
             resp.data.rows.forEach((item:any) => {
                 if(item.drop_id === dropId){
@@ -100,14 +101,18 @@ export const Drop = (dropId:number) => {
         }
     }
 
-    return (
-        (data ?  
+    return (data ?  
             <div className={classes.root} style={{ margin: "8px", display:"contents" }}>
                 <Card style={{ borderRadius:"25px", margin: "auto", display: "flex", maxWidth: "1040px", padding:"24px"}}>
                     <DropBanner data={data} config={dropConfig}/>
                 </Card>
-                {/* <DropActionPanel data={data}/> */}
+                <Card style={{ display:"flex", flexDirection:"column", borderRadius:"25px", margin: "25px auto", maxWidth: "1040px", alignItems: "center", justifyContent: "center", padding:"24px"}}>
+                    <CountdownTimer startTime={startTime} title={"DROPPING SOON!"}/>
+                    <DropActionPanel data={data} elevation={0}/>
+                </Card>
             </div> 
-        :  <Box sx={{ display: 'flex' }}><CircularProgress />{ data ? <DropActionPanel data={data}/> : <></>}</Box>)
-    );
+        :   <Box sx={{ display: 'flex', justifyContent:"center" }}>
+                <CircularProgress />
+            </Box>
+    )
 };

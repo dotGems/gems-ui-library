@@ -15,7 +15,7 @@ const meta: Meta = {
 export default meta;
 
 
-const Template: Story<any> = (args) => <Drop {...args} dropId={117} />;
+const Template: Story<any> = (args) => <Drop {...args} dropId={118} />;
 
 export const Default = Template.bind({});
 Default.args = {

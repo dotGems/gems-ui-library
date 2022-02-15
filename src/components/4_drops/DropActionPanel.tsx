@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
 import { makeStyles } from '@mui/styles';
-import { Card, Grid, Typography } from '@mui/material';
+import { Card, Grid, Typography, Button } from '@mui/material';
 
 import { StandardModel, StandardSize } from "../../models/Standard.model";
 import { DropModel } from '../../models/Drop.model';
 import { IPFS_SOURCE, IPFS_SOURCE_FALLBACK } from '../../data/constants/urls';
-import { Button } from '../1_core/Button';
 import { splitPriceAndCurrency } from "../../common/data";
 import DotGemsContext from '../1_core/DotGemsContext';
 import { QtyControl, defaultConfig as qtyConfig } from '../1_core/QtyControl';
@@ -42,6 +41,15 @@ const useStyles = makeStyles({
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center"
+    },
+    buyButton : {
+        fontSize:"16px",
+        "@media (max-width: 599px)": {
+            padding:"8px 25px", 
+        },
+        "@media (min-width: 600px)": {
+            padding:"8px 48px",
+        }
     }
 });
 
@@ -114,7 +122,7 @@ export const DropActionPanel = ({
                 </Grid>
                 <Grid item xs={12} md={6} style={{ display:"flex", flexDirection:"row", justifyContent:"flex-end" }}>
                     <div style={{ margin:"auto 16px" }}>
-                        <Button label="Buy Now" variant='contained' style={{ padding:"8px 48px", fontSize:"16px" }} onClick={buyNow}/>
+                        <Button variant='contained' className={classes.buyButton} onClick={buyNow}>Buy Now</Button>
                     </div>
                     <QtyControl 
                         config={{
