@@ -1,6 +1,6 @@
 {
   "name": "@dotgems/react",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": ".gems NFT UI library",
   "license": "BSD-3-Clause",
   "main": "dist/index.js",
