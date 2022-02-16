@@ -8,36 +8,29 @@ import { Box } from '@mui/system';
 import { StandardModel } from '../../models/Standard.model';
 import { WalletConnect } from '../6_chain/WalletConnect';
 
+export interface NavbarLinks {
+  id: string,
+  label: string,
+  onClick: Function,
+}
+
 export interface NavbarProps extends StandardModel {
   data: {
     logo: {
       src: string,
       alt: string
     },
-    links?: Array<{
-      id: string,
-      label: string,
-      onClick: Function,
-    }>,
-    activeLink: string,
+    links?: Array<NavbarLinks>,
   },
   config?: {
     hasShadow: boolean
-  }
+  },
+  activeLink: string,
 }
 
 const useStyles = makeStyles((theme) => ({
-  navContainer: {
-    position: 'absolute',
-    overflow: "hidden",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: 1000,
-  },
   navTop: {
-    position: 'absolute',
+    position: 'fixed',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -46,6 +39,8 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     padding: '15px 30px',
     boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+    zIndex: 1000,
+    backgroundColor: "white"
   },
   navLogo: {
     height: "50px",
@@ -63,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "uppercase",
   },
   navBottom: {
-    position: 'absolute',
+    position: 'fixed',
     overflow: "hidden",
     bottom: 0,
     left: 0,
@@ -72,7 +67,9 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
     [theme.breakpoints.up('md')]: {
       display: "none"
-    }
+    },
+    zIndex: 1000,
+    backgroundColor: "white"
   }
 }));
 
@@ -89,6 +86,7 @@ const defaultConfig = {
 export const Navbar = ({
   className,
   data,
+  activeLink,
   config = defaultConfig
 }: NavbarProps) => {
 
@@ -104,13 +102,20 @@ export const Navbar = ({
     setAnchorElNav(null);
   };
 
+  const getLinkClass = (link: NavbarLinks) => {
+    if (activeLink && activeLink.indexOf(link.id) !== -1 && activeLink.length === link.id.length) {
+      return classes.activeLink;
+    }
+    return classes.inactiveLink;
+  }
+
   const renderDesktopLinks = () => (<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'block' } }}>
     {data?.links?.map((link) => (
       <Button
         key={link.id}
         size="large"
-        onClick={() => link.onClick}
-        className={data?.activeLink?.indexOf(link.id) !== -1 && data?.activeLink?.length === link.id.length ? classes.activeLink : classes.inactiveLink}
+        onClick={() => link.onClick()}
+        className={getLinkClass(link)}
       >
         {link.label}
       </Button>
@@ -147,8 +152,8 @@ export const Navbar = ({
       >
         {data?.links?.map((link) => <MenuItem
           key={link.label}
-          onClick={() => link.onClick}
-          className={data?.activeLink?.indexOf(link.id) !== -1 && data?.activeLink?.length === link.id.length ? classes.activeLink : classes.inactiveLink}
+          onClick={() => link.onClick()}
+          className={getLinkClass(link)}
         >
           {link.label}
         </MenuItem>)}
@@ -156,18 +161,22 @@ export const Navbar = ({
     </Box>
   );
 
-  return (<div className={classes.navContainer}>
+  return (<>
     <nav className={classes.navTop}>
-      <img className={classes.navLogo} src={data.logo.src} alt={data.logo.alt} />
-      {renderDesktopLinks()}
-      <Box sx={{display: { xs: 'none', md: 'block' } }}>
-        <WalletConnect/>
-      </Box>
-      {renderMobileLinks()}
+      <div style={{ display: "flex", justifyContent: "flex-start" }}>
+        <img className={classes.navLogo} src={data.logo.src} alt={data.logo.alt} />
+        {renderDesktopLinks()}
+      </div>
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+          <WalletConnect />
+        </Box>
+        {renderMobileLinks()}
+      </div>
     </nav>
     {/*Bottom nav shows in mobile*/}
     <nav className={classes.navBottom}>
       <WalletConnect />
     </nav>
-  </div>);
+  </>);
 }

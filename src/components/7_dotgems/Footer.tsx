@@ -15,6 +15,7 @@ export interface FooterProps extends StandardModel {
 
 const useStyles = makeStyles((theme) => ({
   footer: {
+    marginTop: "auto",
     borderTop: `4px solid ${theme.palette.grey[50]}`,
     padding: "48px",
   },
@@ -46,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
   footerCopyrights: {
     width: "100%",
     paddingTop: "24px",
+    paddingBottom: "100px",
     color: theme.palette.grey[500],
     textAlign: "center"
   },

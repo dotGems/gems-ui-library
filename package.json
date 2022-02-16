@@ -43,6 +43,7 @@
     "eosjs": "^22.1.0",
     "isomorphic-fetch": "^3.0.0",
     "moment": "^2.29.1",
+    "react": "^17.0.2",
     "scatter-ts": "^0.1.9",
     "swiper": "^7.3.1"
   },
@@ -60,7 +61,6 @@
     "babel-loader": "^8.2.3",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
-    "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
     "size-limit": "^7.0.3",

@@ -41,9 +41,9 @@ Default.args = {
         onClick: () => console.log("Constructs")
       },
     ],
-    activeLink: "discover",
   },
   config: {
     hasShadow: true
-  }
+  },
+  activeLink: "discover",
 }
