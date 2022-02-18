@@ -192,7 +192,7 @@ export const WalletConnect = ({ className }: WalletConnectProps) => {
                     })}
                 </Select>
                 <Button onClick={handleWalletButtonClick} className={classes.mrsm}>
-                    <AccountBalanceWalletIcon className={classes.mrsm} /><Typography className={classes.connectText} variant="body1">{walletData ? walletData.linkedAccount : "Connect Wallet"}</Typography>
+                    <AccountBalanceWalletIcon className={classes.mrsm} /><Typography className={classes.connectText} variant="body1">{walletData ? walletData.linkedAccount : "Connect"}</Typography>
                 </Button>
                 <Button>
                     <SettingsIcon />

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
-
-import { Button, IconButton, Menu, MenuItem } from '@mui/material';
-
+import { Button, Drawer, IconButton, Menu, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import { Box } from '@mui/system';
+
 import { StandardModel } from '../../models/Standard.model';
 import { WalletConnect } from '../6_chain/WalletConnect';
 
@@ -45,6 +45,14 @@ const useStyles = makeStyles((theme) => ({
   navLogo: {
     height: "50px",
     marginRight: "48px",
+  },
+  mobileNavDrawer: {
+    zIndex: "800 !important"
+  },
+  mobileNavDrawerContent: {
+    padding: "90px 24px",
+    display: "flex",
+    flexDirection: "column"
   },
   activeLink: {
     fontWeight: "bold",
@@ -92,14 +100,14 @@ export const Navbar = ({
 
   const theme = useTheme();
   const classes = useStyles(theme);
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  // const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
 
-  const handleOpenNavMenu = (event: any) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+  const toggleDrawer = (open: boolean) => (event: any) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setIsMobileDrawerOpen(open);
   };
 
   const getLinkClass = (link: NavbarLinks) => {
@@ -130,12 +138,34 @@ export const Navbar = ({
         aria-label="account of current user"
         aria-controls="menu-appbar"
         aria-haspopup="true"
-        onClick={handleOpenNavMenu}
+        onClick={toggleDrawer(!isMobileDrawerOpen)}
         color="inherit"
       >
-        <MenuIcon />
+        {isMobileDrawerOpen ? <CloseIcon /> : <MenuIcon />}
       </IconButton>
-      <Menu
+      <Drawer
+        anchor={'right'}
+        draggable={true}
+        className={classes.mobileNavDrawer}
+        open={isMobileDrawerOpen}
+        onClose={toggleDrawer(false)}>
+        <div className={classes.mobileNavDrawerContent}>
+          {data?.links?.map((link) => (
+            <Button
+              key={link.id}
+              size="large"
+              onClick={() => {
+                toggleDrawer(false);
+                link.onClick();
+              }}
+              className={getLinkClass(link)}
+            >
+              {link.label}
+            </Button>
+          ))}
+        </div>
+      </Drawer>
+      {/* <Menu
         id="nav-appbar"
         anchorEl={anchorElNav}
         anchorOrigin={{
@@ -157,7 +187,7 @@ export const Navbar = ({
         >
           {link.label}
         </MenuItem>)}
-      </Menu>
+      </Menu> */}
     </Box>
   );
 

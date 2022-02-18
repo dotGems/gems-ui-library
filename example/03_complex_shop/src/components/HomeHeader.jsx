@@ -25,7 +25,7 @@ export default function HomeHeader() {
         </Grid>
         <Grid item xs={12} md={8}>
           <Box display={{ xs: "none", md: "block" }}>
-            <img style={{marginTop: "32px", width: "100%"}} src="/img/highlight.png" alt="dotGems Highlighted NFTs"/>
+            <img style={{marginTop: "-72px", width: "125%"}} src="/img/highlight.png" alt="dotGems Highlighted NFTs"/>
           </Box>
         </Grid>
       </Grid>
