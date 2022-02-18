@@ -24,6 +24,17 @@ export const splitPriceAndCurrency = (listingPrice: string) : Array<string> => {
 }
 
 /**
+ * Formats a given price with a specified number of decimals.
+ * 
+ * @param price Price of the item 
+ * @param decimals Number of desired decimals
+ * @returns Formatted price (with decimals)
+ */
+export const formatPriceDecimals = (price: number, decimals: number) : string => {
+    return price.toFixed(decimals);
+}
+
+/**
  * Utility function to copy some data to the user's clipboard.
  * A callback function can be provided to chain logic.
  *

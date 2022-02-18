@@ -1,6 +1,5 @@
 // CORE =======================================================================
 export * from "./components/1_core/Avatar";
-export * from "./components/1_core/Button";
 export * from "./components/1_core/Card";
 export * from "./components/1_core/DotGemsContext";
 export * from "./components/1_core/DotGemsWrapper";
@@ -35,9 +34,12 @@ export * from "./components/6_chain/WalletConnect";
 // export * from "./components/6_chain/WalletSelect";
 
 // DOTGEMS ====================================================================
-export * from "./components/7_dotgems/Banner";
+// export * from "./components/7_dotgems/Banner";
 export * from "./components/7_dotgems/Footer";
 export * from "./components/7_dotgems/Navbar";
 
 // UTILS ======================================================================
-export * from "./components/9_utils/AsyncImage";
+// export * from "./components/9_utils/AsyncImage";
+
+// SERVICES ===================================================================
+export { default as DropService } from "./data/services/drop";

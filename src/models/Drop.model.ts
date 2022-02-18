@@ -27,7 +27,17 @@
 
 // Drop Data (atomichub) + Collection Data
 export interface DropModel {
+    drop_id: number,
+    schema_name: string,
+    collection_name: string,
+    listing_price: string,
+    settlement_symbol: string,
+    price_recipient: string,
+    fee_rate: string,
     burnable: boolean,
+    transferable: boolean,
+    start_time: number,
+    end_time: number,
     immutable_serialized_data: {
         name: string,
         img: string,
@@ -40,26 +50,16 @@ export interface DropModel {
         cardimg?: string
     },
     issued_supply: number,
+    current_claimed: number,
     max_supply: number,
-    schema_name: string,
     template_id: number,
-    transferable: boolean,
-    drop_id: number,
-    collection_name: string,
+    account_limit: number,
+    account_limit_cooldown: number,
+    max_claimable: number,
     assets_to_mint: Array<{
         template_id: number,
         tokens_to_back: Array<string>
     }>,
-    listing_price: string,
-    settlement_symbol: string,
-    price_recipient: string,
-    fee_rate: string,
     auth_required: number,
-    account_limit: number,
-    account_limit_cooldown: number,
-    max_claimable: number,
-    current_claimed: number,
-    start_time: number,
-    end_time: number,
     display_data: string
 }

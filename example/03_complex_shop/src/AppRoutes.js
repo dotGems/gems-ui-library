@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar, Footer } from "@dotgems/react";
 import {
   Switch,
@@ -12,75 +12,53 @@ import Drops from './pages/Drops';
 import Market from './pages/Market';
 import Constructs from './pages/Constructs';
 
+import footerData from './data/footer.data';
+import navbarData from './data/navbar.data';
+
 function AppRoutes() {
 
+  let history = useHistory();
+  const [activeLink, setActiveLink] = useState('discover'); 
 
-  const navbarData = {
-    logo: {
-      src: "/img/dotGems_logo.png",
-      alt: "dotGems Logo"
-    },
-    links: [
-      {
-        id: "discover",
-        label: "Discover",
-        onClick: () => setAndPrintLink('discover'),
-      },
-      {
-        id: "drops",
-        label: "Drops",
-        onClick: () => setAndPrintLink('drops'),
-      },
-      {
-        id: "market",
-        label: "Market",
-        onClick: () => setAndPrintLink('market'),
-      },
-      {
-        id: "constructs",
-        label: "Constructs",
-        onClick: () => setAndPrintLink('constructs'),
-      },
-    ]
-  };
+  const pushRouteAndSetActive = (link) => {
+    history.push(link);
+    setActiveLink(link);
+  }
 
-const footerData = {
-  logo: {
-    src: '/img/dotGems_logo.png',
-    alt: 'dotGems Logo',
-  },
-}
+  let navbarDataCombined = {
+    logo: {...navbarData.logo},
+    links: navbarData.links.map((link) => {
+      return {
+        ...link,
+        onClick: () => pushRouteAndSetActive(link.id)
+      }
+    })
+  }
 
-let history = useHistory();
-const [activeLink, setActiveLink] = useState('discover'); 
-
-const setAndPrintLink = (link) => {
-  history.push(link);
-  setActiveLink(link);
-}
+  useEffect(() => []);
 
   return (
     <div>
-      <Navbar data={navbarData} activeLink={activeLink}/>
-    <div style={{maxWidth: "1000px", margin: "86px auto"}}>
-      <Switch>
-        <Route path="/discover">
-          <Home/>
-        </Route>
-        <Route path="/drops">
-          <Drops/>
-        </Route>
-        <Route path="/market">
-          <Market/>
-        </Route>
-        <Route path="/constructs">
-          <Constructs/>
-        </Route>
-        <Route path="/">
-          <Home/>
-        </Route>
-      </Switch>
-    </div>
+      <Navbar data={navbarDataCombined} activeLink={activeLink}/>
+      <div style={{maxWidth: "1000px", margin: "120px auto"}}>
+        <Switch>
+          <Route path="/discover">
+            <Home/>
+          </Route>
+          <Route path="/drops">
+            <Drops/>
+          </Route>
+          <Route path="/market">
+            <Market/>
+          </Route>
+          <Route path="/constructs">
+            <Constructs/>
+          </Route>
+          <Route path="/">
+            <Home/>
+          </Route>
+        </Switch>
+      </div>
     <Footer data={footerData}/>
     </div>
   )

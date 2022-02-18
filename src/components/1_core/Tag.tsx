@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
         padding: "4px 16px",
         display: "flex",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "flex-start"
     },
     infoTag: {
         backgroundColor: theme.palette.primary.main,

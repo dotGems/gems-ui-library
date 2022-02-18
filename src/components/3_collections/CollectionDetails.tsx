@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@mui/styles';
-import { IconButton, Snackbar, Typography } from '@mui/material';
+import { IconButton, Snackbar, Typography, Button } from '@mui/material';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import CollectionsOutlinedIcon from '@mui/icons-material/CollectionsOutlined';
 import LanguageIcon from '@mui/icons-material/Language';
@@ -8,7 +8,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import DataObjectIcon from '@mui/icons-material/DataObject';
 
 import { LocalizedStandardModel, StandardSize } from "../../models/Standard.model";
-import { Button } from "../1_core/Button";
 import { Tag } from '../1_core/Tag';
 import { COLLECTION_SOURCE } from '../../data/constants/urls';
 import { copyToClipboard, feeRateToPercentage } from '../../common/data';
@@ -58,19 +57,24 @@ export const CollectionDetails = ({
         <div>
             <Typography variant="h2" style={{ fontSize: "36px", fontWeight: "bold" }} component="div" gutterBottom><CollectionsOutlinedIcon />&nbsp;{data.deserialized.name}</Typography>
             <Tag
-                data={{icon:PersonOutlinedIcon, iconTitle:"Author", label:data.author}}
+                data={{ icon: PersonOutlinedIcon, iconTitle: "Author", label: data.author }}
                 variant={CoreVariant.light}
                 size={StandardSize.lg}
-                config={{custom: {hasPadding: false}}}
+                config={{ custom: { hasPadding: false } }}
             />
             <Button
                 startIcon={<LanguageIcon />}
-                label="Website"
                 variant="text"
                 target="_blank"
-                href={`${COLLECTION_SOURCE}${data.collection_name}`}
-            />
-            {config.showViewData ? <Button startIcon={<DataObjectIcon />} label="Metadata" variant="text" onClick={() => copyToClipboard(data, () => {setSnackbarOpen(true)})}/> : null}
+                href={`${COLLECTION_SOURCE}${data.collection_name}`}>
+                Website
+            </Button>
+            {config.showViewData ? <Button
+                startIcon={<DataObjectIcon />}
+                variant="text"
+                onClick={() => copyToClipboard(data, () => { setSnackbarOpen(true) })}>
+                Metadata
+            </Button> : null}
             <div className={classes.collectionDescription}>
                 <Typography variant="h3" style={{ fontSize: "24px", fontWeight: "bold" }} component="div" gutterBottom>About this Collection</Typography>
                 <Typography variant="body1" color="gray" gutterBottom>{data.deserialized.description}</Typography>
@@ -86,9 +90,9 @@ export const CollectionDetails = ({
                     aria-label="close"
                     color="inherit"
                     onClick={() => setSnackbarOpen(false)}
-                  >
+                >
                     <CloseIcon fontSize="small" />
-                  </IconButton>}
+                </IconButton>}
             />
         </div>
     );

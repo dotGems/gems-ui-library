@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@mui/styles';
-import { IconButton, Snackbar, Typography } from '@mui/material';
+import { IconButton, Snackbar, Typography, Button } from '@mui/material';
 import {
     Language as LanguageIcon,
     DataObject as DataObjectIcon,
@@ -12,7 +12,6 @@ import {
     LocalFireDepartment as LocalFireDepartmentIcon
 } from '@mui/icons-material';
 
-import { Button } from '../1_core/Button';
 import { Tag } from '../1_core/Tag';
 
 import { COLLECTION_SOURCE } from '../../data/constants/urls';
@@ -91,11 +90,21 @@ export const DropDetails = ({
                     {/* {config.showArtist ? <Tag data={{ icon: PersonOutlinedIcon, iconTitle: "Author", label: data.template.deserialized.artist }} variant={CoreVariant.light} size={StandardSize.lg} config={{ custom: { hasPadding: false } }} /> : null} */}
                     {config.showCollection ? <Tag data={{ icon: CollectionsOutlinedIcon, iconTitle: "Collection", label: data.immutable_serialized_data.name }} variant={CoreVariant.light} size={StandardSize.lg} config={{ custom: { hasPadding: false } }} /> : null}
                     <Tag data={{ icon: Filter1Icon, iconTitle: "Mint", label: `${data.issued_supply} of ${data.max_supply}` }} variant={CoreVariant.light} size={StandardSize.lg} config={{ custom: { hasPadding: false } }} />
-                    <Button startIcon={<LanguageIcon />} label="Website" variant="text" target="_blank" href={`${COLLECTION_SOURCE}${data.collection_name}`} />
+                    <Button
+                        startIcon={<LanguageIcon />}
+                        variant="text"
+                        target="_blank"
+                        href={`${COLLECTION_SOURCE}${data.collection_name}`}>
+                        Website
+                    </Button>
                     {/* {config.showViewData ?
-                        <Button startIcon={<DataObjectIcon />} label="Metadata" variant="text" onClick={() => copyToClipboard(data, () => { setSnackbarOpen(true) })} />
-                        : null
-                    } */}
+                        <Button
+                            startIcon={<DataObjectIcon />}
+                            variant="text"
+                            onClick={() => copyToClipboard(data, () => { setSnackbarOpen(true) })}>
+                            Metadata
+                        </Button>
+                        : null} */}
                 </div>
                 {config.showBurnableTransferable ? <Typography variant="body1" color="primary" className={classes.burnableTransferable}>
                     {data.transferable === true ? <CompareArrowsIcon /> : null}
