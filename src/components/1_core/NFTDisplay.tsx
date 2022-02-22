@@ -24,7 +24,7 @@ export interface NFTDisplayProps extends StandardModel {
         backimg?: string,
         cardimg?: string
     },
-    config: {
+    config?: {
         defaultPart: NFTPart,
         loop: {
             isEnabled: boolean,

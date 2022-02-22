@@ -22,7 +22,7 @@ import { CoreVariant } from '../../models/StandardCore.model';
 
 export interface DropDetailsProps extends LocalizedStandardModel {
     data: DropModel,
-    config: {
+    config?: {
         showArtist?: boolean,
         showCollection?: boolean,
         showAbout?: boolean,
