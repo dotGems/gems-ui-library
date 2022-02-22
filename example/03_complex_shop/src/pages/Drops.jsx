@@ -10,6 +10,7 @@ export default function Drops() {
   useEffect(() =>{
     DropService.getCollectionInfo('eos','pomelo').then((res) => {
       setDrops(res.data.rows);
+      console.log(res.data.rows);
     });
   }, [])
 
@@ -33,16 +34,17 @@ export default function Drops() {
             config={{onClick: (dropId) => console.log(dropId)}}
           />
         </Grid>)}
-        {drops.map((drop) => <DropBanner
-            data={{
-              ...drop,
-              listing_price: "1.0000 EOS",
-              settlement_symbol: "4,EOS",
-            }}
-            style={{}}
-            config={{onClick: (dropId) => console.log(dropId)}}
-          />)}
       </Grid>
+      <div style={{padding: "24px"}}>
+        {drops.map((drop) => <DropBanner
+          data={{
+            ...drop,
+            listing_price: "1.0000 EOS",
+            settlement_symbol: "4,EOS",
+          }}
+          config={{onClick: (dropId) => console.log(dropId)}}
+        />)}
+      </div>
     </div>
   )
 }

@@ -51,7 +51,14 @@ const useStyles = makeStyles({
         alignItems: "top"
     },
     coreInfo: {
-        margin: "0px"
+        margin: "0px",
+        display: "flex",
+        justifyContent: "flex-start",
+        flexDirection: "column"
+    },
+    actionsContainer: {
+        display: "flex",
+        justifyContent: "flex-start"
     },
     burnableTransferable: {
         textAlign: "right"
@@ -83,35 +90,45 @@ export const DropDetails = ({
 
     return (
         <div className={classes.root}>
-            <Typography variant="h2" style={{ fontSize: "36px", fontWeight: "bold" }} component="div" gutterBottom>{data.immutable_serialized_data.name}</Typography>
+            <Typography
+                variant="h2"
+                style={{ textAlign: "left", fontSize: "36px", fontWeight: "bold" }}
+                component="div"
+                gutterBottom>
+                {data.immutable_serialized_data.name}
+            </Typography>
             <div className={classes.infoContainer}>
                 <div className={classes.coreInfo}>
                     {/* TODO: Add enable/disable attributes for each UI item */}
                     {/* {config.showArtist ? <Tag data={{ icon: PersonOutlinedIcon, iconTitle: "Author", label: data.template.deserialized.artist }} variant={CoreVariant.light} size={StandardSize.lg} config={{ custom: { hasPadding: false } }} /> : null} */}
                     {config.showCollection ? <Tag data={{ icon: CollectionsOutlinedIcon, iconTitle: "Collection", label: data.immutable_serialized_data.name }} variant={CoreVariant.light} size={StandardSize.lg} config={{ custom: { hasPadding: false } }} /> : null}
                     <Tag data={{ icon: Filter1Icon, iconTitle: "Mint", label: `${data.issued_supply} of ${data.max_supply}` }} variant={CoreVariant.light} size={StandardSize.lg} config={{ custom: { hasPadding: false } }} />
-                    <Button
-                        startIcon={<LanguageIcon />}
-                        variant="text"
-                        target="_blank"
-                        href={`${COLLECTION_SOURCE}${data.collection_name}`}>
-                        Website
-                    </Button>
-                    {/* {config.showViewData ?
+                    <div className={classes.actionsContainer}>
                         <Button
-                            startIcon={<DataObjectIcon />}
+                            startIcon={<LanguageIcon />}
                             variant="text"
-                            onClick={() => copyToClipboard(data, () => { setSnackbarOpen(true) })}>
+                            target="_blank"
+                            style={{ textAlign: "left" }}
+                            href={`${COLLECTION_SOURCE}${data.collection_name}`}>
+                            Website
+                        </Button>
+                        {/* {config.showViewData ?
+                        <Button
+                        startIcon={<DataObjectIcon />}
+                        variant="text"
+                        style={{textAlign: "left"}}
+                        onClick={() => copyToClipboard(data, () => { setSnackbarOpen(true) })}>
                             Metadata
                         </Button>
                         : null} */}
+                    </div>
                 </div>
                 {config.showBurnableTransferable ? <Typography variant="body1" color="primary" className={classes.burnableTransferable}>
                     {data.transferable === true ? <CompareArrowsIcon /> : null}
                     {data.burnable === true ? <LocalFireDepartmentIcon /> : null}
                 </Typography> : null}
             </div>
-            {config.showAbout ? <Typography variant="body1" color="gray">{data.immutable_serialized_data.context}</Typography> : null}
+            {config.showAbout ? <Typography variant="body1" color="gray" textAlign="left">{data.immutable_serialized_data.context}</Typography> : null}
             <Snackbar
                 open={isSnackbarOpen}
                 autoHideDuration={3000}
