@@ -17,6 +17,9 @@ export default function DropsDetails() {
     });
   }, [])
 
+  const dropIndex = location.pathname.split("/")[3];
+  console.log(dropIndex);
+
   if(drops && drops.length > 0) {
     return (
       <div style={{textAlign: "left"}}>
@@ -24,7 +27,7 @@ export default function DropsDetails() {
         <div style={{padding: "24px"}}>
           <DropBanner
             data={{
-              ...drops[location.pathname[location.pathname.length - 1]],
+              ...drops[dropIndex],
               listing_price: "1.0000 EOS",
               settlement_symbol: "4,EOS",
             }}
@@ -32,7 +35,7 @@ export default function DropsDetails() {
           <DropActionPanel 
             style={{marginTop: "4em"}}
             data={{
-              ...drops[location.pathname[location.pathname.length - 1]],
+              ...drops[dropIndex],
               listing_price: "1.0000 EOS",
               settlement_symbol: "4,EOS",
             }}/>
