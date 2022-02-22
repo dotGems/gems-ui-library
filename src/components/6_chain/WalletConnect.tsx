@@ -109,7 +109,6 @@ export const WalletConnect = ({ className }: WalletConnectProps) => {
     const [selectedNetwork, setSelectedNetwork] = useState<SUPPORTED_NETWORK_KEYS>(SUPPORTED_NETWORK_KEYS.eos); // TODO configurable
     const [walletData, setWalletData] = useState<WalletModel | undefined>(undefined);
     const [accountID, setAccountID] = useState(""); 
-    const [selectedWallet, setSelectedWallet] = useState<SupportedWallet>();
 
     useEffect(() => {
         checkForConnectedWallets();
@@ -119,18 +118,6 @@ export const WalletConnect = ({ className }: WalletConnectProps) => {
         }
     }, []);
 
-    useEffect(() => {
-        // selectedWallet ? localStorage.setItem("selectedWallet", selectedWallet) : "";
-        console.log(localStorage.getItem("selectedWallet") || "")
-    }, [selectedWallet]);
-
-    const getSelectedWallet = () => {
-        if (localStorage.getItem("selectedWallet") && localStorage.getItem("selectedWallet") !== null){
-            let wallet = localStorage.getItem("selectedWallet") || ""; 
-            setSelectedWallet(():any => wallet);
-            console.log({wallet})
-        }
-    }
     const checkForConnectedWallets = () => {
         //Steps:
         // 1) Check selectedWallet in the localstorage
