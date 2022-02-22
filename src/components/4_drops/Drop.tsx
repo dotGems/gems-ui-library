@@ -56,19 +56,14 @@ export const Drop = ({dropId}:DropProps) => {
 
     
     useEffect(() => {
-        console.log(dropId);
       dropAPIs.getDropInfo().then((resp:any) => {
             resp.data.rows.forEach((item:any) => {
                 if(item.drop_id === dropId){
                   const templateID = item.assets_to_mint[0].template_id;
-                  console.log({templateID});
                   setStartTime(() => item.start_time)
-                  console.log(item.collection_name)
                   dropAPIs.getCollectionInfo("eos", item.collection_name).then((res:any)=> {
-                    console.log(res.data.rows);
                     res.data.rows.forEach((row:any) => {
                       if(templateID === row.template_id ){
-                        console.log({row})
                         setData({ ...row, ...item })
                       }
                       })

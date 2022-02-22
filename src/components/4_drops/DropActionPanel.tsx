@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import { Card, Grid, Typography, Button } from '@mui/material';
 
 import { StandardModel, StandardSize } from "../../models/Standard.model";
 import { DropModel } from '../../models/Drop.model';
 import { IPFS_SOURCE, IPFS_SOURCE_FALLBACK } from '../../data/constants/urls';
-import { splitPriceAndCurrency } from "../../common/data";
+import { formatPriceDecimals, splitPriceAndCurrency } from "../../common/data";
 import DotGemsContext from '../1_core/DotGemsContext';
 import { QtyControl, defaultConfig as qtyConfig } from '../1_core/QtyControl';
 
@@ -36,6 +36,13 @@ const useStyles = makeStyles({
         paddingBottom: "0 !important",
         padding: 0,
         position: "relative"
+    },
+    listingPrice: {
+        fontSize: "1.5em",
+        fontWeight: "bold",
+        marginRight: "0.25em",
+        display: "inline-block",
+        textAlign: "left"
     },
     actionsContainer: {
         display: "flex",
@@ -71,13 +78,13 @@ export const DropActionPanel = ({
     size,
     elevation,
     // className,
-    // style,
+    style,
     data,
     // config = defaultConfig,
 }: DropActionPanelProps) => {
 
     const classes = useStyles();
-    const dotGemsCtx = useContext(DotGemsContext);
+    const [qty, setQty] = useState(1);
 
     // const getCardWidth = () => {
     //     if (config?.orientation?.indexOf("horizontal") !== -1) {
@@ -93,10 +100,15 @@ export const DropActionPanel = ({
 
     const renderPrice = () => {
         let splitListingPrice = splitPriceAndCurrency(data.listing_price);
-        return (<div>
-            <Typography variant="body1" style={{ fontSize: "2.4em", fontWeight: "bold", marginRight: "0.20em", display: "inline-block" }}>{splitListingPrice[0]}</Typography>
-            <Typography variant="body2" color="#A5A5A5" style={{ display: "inline-block", fontSize: "1.4em" }}>{splitListingPrice[1]}</Typography>
-        </div>)
+        if (splitListingPrice && splitListingPrice.length === 2) {
+            return (<div style={{ textAlign: "left" }}>
+                <Typography variant="body1" className={classes.listingPrice}>{formatPriceDecimals(parseFloat(splitListingPrice[0]) * qty, 4)}</Typography>
+                <Typography variant="body2" color="#A5A5A5" style={{ display: "inline-block" }}>{splitListingPrice[1]}</Typography>
+            </div>)
+        } else {
+            console.warn('Unable to render price.');
+            return null;
+        }
     }
 
     const buyNow = () => {
@@ -104,7 +116,7 @@ export const DropActionPanel = ({
     }
 
     return (
-        <Card className={classes.dropActionPanel} style={{ width: "100%" }} elevation={elevation}>
+        <Card className={classes.dropActionPanel} style={{ width: "100%", ...style }} elevation={elevation}>
             <Grid container flexDirection={'row'} style={{padding:"16px 32px 16px 16px"}}>
                 <Grid item xs={12} md={6} style={{ display:"flex", flexDirection:"row" }}>
                     <div style={{ width:"80px", paddingRight:"16px" }}>
@@ -127,7 +139,7 @@ export const DropActionPanel = ({
                     <QtyControl 
                         config={{
                             isEditable: qtyConfig.isEditable,
-                            onChange: qtyConfig.onChange,
+                            onChange: setQty,
                             maxQty: qtyConfig.maxQty
                         }}
                         size={StandardSize.lg}

@@ -24,7 +24,7 @@ export interface NFTDisplayProps extends StandardModel {
         backimg?: string,
         cardimg?: string
     },
-    config: {
+    config?: {
         defaultPart: NFTPart,
         loop: {
             isEnabled: boolean,
@@ -56,12 +56,14 @@ const useStyles = makeStyles((theme) => ({
         // display: 'inline-block'
     },
     mainDisplayContainer: {
-        height: "256px",
         width: "256px",
+        minHeight: "245px",
+        maxWidth: "100%",
+        height: "auto",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        margin: "auto"
+        margin: "auto",
     },
     mainDisplay: {
         height: '100%',
@@ -78,7 +80,9 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "space-around",
         padding: "4px",
-        height: "55px"
+        minHeight: "55px",
+        maxWidth: "100%",
+        height: "auto",
     },
     selectorItem: {
         cursor: "pointer",

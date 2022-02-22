@@ -14,6 +14,8 @@ import Constructs from './pages/Constructs';
 
 import footerData from './data/footer.data';
 import navbarData from './data/navbar.data';
+import DropsDetails from './pages/DropsDetails';
+import ScrollToTop from './utils/ScrollToTop';
 
 function AppRoutes() {
 
@@ -30,7 +32,7 @@ function AppRoutes() {
     links: navbarData.links.map((link) => {
       return {
         ...link,
-        onClick: () => pushRouteAndSetActive(link.id)
+        onClick: () => pushRouteAndSetActive(`/${link.id}`)
       }
     })
   }
@@ -41,13 +43,20 @@ function AppRoutes() {
     <div>
       <Navbar data={navbarDataCombined} activeLink={activeLink}/>
       <div style={{maxWidth: "1000px", margin: "120px auto"}}>
+        <ScrollToTop/>
         <Switch>
           <Route path="/discover">
             <Home/>
           </Route>
-          <Route path="/drops">
-            <Drops/>
-          </Route>
+          <Route
+            path="/drops"
+            render={({ match: { url } }) => (
+              <>
+                <Route path={`${url}/`} component={Drops} exact />
+                <Route path={`${url}/details/:dropId`} component={DropsDetails} />
+              </>
+            )}
+          />
           <Route path="/market">
             <Market/>
           </Route>
