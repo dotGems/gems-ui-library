@@ -32,7 +32,7 @@ import { Avatar } from "../1_core/Avatar";
 import { Card } from "../1_core/Card";
 import DotGemsContext from '../1_core/DotGemsContext';
 import { NetworkModel } from '../../models/Network.model';
-import { WalletButtonModel, WalletModel } from '../../models/Wallet.model';
+import { WalletButtonModel, WalletModel, SupportedWallet } from '../../models/Wallet.model';
 import { StandardModel, StandardSize } from '../../models/Standard.model';
 import { NETWORK_SUPPORTED_WALLETS, SUPPORTED_NETWORK_KEYS } from '../../data/constants/networks/networks';
 import { WALLET_BUTTONS } from '../../data/constants/wallets';
@@ -53,7 +53,8 @@ const useStyles = makeStyles((theme) => ({
     },
     connectText: {
         display: "inline-block",
-        whiteSpace: "nowrap"
+        whiteSpace: "nowrap",
+        textTransform: "none"
     },
     networksContainer: {
         display: "flex",
@@ -107,13 +108,57 @@ export const WalletConnect = ({ className }: WalletConnectProps) => {
     const [isWalletInfoOpen, setIsWalletInfoOpen] = useState(false);
     const [selectedNetwork, setSelectedNetwork] = useState<SUPPORTED_NETWORK_KEYS>(SUPPORTED_NETWORK_KEYS.eos); // TODO configurable
     const [walletData, setWalletData] = useState<WalletModel | undefined>(undefined);
+    const [accountID, setAccountID] = useState(""); 
+    const [selectedWallet, setSelectedWallet] = useState<SupportedWallet>();
 
     useEffect(() => {
+        checkForConnectedWallets();
         document.addEventListener('keydown', handleKeyPresses)
         return () => {
             document.removeEventListener("keydown", handleKeyPresses);
         }
     }, []);
+
+    useEffect(() => {
+        // selectedWallet ? localStorage.setItem("selectedWallet", selectedWallet) : "";
+        console.log(localStorage.getItem("selectedWallet") || "")
+    }, [selectedWallet]);
+
+    const getSelectedWallet = () => {
+        if (localStorage.getItem("selectedWallet") && localStorage.getItem("selectedWallet") !== null){
+            let wallet = localStorage.getItem("selectedWallet") || ""; 
+            setSelectedWallet(():any => wallet);
+            console.log({wallet})
+        }
+    }
+    const checkForConnectedWallets = () => {
+        //Steps:
+        // 1) Check selectedWallet in the localstorage
+        // 2) If found and is anchor then check for anchor-link-eos-list in the localstorage
+        // 3) If not anchor then it is any other scatter-based wallet
+
+        if (localStorage.getItem("selectedWallet") === SupportedWallet.anchor) {
+            console.log("We here now!")
+            if (
+                localStorage.getItem("anchor-link-eos-list") &&
+                localStorage.getItem("anchor-link-eos-list") !== null
+            ) {
+                
+                const anchor: any = localStorage.getItem("anchor-link-eos-list") || "";
+                setTimeout(() => {
+                    const anchorObject: any = anchor ? JSON.parse(anchor) : [];
+                    setAccountID(()=> ((anchorObject[0] || {}).auth || {}).actor || "");
+                    console.log(((anchorObject[0] || {}).auth || {}).actor || "");
+                }, 0);
+            } else {
+                setAccountID(() => "");
+            }
+        } else {
+            const scatterAccount = localStorage.getItem("scatterAccount");
+            setAccountID(() => scatterAccount || "");
+            // setEosActor(((anchorObject[0] || {}).auth || {}).actor || "");
+        }
+    }
 
     const handleKeyPresses = useCallback((event) => {
         if (event) {
@@ -141,6 +186,36 @@ export const WalletConnect = ({ className }: WalletConnectProps) => {
     const handleNetworkSelect = (network: SUPPORTED_NETWORK_KEYS) => {
         setSelectedNetwork(network);
     }
+
+    const handleWalletClick = (wallet:WalletButtonModel) => {
+        localStorage.setItem("selectedWallet", wallet.id)
+        wallet.onClick().then(resp => { setIsConnectWalletOpen(false); checkForConnectedWallets(); });
+
+    }
+
+
+    const handleDisconnectWallet = (wallet: WalletButtonModel) => {
+        setAccountID(()=> "");
+        if (wallet.id === SupportedWallet.anchor) {
+            var archive: any = {}, // Notice change here
+                keys = Object.keys(localStorage),
+                i = keys.length, key;
+
+            while (i--) {
+                archive[keys[i]] = localStorage.getItem(keys[i]);
+            }
+
+            for (key in archive) {
+                if (!key.startsWith(wallet.id)) continue;
+                localStorage.removeItem(key);
+            }
+
+                return archive;
+            }
+        else {
+            localStorage.removeItem(wallet.id);
+        }
+  }
 
     const connectMockWallet = () => {
         setIsConnectWalletOpen(false);
@@ -192,7 +267,7 @@ export const WalletConnect = ({ className }: WalletConnectProps) => {
                     })}
                 </Select>
                 <Button onClick={handleWalletButtonClick} className={classes.mrsm}>
-                    <AccountBalanceWalletIcon className={classes.mrsm} /><Typography className={classes.connectText} variant="body1">{walletData ? walletData.linkedAccount : "Connect"}</Typography>
+                    <AccountBalanceWalletIcon className={classes.mrsm} /><Typography className={classes.connectText} variant="body1">{accountID === "" ? "Connect" : accountID }</Typography>
                 </Button>
                 <Button>
                     <SettingsIcon />
@@ -237,7 +312,7 @@ export const WalletConnect = ({ className }: WalletConnectProps) => {
                                 <Button
                                     disabled={selectedNetwork === undefined || !NETWORK_SUPPORTED_WALLETS[selectedNetwork].includes(wallet.id)}
                                     className={classes.sqButton}
-                                    onClick={connectMockWallet}
+                                    onClick={()=> handleWalletClick(wallet)}
                                 >
                                     <div style={{ width: "60px", margin: "auto" }}>
                                         <img src={wallet.icon} className={classes.mrsm} />
@@ -302,6 +377,7 @@ export const WalletConnect = ({ className }: WalletConnectProps) => {
                     <MenuItem className={classes.dangerMenuItem} onClick={() => {
                         setWalletData(undefined);
                         setIsWalletInfoOpen(false);
+                        // handleDisconnectWallet(wallet);
                         // setSelectedNetwork(undefined);
                     }}>
                         <ListItemIcon className={classes.dangerMenuItem}>

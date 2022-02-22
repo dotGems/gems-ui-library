@@ -1,7 +1,8 @@
 export interface WalletButtonModel {
     id: SupportedWallet,
     name: string,
-    icon: string
+    icon: string,
+    onClick: () => Promise<void>
 }
 
 export interface WalletModel {
@@ -10,7 +11,7 @@ export interface WalletModel {
     pfp?: string,
     status?: string,
     visible?: boolean,
-    currencies: [{
+    currencies?: [{
         name: string,
         amount: string
         resources?: {
