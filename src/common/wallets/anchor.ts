@@ -39,8 +39,14 @@ export const getWalletDataFromLocalStorage = async () => {
       setTimeout(() => {
         const anchorObject: any = anchor ? JSON.parse(anchor) : [];
         console.log(((anchorObject[0] || {}).auth || {}).actor || "");
-        return ((anchorObject[0] || {}).auth || {}).actor || "";
+        let actor = anchorObject[0]?.auth?.actor;
+        if(!actor) {
+          return ""
+        } else {
+          return actor; 
+        }
       }, 0);
+      return "";
   }
   else {
     return "";  
